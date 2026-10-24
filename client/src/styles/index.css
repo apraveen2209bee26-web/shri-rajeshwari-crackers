@@ -1,0 +1,145 @@
+@import url('https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;500;600;700;800&family=Raleway:wght@600;700;800;900&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    color: #21160f;
+    background: #fff8ef;
+    font-family: 'Open Sans', sans-serif;
+  }
+
+  * {
+    @apply border-ember-100;
+    box-sizing: border-box;
+  }
+
+  body {
+    @apply bg-cream font-body text-coal-900 antialiased;
+    min-height: 100vh;
+    background-image:
+      radial-gradient(circle at top left, rgba(255, 83, 48, 0.1), transparent 24%),
+      radial-gradient(circle at 80% 10%, rgba(255, 208, 86, 0.18), transparent 18%),
+      linear-gradient(180deg, #fffaf3 0%, #fff7ee 38%, #fff2dd 100%);
+  }
+
+  a {
+    @apply text-inherit no-underline;
+  }
+
+  button,
+  input,
+  textarea,
+  select {
+    font: inherit;
+  }
+
+  #root {
+    min-height: 100vh;
+  }
+
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    font-family: 'Raleway', sans-serif;
+  }
+}
+
+@layer components {
+  .shell {
+    @apply mx-auto w-full max-w-7xl px-4 sm:px-6 lg:px-8;
+  }
+
+  .glass-card {
+    @apply rounded-[30px] border border-ember-100 bg-white shadow-festive;
+  }
+
+  .section-space {
+    @apply py-16 sm:py-20;
+  }
+
+  .page-banner {
+    @apply rounded-[34px] border border-ember-100 bg-hero-radial shadow-festive;
+  }
+
+  .festive-chip {
+    @apply inline-flex items-center rounded-full border border-ember-200 bg-amber-50 px-4 py-1.5 text-xs font-bold uppercase tracking-[0.22em] text-ember-700;
+  }
+
+  .warm-panel {
+    @apply rounded-[28px] border border-amber-200 bg-amber-50 shadow-[0_10px_30px_rgba(82,44,10,0.06)];
+  }
+
+  .input {
+    @apply w-full rounded-2xl border border-amber-200 bg-white px-4 py-3 text-sm text-coal-900 shadow-sm outline-none transition focus:border-ember-300 focus:ring-4 focus:ring-amber-100;
+  }
+
+  .label {
+    @apply mb-2 block text-sm font-semibold uppercase tracking-[0.12em] text-coal-800;
+  }
+
+  .topbar-marquee {
+    animation: topbar-marquee 20s linear infinite;
+  }
+
+  .festival-offer-card {
+    @apply relative mx-auto max-w-4xl rounded-2xl border-4 bg-white px-6 py-8 text-center shadow-glow sm:px-10;
+    border-color: #ff0019;
+    animation: pulse-sale-border 2s ease-in-out infinite;
+  }
+
+  .festival-spark {
+    @apply absolute h-8 w-8 text-gold-400;
+    animation: spark-float 2s ease-in-out infinite;
+  }
+
+  .stat-box {
+    @apply rounded-2xl border-t-4 bg-white p-6 text-center shadow-festive transition duration-300 hover:-translate-y-2;
+    border-top-color: #ff0019;
+  }
+}
+
+@keyframes topbar-marquee {
+  0% {
+    transform: translateX(70%);
+  }
+
+  100% {
+    transform: translateX(-70%);
+  }
+}
+
+@keyframes pulse-sale-border {
+  0%,
+  100% {
+    box-shadow: 0 0 10px rgba(255, 0, 25, 0.28);
+  }
+
+  50% {
+    box-shadow: 0 0 26px rgba(255, 0, 25, 0.66);
+  }
+}
+
+@keyframes spark-float {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+
+  50% {
+    transform: translateY(-10px);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .topbar-marquee,
+  .festival-offer-card,
+  .festival-spark {
+    animation: none;
+  }
+}
