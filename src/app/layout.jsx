@@ -1,10 +1,12 @@
 import './globals.css';
+import { SettingsProvider } from '@/context/SettingsContext';
 import { CartProvider } from '@/context/CartContext';
 import Navbar from '@/components/layout/Navbar';
 import Footer from '@/components/layout/Footer';
 import CartDrawer from '@/components/cart/CartDrawer';
 import CheckoutModal from '@/components/cart/CheckoutModal';
 import FloatingCartButton from '@/components/cart/FloatingCartButton';
+import FloatingWhatsAppButton from '@/components/cart/FloatingWhatsAppButton';
 
 export const metadata = {
   title: 'Shri Rajeshwari Crackers | Sivakasi Crackers Online | 80% Mega Discount',
@@ -36,16 +38,19 @@ export default function RootLayout({ children }) {
         />
       </head>
       <body className="antialiased flex flex-col min-h-screen">
-        <CartProvider>
-          <Navbar />
-          <main className="flex-1">
-            {children}
-          </main>
-          <Footer />
-          <CartDrawer />
-          <CheckoutModal />
-          <FloatingCartButton />
-        </CartProvider>
+        <SettingsProvider>
+          <CartProvider>
+            <Navbar />
+            <main className="flex-1">
+              {children}
+            </main>
+            <Footer />
+            <CartDrawer />
+            <CheckoutModal />
+            <FloatingCartButton />
+            <FloatingWhatsAppButton />
+          </CartProvider>
+        </SettingsProvider>
       </body>
     </html>
   );

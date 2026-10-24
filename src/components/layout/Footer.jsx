@@ -1,3 +1,5 @@
+'use client';
+
 import React from 'react';
 import Link from 'next/link';
 import { 
@@ -8,11 +10,22 @@ import {
   ShieldCheck, 
   Award, 
   Truck, 
-  Clock
+  Clock,
+  MessageCircle
 } from 'lucide-react';
+import { useSettings } from '@/context/SettingsContext';
 import { STORE_CONFIG } from '@/lib/constants';
 
 export default function Footer() {
+  const { 
+    settings, 
+    whatsappUrl, 
+    whatsappDisplay, 
+    secondaryPhoneDisplay, 
+    cleanWaNumber, 
+    cleanSecPhone 
+  } = useSettings();
+
   return (
     <footer className="bg-slate-900 text-slate-300 pt-14 pb-8 border-t border-slate-800">
       <div className="max-w-7xl mx-auto px-4 sm:px-6">
@@ -67,13 +80,13 @@ export default function Footer() {
               <div className="w-10 h-10 rounded-xl bg-slate-950 flex items-center justify-center overflow-hidden border border-sky-400/30">
                 <img 
                   src="/images/logo.png" 
-                  alt="Shri Rajeshwari Crackers Logo" 
+                  alt={`${settings.shop_name} Logo`} 
                   className="w-full h-full object-contain p-0.5" 
                 />
               </div>
               <div>
-                <span className="font-black text-lg text-white tracking-wide">
-                  SHRI RAJESHWARI <span className="text-amber-400">CRACKERS</span>
+                <span className="font-black text-lg text-white tracking-wide uppercase">
+                  {settings.shop_name || 'SHRI RAJESHWARI CRACKERS'}
                 </span>
                 <p className="text-[10px] text-sky-300 font-semibold">ஸ்ரீ ராஜேஸ்வரி கிராக்கர்ஸ் • {STORE_CONFIG.motto}</p>
               </div>
@@ -111,33 +124,34 @@ export default function Footer() {
             </ul>
           </div>
 
-          {/* Contact Details */}
+          {/* Dynamic Contact Details & Chat on WhatsApp */}
           <div className="md:col-span-3 space-y-3">
             <h5 className="text-xs font-bold text-white uppercase tracking-wider">Direct Factory & Support</h5>
             <div className="space-y-2.5 text-xs">
               <div className="flex items-start gap-2.5">
                 <MapPin className="w-4 h-4 text-amber-400 shrink-0 mt-0.5" />
-                <span className="text-slate-400 leading-snug">{STORE_CONFIG.address}</span>
+                <span className="text-slate-400 leading-snug">{settings.address}</span>
               </div>
               <div className="flex items-center gap-2.5">
                 <Phone className="w-4 h-4 text-green-400 shrink-0" />
-                <a href={`tel:${STORE_CONFIG.phone}`} className="text-slate-300 hover:text-white font-medium">
-                  {STORE_CONFIG.phoneDisplay} (WhatsApp)
+                <a href={`tel:${cleanWaNumber}`} className="text-slate-300 hover:text-white font-medium">
+                  {whatsappDisplay} (WhatsApp)
                 </a>
               </div>
               <div className="flex items-center gap-2.5">
                 <Phone className="w-4 h-4 text-sky-400 shrink-0" />
-                <a href={`tel:${STORE_CONFIG.secondaryPhone}`} className="text-slate-300 hover:text-white font-medium">
-                  {STORE_CONFIG.secondaryPhoneDisplay} (Call 24/7)
+                <a href={`tel:${cleanSecPhone}`} className="text-slate-300 hover:text-white font-medium">
+                  {secondaryPhoneDisplay} (Call 24/7)
                 </a>
               </div>
               <div className="pt-2">
                 <a
-                  href={`https://wa.me/91${STORE_CONFIG.whatsappNumber}`}
+                  href={whatsappUrl}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="inline-flex items-center gap-2 px-3.5 py-2 rounded-lg bg-green-600 hover:bg-green-700 text-white font-semibold text-xs shadow-md transition-colors"
+                  className="inline-flex items-center gap-2 px-4 py-2.5 rounded-xl bg-gradient-to-r from-emerald-600 to-green-600 hover:from-emerald-500 hover:to-green-500 text-white font-bold text-xs shadow-lg shadow-green-900/30 transition-all hover:scale-105 active:scale-95"
                 >
+                  <MessageCircle className="w-4 h-4 fill-white text-emerald-600" />
                   <span>Chat on WhatsApp</span>
                 </a>
               </div>
@@ -148,7 +162,7 @@ export default function Footer() {
         {/* Bottom Legal Row */}
         <div className="pt-8 border-t border-slate-800 text-xs text-slate-500 flex flex-col sm:flex-row items-center justify-between gap-4">
           <p>
-            <Link href="/admin/login" className="hover:text-slate-400 transition-colors" title="Owner Portal">©</Link> {new Date().getFullYear()} Shri Rajeshwari Crackers. All Rights Reserved. Sivakasi, Tamil Nadu.
+            <Link href="/admin/login" className="hover:text-slate-400 transition-colors" title="Owner Portal">©</Link> {new Date().getFullYear()} {settings.shop_name}. All Rights Reserved. Sivakasi, Tamil Nadu.
           </p>
           <p className="flex items-center gap-1">
             Manufactured & packed under strict PESO Indian Safety Standards

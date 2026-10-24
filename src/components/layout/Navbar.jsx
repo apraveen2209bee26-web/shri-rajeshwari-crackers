@@ -12,11 +12,20 @@ import {
   Flame 
 } from 'lucide-react';
 import { useCart } from '@/context/CartContext';
+import { useSettings } from '@/context/SettingsContext';
 import { STORE_CONFIG } from '@/lib/constants';
 
 export default function Navbar() {
   const pathname = usePathname();
   const { totalCount, finalAmount, setIsCartOpen } = useCart();
+  const { 
+    settings, 
+    whatsappUrl, 
+    whatsappDisplay, 
+    secondaryPhoneDisplay, 
+    cleanWaNumber, 
+    cleanSecPhone 
+  } = useSettings();
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
   // Hidden keyboard shortcut for store owner: Ctrl + Shift + A
@@ -59,20 +68,20 @@ export default function Navbar() {
           </div>
           <div className="flex flex-wrap items-center gap-3 sm:gap-4 text-sky-200">
             <a 
-              href={`https://wa.me/91${STORE_CONFIG.whatsappNumber}`} 
+              href={whatsappUrl} 
               target="_blank" 
               rel="noopener noreferrer"
               className="flex items-center gap-1.5 hover:text-amber-300 transition-colors"
             >
               <Phone className="w-3.5 h-3.5 text-green-400" />
-              <span>WhatsApp: <strong className="text-white">{STORE_CONFIG.whatsappDisplay}</strong></span>
+              <span>WhatsApp: <strong className="text-white">{whatsappDisplay}</strong></span>
             </a>
             <span className="hidden sm:inline text-sky-400">|</span>
             <a 
-              href={`tel:${STORE_CONFIG.secondaryPhone}`} 
+              href={`tel:${cleanSecPhone}`} 
               className="hidden sm:flex items-center gap-1.5 hover:text-amber-300 transition-colors"
             >
-              <span>Call: <strong className="text-white">{STORE_CONFIG.secondaryPhoneDisplay}</strong></span>
+              <span>Call: <strong className="text-white">{secondaryPhoneDisplay}</strong></span>
             </a>
           </div>
         </div>

@@ -21,10 +21,12 @@ import {
   FileDown
 } from 'lucide-react';
 import { useCart } from '@/context/CartContext';
+import { useSettings } from '@/context/SettingsContext';
 import { STORE_CONFIG } from '@/lib/constants';
 
 export default function HomePage() {
   const { addToCart, getItemQuantity, updateQuantity } = useCart();
+  const { settings, whatsappUrl, whatsappDisplay, secondaryPhoneDisplay, cleanSecPhone } = useSettings();
   const [featuredProducts, setFeaturedProducts] = useState([]);
   const [loading, setLoading] = useState(true);
 
@@ -437,21 +439,21 @@ export default function HomePage() {
                 </p>
                 <p className="flex items-center justify-center lg:justify-start gap-2">
                   <strong className="text-slate-900">☎️ 24/7 தொடர்புக்கு / Call:</strong>
-                  <a href={`tel:${STORE_CONFIG.secondaryPhone}`} className="font-bold text-sky-800 hover:underline">{STORE_CONFIG.secondaryPhoneDisplay}</a>
+                  <a href={`tel:${cleanSecPhone}`} className="font-bold text-sky-800 hover:underline">{secondaryPhoneDisplay}</a>
                   <span>/</span>
-                  <a href={`tel:${STORE_CONFIG.whatsappNumber}`} className="font-bold text-sky-800 hover:underline">{STORE_CONFIG.whatsappDisplay}</a>
+                  <a href={whatsappUrl} target="_blank" rel="noopener noreferrer" className="font-bold text-sky-800 hover:underline">{whatsappDisplay}</a>
                 </p>
               </div>
 
               <div className="flex flex-wrap items-center justify-center lg:justify-start gap-3 pt-2">
                 <a
-                  href={`https://wa.me/91${STORE_CONFIG.whatsappNumber}`}
+                  href={whatsappUrl}
                   target="_blank"
                   rel="noopener noreferrer"
                   className="px-5 py-2.5 rounded-xl bg-green-600 hover:bg-green-700 text-white font-bold text-xs shadow-md flex items-center gap-2 transition-all active:scale-95"
                 >
                   <Phone className="w-4 h-4" />
-                  <span>Order on WhatsApp ({STORE_CONFIG.whatsappDisplay})</span>
+                  <span>Order on WhatsApp ({whatsappDisplay})</span>
                 </a>
                 <a
                   href="/images/visiting-card.jpg"
@@ -534,7 +536,7 @@ export default function HomePage() {
               Need Bulk Or Custom Packs?
             </span>
             <h2 className="text-2xl sm:text-3xl font-black">
-              Connect Directly with {STORE_CONFIG.name}
+              Connect Directly with {settings.shop_name}
             </h2>
             <p className="text-xs sm:text-sm text-sky-200 max-w-xl">
               Have questions about customized marriage series, corporate gifting boxes, or urgent Sivakasi dispatch? Chat with us instantly.
@@ -543,13 +545,13 @@ export default function HomePage() {
 
           <div className="flex flex-col sm:flex-row gap-3 z-10">
             <a
-              href={`https://wa.me/91${STORE_CONFIG.whatsappNumber}`}
+              href={whatsappUrl}
               target="_blank"
               rel="noopener noreferrer"
               className="px-6 py-3.5 rounded-xl bg-green-500 hover:bg-green-600 text-white font-extrabold text-xs sm:text-sm shadow-xl flex items-center justify-center gap-2 transition-colors"
             >
               <Phone className="w-4 h-4" />
-              <span>WhatsApp: {STORE_CONFIG.whatsappDisplay}</span>
+              <span>WhatsApp: {whatsappDisplay}</span>
             </a>
             <Link
               href="/quick-order"

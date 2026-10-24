@@ -12,6 +12,7 @@ import {
   Sparkles
 } from 'lucide-react';
 import { useCart } from '@/context/CartContext';
+import { useSettings } from '@/context/SettingsContext';
 import { STORE_CONFIG, generateWhatsAppOrderUrl } from '@/lib/constants';
 
 export default function CheckoutModal() {
@@ -25,6 +26,7 @@ export default function CheckoutModal() {
     totalSavings,
     totalCount 
   } = useCart();
+  const { settings: storeSettings } = useSettings();
 
   const [formData, setFormData] = useState({
     name: '',
@@ -39,35 +41,6 @@ export default function CheckoutModal() {
   const [orderCompleted, setOrderCompleted] = useState(false);
   const [submittedOrderRef, setSubmittedOrderRef] = useState('');
   const [generatedWhatsAppUrl, setGeneratedWhatsAppUrl] = useState('');
-
-  // Live Store Settings loaded dynamically from /api/settings
-  const [storeSettings, setStoreSettings] = useState({
-    shop_name: STORE_CONFIG.name,
-    whatsapp_number: STORE_CONFIG.whatsappNumber,
-    secondary_phone: STORE_CONFIG.secondaryPhone,
-    address: STORE_CONFIG.address
-  });
-
-  // Fetch dynamic store & WhatsApp settings configured by store owner
-  useEffect(() => {
-    async function loadDynamicSettings() {
-      try {
-        const res = await fetch('/api/settings', { cache: 'no-store' });
-        const data = await res.json();
-        if (data.success && data.settings) {
-          setStoreSettings({
-            shop_name: data.settings.shop_name || STORE_CONFIG.name,
-            whatsapp_number: data.settings.whatsapp_number || STORE_CONFIG.whatsappNumber,
-            secondary_phone: data.settings.secondary_phone || STORE_CONFIG.secondaryPhone,
-            address: data.settings.address || STORE_CONFIG.address
-          });
-        }
-      } catch (err) {
-        console.error('Error fetching dynamic store settings:', err);
-      }
-    }
-    loadDynamicSettings();
-  }, [isCheckoutOpen]);
 
   if (!isCheckoutOpen) return null;
 
