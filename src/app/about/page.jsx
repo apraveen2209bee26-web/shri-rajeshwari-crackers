@@ -22,6 +22,7 @@ import {
 import { useSettings } from '@/context/SettingsContext';
 import { STORE_CONFIG } from '@/lib/constants';
 import PageHeroHeader from '@/components/layout/PageHeroHeader';
+import FestiveBackgroundPattern from '@/components/effects/FestiveBackgroundPattern';
 
 export default function AboutPage() {
   const { 
@@ -35,7 +36,10 @@ export default function AboutPage() {
   } = useSettings();
 
   return (
-    <div className="min-h-screen bg-gradient-to-b from-sky-50/40 via-slate-50/70 to-white pb-24">
+    <div className="relative min-h-screen pb-24">
+      {/* Authentic Sivakasi Pyrotechnic Watermark & Sapphire Heritage Atmospheric Glow */}
+      <FestiveBackgroundPattern theme="sapphire" />
+
       {/* 1. Full-Width Edge-to-Edge Hero Banner (Sapphire Navy Theme & Sky Crackers) */}
       <PageHeroHeader
         theme="sapphire"

@@ -17,6 +17,7 @@ import {
 import { useCart } from '@/context/CartContext';
 import { MACRO_CATEGORIES, SUB_CATEGORIES } from '@/lib/constants';
 import PageHeroHeader from '@/components/layout/PageHeroHeader';
+import FestiveBackgroundPattern from '@/components/effects/FestiveBackgroundPattern';
 
 function ShopContent() {
   const searchParams = useSearchParams();
@@ -90,7 +91,10 @@ function ShopContent() {
   }, [allProducts, selectedMacro, selectedSub, searchQuery, inStockOnly, sortBy, priceRange]);
 
   return (
-    <div className="min-h-screen bg-gradient-to-b from-purple-50/40 via-slate-50/70 to-white pb-24">
+    <div className="relative min-h-screen pb-24">
+      {/* Authentic Sivakasi Pyrotechnic Watermark & Royal Purple Atmospheric Glow */}
+      <FestiveBackgroundPattern theme="purple" />
+
       {/* 1. Full-Width Edge-to-Edge Hero Banner (Purple Theme & Sky Crackers) */}
       <PageHeroHeader
         theme="purple"

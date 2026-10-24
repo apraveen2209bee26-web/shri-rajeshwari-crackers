@@ -96,6 +96,15 @@ body {
   100% { background-position: 200% 0; }
 }
 
+@keyframes twinkle {
+  0%, 100% { opacity: 0.25; transform: scale(0.85); }
+  50% { opacity: 0.85; transform: scale(1.25); }
+}
+
+.animate-twinkle {
+  animation: twinkle 3.5s ease-in-out infinite;
+}
+
 /* Print Friendly Styles for Price List */
 @media print {
   body {

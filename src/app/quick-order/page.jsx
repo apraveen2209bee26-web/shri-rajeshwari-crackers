@@ -12,6 +12,7 @@ import {
 } from 'lucide-react';
 import { useCart } from '@/context/CartContext';
 import PageHeroHeader from '@/components/layout/PageHeroHeader';
+import FestiveBackgroundPattern from '@/components/effects/FestiveBackgroundPattern';
 
 export default function QuickOrderPage() {
   const { 
@@ -92,7 +93,10 @@ export default function QuickOrderPage() {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-b from-rose-50/40 via-slate-50/70 to-white pb-32">
+    <div className="relative min-h-screen pb-32">
+      {/* Authentic Sivakasi Pyrotechnic Watermark & Festive Crimson Atmospheric Glow */}
+      <FestiveBackgroundPattern theme="red" />
+
       {/* 1. Full-Width Edge-to-Edge Hero Banner (Red Theme & Sky Crackers) */}
       <PageHeroHeader
         theme="red"

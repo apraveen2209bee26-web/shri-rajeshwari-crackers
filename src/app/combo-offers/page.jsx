@@ -24,6 +24,7 @@ import {
 import { useCart } from '@/context/CartContext';
 import { useSettings } from '@/context/SettingsContext';
 import PageHeroHeader from '@/components/layout/PageHeroHeader';
+import FestiveBackgroundPattern from '@/components/effects/FestiveBackgroundPattern';
 
 export default function ComboOffersPage() {
   const { addToCart } = useCart();
@@ -174,7 +175,10 @@ export default function ComboOffersPage() {
   }
 
   return (
-    <div className="min-h-screen bg-gradient-to-b from-amber-50/40 via-slate-50/70 to-white pb-24">
+    <div className="relative min-h-screen pb-24">
+      {/* Authentic Sivakasi Pyrotechnic Watermark & Imperial Gold Atmospheric Glow */}
+      <FestiveBackgroundPattern theme="gold" />
+
       {/* 1. Full-Width Edge-to-Edge Hero Banner (Gold Theme & Sky Crackers) */}
       <PageHeroHeader
         theme="gold"

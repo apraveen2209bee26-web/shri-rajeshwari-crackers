@@ -30,6 +30,7 @@ import { useCart } from '@/context/CartContext';
 import { useSettings } from '@/context/SettingsContext';
 import { STORE_CONFIG } from '@/lib/constants';
 import FireworksBurstCanvas from '@/components/effects/FireworksBurstCanvas';
+import FestiveBackgroundPattern from '@/components/effects/FestiveBackgroundPattern';
 
 export default function HomePage() {
   const router = useRouter();
@@ -122,7 +123,10 @@ export default function HomePage() {
   };
 
   return (
-    <div className="space-y-16 pb-20">
+    <div className="relative min-h-screen space-y-16 pb-20">
+      {/* Authentic Sivakasi Pyrotechnic Watermark & Atmospheric Glow */}
+      <FestiveBackgroundPattern theme="blue" />
+
       {/* 1. FESTIVE TICKER BANNER (Blue, Golden, Black & White Theme) */}
       <div className="bg-gradient-to-r from-slate-950 via-[#0a2540] to-slate-950 text-white text-xs py-2 px-3 overflow-hidden border-b border-sky-500/30 shadow-md">
         <div className="flex items-center gap-6 whitespace-nowrap animate-marquee font-bold tracking-wide">

@@ -17,6 +17,7 @@ import {
 } from 'lucide-react';
 import { STORE_CONFIG } from '@/lib/constants';
 import PageHeroHeader from '@/components/layout/PageHeroHeader';
+import FestiveBackgroundPattern from '@/components/effects/FestiveBackgroundPattern';
 
 export default function SafetyTipsPage() {
   const [activeTab, setActiveTab] = useState('all');
@@ -104,7 +105,10 @@ export default function SafetyTipsPage() {
   ];
 
   return (
-    <div className="min-h-screen bg-gradient-to-b from-teal-50/40 via-slate-50/70 to-white pb-24">
+    <div className="relative min-h-screen pb-24">
+      {/* Authentic Sivakasi Pyrotechnic Watermark & Citrine Teal Atmospheric Glow */}
+      <FestiveBackgroundPattern theme="teal" />
+
       {/* 1. Full-Width Edge-to-Edge Hero Banner (Citrine Teal Theme & Sky Crackers) */}
       <PageHeroHeader
         theme="citrine"

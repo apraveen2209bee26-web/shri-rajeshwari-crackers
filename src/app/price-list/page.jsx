@@ -13,6 +13,7 @@ import {
 import { useCart } from '@/context/CartContext';
 import { STORE_CONFIG } from '@/lib/constants';
 import PageHeroHeader from '@/components/layout/PageHeroHeader';
+import FestiveBackgroundPattern from '@/components/effects/FestiveBackgroundPattern';
 
 export default function PriceListPage() {
   const { setIsCartOpen } = useCart();
@@ -62,7 +63,12 @@ export default function PriceListPage() {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-b from-emerald-50/40 via-slate-50/70 to-white pb-24">
+    <div className="relative min-h-screen pb-24">
+      {/* Authentic Sivakasi Pyrotechnic Watermark & Eco-Green Atmospheric Glow */}
+      <div className="no-print">
+        <FestiveBackgroundPattern theme="emerald" />
+      </div>
+
       {/* 1. Full-Width Edge-to-Edge Hero Banner (Emerald Theme & Sky Crackers) */}
       <div className="no-print">
         <PageHeroHeader
