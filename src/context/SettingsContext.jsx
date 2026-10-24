@@ -15,23 +15,33 @@ export function SettingsProvider({ children }) {
     tagline: STORE_CONFIG.tagline || 'Light Up the Celebration',
     motto: STORE_CONFIG.motto || 'ஸ்ரீ முருகன் துணை'
   });
+  const [branches, setBranches] = useState([]);
   const [loading, setLoading] = useState(true);
 
   const fetchSettings = useCallback(async () => {
     try {
-      const res = await fetch('/api/settings', { cache: 'no-store' });
-      const data = await res.json();
-      if (data.success && data.settings) {
+      const [settingsRes, branchesRes] = await Promise.all([
+        fetch('/api/settings', { cache: 'no-store' }),
+        fetch('/api/branches', { cache: 'no-store' })
+      ]);
+
+      const settingsData = await settingsRes.json();
+      if (settingsData.success && settingsData.settings) {
         setSettings(prev => ({
           ...prev,
-          shop_name: data.settings.shop_name || prev.shop_name,
-          whatsapp_number: data.settings.whatsapp_number || prev.whatsapp_number,
-          secondary_phone: data.settings.secondary_phone || prev.secondary_phone,
-          address: data.settings.address || prev.address
+          shop_name: settingsData.settings.shop_name || prev.shop_name,
+          whatsapp_number: settingsData.settings.whatsapp_number || prev.whatsapp_number,
+          secondary_phone: settingsData.settings.secondary_phone || prev.secondary_phone,
+          address: settingsData.settings.address || prev.address
         }));
       }
+
+      const branchesData = await branchesRes.json();
+      if (branchesData.success && Array.isArray(branchesData.branches)) {
+        setBranches(branchesData.branches);
+      }
     } catch (e) {
-      console.error('Failed to fetch dynamic settings', e);
+      console.error('Failed to fetch dynamic settings or branches', e);
     } finally {
       setLoading(false);
     }
@@ -60,6 +70,7 @@ export function SettingsProvider({ children }) {
 
   const value = {
     settings,
+    branches,
     loading,
     refreshSettings: fetchSettings,
     cleanWaNumber: cleanWa,
@@ -88,6 +99,7 @@ export function useSettings() {
         secondary_phone: STORE_CONFIG.secondaryPhone,
         address: STORE_CONFIG.address,
       },
+      branches: [],
       loading: false,
       refreshSettings: () => {},
       cleanWaNumber: cleanWa,

@@ -28,15 +28,20 @@ import {
   RefreshCw,
   SlidersHorizontal,
   ChevronLeft,
-  ChevronRight
+  ChevronRight,
+  Sparkles,
+  MapPin,
+  Building2
 } from 'lucide-react';
 import { STORE_CONFIG, SUB_CATEGORIES } from '@/lib/constants';
+import ComboManager from '@/components/admin/ComboManager';
+import BranchManager from '@/components/admin/BranchManager';
 
 export default function AdminDashboardPage() {
   const router = useRouter();
   const [authorized, setAuthorized] = useState(false);
   const [loading, setLoading] = useState(true);
-  const [activeTab, setActiveTab] = useState('products'); // 'products' | 'orders' | 'settings'
+  const [activeTab, setActiveTab] = useState('products'); // 'products' | 'combos' | 'orders' | 'branches' | 'settings'
 
   // Products State
   const [products, setProducts] = useState([]);
@@ -668,7 +673,7 @@ export default function AdminDashboardPage() {
       </div>
 
       {/* Primary Tab Navigation */}
-      <div className="flex border-b border-slate-200 gap-4 sm:gap-6 overflow-x-auto">
+      <div className="flex border-b border-slate-200 gap-3 sm:gap-6 overflow-x-auto pb-1">
         <button
           onClick={() => setActiveTab('products')}
           className={`pb-3 font-bold text-xs sm:text-sm flex items-center gap-2 border-b-2 whitespace-nowrap transition-all ${
@@ -679,6 +684,21 @@ export default function AdminDashboardPage() {
         >
           <Package className="w-4 h-4" />
           <span>Product Inventory CRUD ({products.length})</span>
+        </button>
+
+        <button
+          onClick={() => setActiveTab('combos')}
+          className={`pb-3 font-bold text-xs sm:text-sm flex items-center gap-2 border-b-2 whitespace-nowrap transition-all ${
+            activeTab === 'combos'
+              ? 'border-red-600 text-red-700'
+              : 'border-transparent text-slate-500 hover:text-slate-800'
+          }`}
+        >
+          <Sparkles className="w-4 h-4 text-amber-500" />
+          <span className="flex items-center gap-1.5">
+            Combo Offers Configuration
+            <span className="bg-red-500 text-white text-[10px] font-black px-1.5 py-0.2 rounded-full uppercase">NEW</span>
+          </span>
         </button>
 
         <button
@@ -694,6 +714,18 @@ export default function AdminDashboardPage() {
         </button>
 
         <button
+          onClick={() => setActiveTab('branches')}
+          className={`pb-3 font-bold text-xs sm:text-sm flex items-center gap-2 border-b-2 whitespace-nowrap transition-all ${
+            activeTab === 'branches'
+              ? 'border-sky-600 text-sky-800'
+              : 'border-transparent text-slate-500 hover:text-slate-800'
+          }`}
+        >
+          <Building2 className="w-4 h-4 text-sky-600" />
+          <span>Branches &amp; Google Maps</span>
+        </button>
+
+        <button
           onClick={() => setActiveTab('settings')}
           className={`pb-3 font-bold text-xs sm:text-sm flex items-center gap-2 border-b-2 whitespace-nowrap transition-all ${
             activeTab === 'settings'
@@ -702,7 +734,7 @@ export default function AdminDashboardPage() {
           }`}
         >
           <Settings className="w-4 h-4" />
-          <span>WhatsApp Routing & Store Settings</span>
+          <span>WhatsApp Routing &amp; Profile</span>
         </button>
       </div>
 
@@ -885,7 +917,12 @@ export default function AdminDashboardPage() {
         </div>
       )}
 
-      {/* TAB 2: WHATSAPP ORDERS WITH CSV EXPORT, SEARCH, PAGINATION & CLOUD STORAGE ADVISORY */}
+      {/* TAB 2: COMBO OFFERS CONFIGURATION */}
+      {activeTab === 'combos' && (
+        <ComboManager products={products} onNotification={showNotification} />
+      )}
+
+      {/* TAB 3: WHATSAPP ORDERS WITH CSV EXPORT, SEARCH, PAGINATION & CLOUD STORAGE ADVISORY */}
       {activeTab === 'orders' && (
         <div className="space-y-5">
           {/* DATABASE STORAGE CAPACITY ADVISORY BANNER (Updated to reflect Cloud PostgreSQL Neon AWS) */}
@@ -1113,7 +1150,12 @@ export default function AdminDashboardPage() {
         </div>
       )}
 
-      {/* TAB 3: DYNAMIC WHATSAPP ROUTING & STORE CONFIGURATION */}
+      {/* TAB 4: BRANCH LOCATIONS & GOOGLE MAPS CONFIGURATION */}
+      {activeTab === 'branches' && (
+        <BranchManager onNotification={showNotification} />
+      )}
+
+      {/* TAB 5: DYNAMIC WHATSAPP ROUTING & STORE CONFIGURATION */}
       {activeTab === 'settings' && (
         <div className="max-w-2xl mx-auto space-y-6">
           <div className="glass-card rounded-3xl p-6 sm:p-8 border border-sky-100 shadow-xl space-y-5">

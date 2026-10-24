@@ -1,3 +1,5 @@
+'use client';
+
 import React from 'react';
 import Link from 'next/link';
 import { 
@@ -9,29 +11,39 @@ import {
   Phone, 
   Mail, 
   Sparkles, 
-  Percent,
-  Clock,
-  FileDown
+  Percent, 
+  Clock, 
+  FileDown,
+  Navigation,
+  ExternalLink,
+  Building2,
+  CheckCircle2
 } from 'lucide-react';
+import { useSettings } from '@/context/SettingsContext';
 import { STORE_CONFIG } from '@/lib/constants';
 
-export const metadata = {
-  title: 'About Us | Shri Rajeshwari Crackers Sivakasi',
-  description: 'Learn about Shri Rajeshwari Crackers, Sivakasi\'s premier fireworks manufacturing outlet offering genuine green crackers with 80% flat factory discount.',
-};
-
 export default function AboutPage() {
+  const { 
+    settings, 
+    branches, 
+    whatsappUrl, 
+    whatsappDisplay, 
+    secondaryPhoneDisplay, 
+    cleanWaNumber, 
+    cleanSecPhone 
+  } = useSettings();
+
   return (
     <div className="max-w-7xl mx-auto px-4 sm:px-6 py-10 space-y-16">
       {/* 1. Header Hero */}
-      <div className="bg-gradient-to-r from-sky-900 via-sky-800 to-indigo-950 rounded-3xl p-8 sm:p-14 text-white shadow-xl relative overflow-hidden">
+      <div className="bg-gradient-to-r from-sky-950 via-sky-900 to-indigo-950 rounded-3xl p-8 sm:p-14 text-white shadow-xl relative overflow-hidden">
         <div className="relative z-10 max-w-2xl space-y-3">
           <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-amber-400 text-sky-950 text-xs font-black">
             <Sparkles className="w-3.5 h-3.5" />
-            <span>SIVAKASI FACTORY OUTLET • SINCE ESTABLISHMENT</span>
+            <span>SIVAKASI FACTORY OUTLET • AUTHENTIC FIREWORKS</span>
           </div>
           <h1 className="text-3xl sm:text-5xl font-black">
-            About {STORE_CONFIG.name}
+            About {settings.shop_name}
           </h1>
           <p className="text-xs sm:text-base text-sky-200 leading-relaxed">
             {STORE_CONFIG.tamilName} — Pioneering vibrant, safe, and world-class festive illuminations straight from the pyrotechnic capital of India — Sivakasi, Tamil Nadu.
@@ -53,11 +65,11 @@ export default function AboutPage() {
           </div>
 
           <p className="text-xs sm:text-sm text-slate-600 leading-relaxed">
-            Founded in the heart of Sivakasi, <strong className="text-slate-800">{STORE_CONFIG.name}</strong> was born with a singular mission: to make premium, festive fireworks accessible directly to every household and community across India without exploitative middleman markups.
+            Founded in the heart of Sivakasi, <strong className="text-slate-800">{settings.shop_name}</strong> was born with a singular mission: to make premium, festive fireworks accessible directly to every household and community across India without middleman markups.
           </p>
 
           <p className="text-xs sm:text-sm text-slate-600 leading-relaxed">
-            For generations, Sivakasi has supplied over 90% of India&apos;s festive fireworks. At {STORE_CONFIG.name}, we combine time-tested traditional pyrotechnic craftsmanship with modern chemical safety engineering. Every sparkler, fountain, and aerial shell is manufactured under stringent quality oversight complying with the Petroleum and Explosives Safety Organisation (PESO).
+            For generations, Sivakasi has supplied over 90% of India&apos;s festive fireworks. At {settings.shop_name}, we combine time-tested traditional pyrotechnic craftsmanship with modern chemical safety engineering. Every sparkler, fountain, and aerial shell is manufactured under stringent quality oversight complying with the Petroleum and Explosives Safety Organisation (PESO).
           </p>
 
           <div className="p-4 rounded-2xl bg-amber-50 border border-amber-200/80 text-amber-900 text-xs space-y-1">
@@ -66,7 +78,7 @@ export default function AboutPage() {
               <span>Why We Provide A Transparent 80% Discount</span>
             </h4>
             <p className="text-[11px] text-amber-800 leading-relaxed">
-              Standard retail cracker markets impose massive 300% to 500% profit margins through multi-layered distributor chains. Because you purchase directly from our Sivakasi manufacturing outlet at {STORE_CONFIG.address}, we pass factory savings directly to you with our genuine flat 80% mega discount.
+              Standard retail cracker markets impose massive profit margins through multi-layered distributor chains. Because you purchase directly from our Sivakasi outlet, we pass factory savings directly to you with our genuine flat 80% mega discount.
             </p>
           </div>
         </div>
@@ -101,7 +113,107 @@ export default function AboutPage() {
         </div>
       </div>
 
-      {/* 3. Core Pillars */}
+      {/* 3. DYNAMIC BRANCH LOCATIONS & GOOGLE MAPS NAVIGATION */}
+      <div className="space-y-6">
+        <div className="text-center max-w-2xl mx-auto space-y-2">
+          <span className="text-xs font-bold uppercase tracking-wider text-sky-600 bg-sky-100 px-3 py-1 rounded-full">
+            Direct Sivakasi Store & Depots
+          </span>
+          <h2 className="text-2xl sm:text-3xl font-black text-slate-900">
+            Our Shop & Branch Locations
+          </h2>
+          <p className="text-xs sm:text-sm text-slate-600">
+            Touch or click on any branch location below to navigate directly on Google Maps!
+          </p>
+        </div>
+
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+          {branches.length === 0 ? (
+            /* Fallback to primary address if no branches added yet */
+            <div className="col-span-2 bg-white rounded-3xl p-6 sm:p-8 border border-sky-100 shadow-xl flex flex-col justify-between gap-6">
+              <div className="space-y-3">
+                <span className="px-3 py-1 rounded-full bg-amber-100 text-amber-900 font-black text-xs">
+                  MAIN FACTORY OUTLET
+                </span>
+                <h3 className="text-xl font-black text-slate-900">{settings.shop_name}</h3>
+                <p className="text-xs text-slate-600 flex items-start gap-2">
+                  <MapPin className="w-4 h-4 text-red-500 shrink-0 mt-0.5" />
+                  <span>{settings.address}</span>
+                </p>
+                <p className="text-xs text-slate-600 flex items-center gap-2">
+                  <Phone className="w-4 h-4 text-green-500 shrink-0" />
+                  <span>WhatsApp: {whatsappDisplay} | Call: {secondaryPhoneDisplay}</span>
+                </p>
+              </div>
+
+              <a
+                href={`https://maps.google.com/?q=${encodeURIComponent(`${settings.shop_name}, ${settings.address}`)}`}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="w-full sm:w-auto self-start px-5 py-3 rounded-xl bg-gradient-to-r from-sky-600 to-indigo-700 hover:from-sky-500 hover:to-indigo-600 text-white font-extrabold text-xs shadow-md flex items-center justify-center gap-2 transition-all active:scale-95"
+              >
+                <Navigation className="w-4 h-4" />
+                <span>Navigate on Google Maps</span>
+                <ExternalLink className="w-3.5 h-3.5 ml-1" />
+              </a>
+            </div>
+          ) : (
+            branches.map((branch) => (
+              <div 
+                key={branch.id} 
+                className={`bg-white rounded-3xl p-6 sm:p-8 border shadow-xl flex flex-col justify-between gap-6 transition-all hover:scale-[1.01] ${
+                  branch.isMainBranch ? 'border-amber-300 ring-2 ring-amber-400/20' : 'border-sky-100'
+                }`}
+              >
+                <div className="space-y-3">
+                  <div className="flex items-center justify-between gap-2">
+                    <span className={`px-3 py-1 rounded-full font-black text-xs uppercase tracking-wider ${
+                      branch.isMainBranch ? 'bg-amber-100 text-amber-900 border border-amber-300' : 'bg-sky-100 text-sky-800'
+                    }`}>
+                      {branch.isMainBranch ? '★ Head Office & Factory' : 'Branch Location'}
+                    </span>
+                    <span className="text-xs text-slate-400 font-semibold">{branch.city}</span>
+                  </div>
+
+                  <div>
+                    <h3 className="text-lg sm:text-xl font-black text-slate-900">{branch.name}</h3>
+                    {branch.tamilName && (
+                      <p className="text-xs font-bold text-sky-800">{branch.tamilName}</p>
+                    )}
+                  </div>
+
+                  <div className="space-y-2 text-xs text-slate-600 pt-1">
+                    <p className="flex items-start gap-2.5">
+                      <MapPin className="w-4 h-4 text-rose-500 shrink-0 mt-0.5" />
+                      <span className="leading-snug">{branch.address}, {branch.city} - {branch.pincode}</span>
+                    </p>
+                    {branch.phone && (
+                      <p className="flex items-center gap-2.5">
+                        <Phone className="w-4 h-4 text-emerald-600 shrink-0" />
+                        <span>Phone / WhatsApp: <a href={`tel:${branch.phone}`} className="font-bold text-slate-800 hover:underline">{branch.phone}</a></span>
+                      </p>
+                    )}
+                  </div>
+                </div>
+
+                {/* Google Maps Interactive Navigation Button */}
+                <a
+                  href={branch.googleMapsUrl || `https://maps.google.com/?q=${encodeURIComponent(`${branch.name}, ${branch.address}, ${branch.city} ${branch.pincode}`)}`}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="w-full py-3 px-4 rounded-xl bg-gradient-to-r from-sky-600 via-sky-700 to-indigo-800 hover:from-sky-500 hover:to-indigo-700 text-white font-extrabold text-xs shadow-md shadow-sky-600/25 flex items-center justify-center gap-2 transition-all active:scale-95"
+                >
+                  <Navigation className="w-4 h-4 text-amber-300" />
+                  <span>Open in Google Maps (Touch to Navigate)</span>
+                  <ExternalLink className="w-3.5 h-3.5 opacity-80" />
+                </a>
+              </div>
+            ))
+          )}
+        </div>
+      </div>
+
+      {/* 4. Core Pillars */}
       <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
         <div className="glass-panel rounded-3xl p-6 border border-sky-100 space-y-3">
           <div className="w-12 h-12 rounded-2xl bg-sky-100 text-sky-700 flex items-center justify-center font-bold">
@@ -134,15 +246,15 @@ export default function AboutPage() {
         </div>
       </div>
 
-      {/* 4. Contact & Factory Outlet Card with Official Visiting Card */}
+      {/* 5. Contact & Visiting Card */}
       <div className="rounded-3xl bg-slate-900 text-white p-8 sm:p-12 shadow-xl border border-slate-800">
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8 items-center">
           <div className="space-y-4">
             <span className="text-xs font-bold text-amber-400 uppercase tracking-wider">
-              Visit Or Contact Our Factory Outlet
+              Visit Or Contact Our Direct Desk
             </span>
             <h3 className="text-2xl font-black">
-              {STORE_CONFIG.name}
+              {settings.shop_name}
             </h3>
             <p className="text-amber-300 font-tamil font-bold text-sm">
               {STORE_CONFIG.tamilName} • {STORE_CONFIG.tamilGreeting}
@@ -150,29 +262,25 @@ export default function AboutPage() {
             <div className="space-y-3 text-xs text-slate-300">
               <div className="flex items-start gap-3">
                 <MapPin className="w-5 h-5 text-amber-400 shrink-0 mt-0.5" />
-                <span>{STORE_CONFIG.address}</span>
+                <span>{settings.address}</span>
               </div>
               <div className="flex items-center gap-3">
                 <Phone className="w-5 h-5 text-green-400 shrink-0" />
-                <span>WhatsApp: <strong className="text-white">{STORE_CONFIG.whatsappDisplay}</strong></span>
+                <span>WhatsApp: <strong className="text-white">{whatsappDisplay}</strong></span>
               </div>
               <div className="flex items-center gap-3">
                 <Phone className="w-5 h-5 text-sky-400 shrink-0" />
-                <span>24/7 Call: <strong className="text-white">{STORE_CONFIG.secondaryPhoneDisplay}</strong></span>
+                <span>24/7 Call: <strong className="text-white">{secondaryPhoneDisplay}</strong></span>
               </div>
               <div className="flex items-center gap-3">
                 <Mail className="w-5 h-5 text-sky-400 shrink-0" />
-                <span>{STORE_CONFIG.email}</span>
-              </div>
-              <div className="flex items-center gap-3">
-                <Clock className="w-5 h-5 text-indigo-400 shrink-0" />
-                <span>Working Hours: 24/7 Available (Monday - Sunday)</span>
+                <span>{settings.email || STORE_CONFIG.email}</span>
               </div>
             </div>
 
             <div className="pt-2 flex flex-wrap gap-3">
               <a
-                href={`https://wa.me/91${STORE_CONFIG.whatsappNumber}`}
+                href={whatsappUrl}
                 target="_blank"
                 rel="noopener noreferrer"
                 className="px-5 py-2.5 rounded-xl bg-green-500 hover:bg-green-600 text-white font-bold text-xs shadow-md transition-colors flex items-center gap-1.5"
@@ -181,10 +289,11 @@ export default function AboutPage() {
                 <span>Chat on WhatsApp</span>
               </a>
               <Link
-                href="/shop"
-                className="px-5 py-2.5 rounded-xl bg-sky-600 hover:bg-sky-700 text-white font-bold text-xs shadow-md transition-colors"
+                href="/combo-offers"
+                className="px-5 py-2.5 rounded-xl bg-gradient-to-r from-rose-600 to-amber-600 text-white font-bold text-xs shadow-md transition-colors flex items-center gap-1.5"
               >
-                Explore Cracker Shop
+                <Flame className="w-4 h-4" />
+                <span>View Combo Offers 🔥</span>
               </Link>
             </div>
           </div>

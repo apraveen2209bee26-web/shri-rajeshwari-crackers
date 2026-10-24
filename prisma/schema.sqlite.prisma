@@ -50,3 +50,37 @@ model AdminSetting {
   value     String
   updatedAt DateTime @updatedAt
 }
+
+model ComboOffer {
+  id               Int      @id @default(autoincrement())
+  slug             String   @unique
+  title            String
+  tamilTitle       String   @default("")
+  badge            String   @default("MEGA SAVER")
+  itemsCount       Int      @default(0)
+  image            String   @default("/images/illustration-diwali-crackers.avif")
+  totalMarketPrice Float    @default(0)
+  offerPrice       Float
+  description      String?
+  highlights       String   @default("[]")
+  itemsJson        String   @default("[]")
+  active           Boolean  @default(true)
+  sortOrder        Int      @default(0)
+  createdAt        DateTime @default(now())
+  updatedAt        DateTime @updatedAt
+}
+
+model BranchLocation {
+  id             Int      @id @default(autoincrement())
+  name           String
+  tamilName      String   @default("")
+  address        String
+  city           String
+  pincode        String   @default("")
+  phone          String   @default("")
+  secondaryPhone String   @default("")
+  googleMapsUrl  String
+  isMainBranch   Boolean  @default(false)
+  createdAt      DateTime @default(now())
+  updatedAt      DateTime @updatedAt
+}
