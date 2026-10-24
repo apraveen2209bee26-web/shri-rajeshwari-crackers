@@ -98,33 +98,140 @@ export default function Navbar() {
     return false;
   };
 
+  // Dynamic color theme matching the active page's hero header
+  const getPageTheme = () => {
+    if (pathname.startsWith('/shop')) {
+      return {
+        bg: 'bg-gradient-to-r from-[#100424] via-[#23094c] to-[#100424]',
+        border: 'border-b border-purple-500/40',
+        badge: 'bg-gradient-to-r from-amber-400 via-yellow-300 to-amber-500 text-purple-950 shadow-purple-950/50 border border-amber-300/80',
+        textColor: 'text-purple-100',
+        highlightColor: 'text-amber-300',
+        pillBg: 'bg-purple-950/70 hover:bg-purple-900/90 border-purple-400/40 text-purple-200 hover:text-white',
+        phoneIcon: 'text-purple-300',
+        waIcon: 'text-emerald-400',
+        glow: 'from-purple-500/15 via-amber-500/10 to-purple-500/15'
+      };
+    }
+    if (pathname.startsWith('/quick-order')) {
+      return {
+        bg: 'bg-gradient-to-r from-[#1c0309] via-[#430915] to-[#1c0309]',
+        border: 'border-b border-rose-500/40',
+        badge: 'bg-gradient-to-r from-amber-400 via-yellow-300 to-amber-500 text-rose-950 shadow-rose-950/50 border border-amber-300/80',
+        textColor: 'text-rose-100',
+        highlightColor: 'text-amber-300',
+        pillBg: 'bg-rose-950/70 hover:bg-rose-900/90 border-rose-400/40 text-rose-200 hover:text-white',
+        phoneIcon: 'text-rose-300',
+        waIcon: 'text-emerald-400',
+        glow: 'from-rose-500/15 via-amber-500/10 to-rose-500/15'
+      };
+    }
+    if (pathname.startsWith('/combo-offers')) {
+      return {
+        bg: 'bg-gradient-to-r from-[#140e03] via-[#2f2005] to-[#140e03]',
+        border: 'border-b border-amber-500/40',
+        badge: 'bg-gradient-to-r from-yellow-300 via-amber-400 to-yellow-400 text-amber-950 shadow-amber-950/50 border border-yellow-200',
+        textColor: 'text-amber-100',
+        highlightColor: 'text-yellow-300',
+        pillBg: 'bg-amber-950/70 hover:bg-amber-900/90 border-amber-400/50 text-amber-200 hover:text-white',
+        phoneIcon: 'text-amber-300',
+        waIcon: 'text-emerald-400',
+        glow: 'from-amber-500/20 via-yellow-400/15 to-amber-500/20'
+      };
+    }
+    if (pathname.startsWith('/price-list')) {
+      return {
+        bg: 'bg-gradient-to-r from-[#021812] via-[#064232] to-[#021812]',
+        border: 'border-b border-emerald-500/40',
+        badge: 'bg-gradient-to-r from-amber-400 via-yellow-300 to-amber-500 text-emerald-950 shadow-emerald-950/50 border border-amber-300/80',
+        textColor: 'text-emerald-100',
+        highlightColor: 'text-amber-300',
+        pillBg: 'bg-emerald-950/70 hover:bg-emerald-900/90 border-emerald-400/40 text-emerald-200 hover:text-white',
+        phoneIcon: 'text-emerald-300',
+        waIcon: 'text-emerald-400',
+        glow: 'from-emerald-500/15 via-amber-500/10 to-emerald-500/15'
+      };
+    }
+    if (pathname.startsWith('/about')) {
+      return {
+        bg: 'bg-gradient-to-r from-[#020b18] via-[#07244a] to-[#020b18]',
+        border: 'border-b border-sky-500/40',
+        badge: 'bg-gradient-to-r from-amber-400 via-yellow-300 to-amber-500 text-sky-950 shadow-sky-950/50 border border-amber-300/80',
+        textColor: 'text-sky-100',
+        highlightColor: 'text-amber-300',
+        pillBg: 'bg-sky-950/70 hover:bg-sky-900/90 border-sky-400/40 text-sky-200 hover:text-white',
+        phoneIcon: 'text-sky-300',
+        waIcon: 'text-emerald-400',
+        glow: 'from-sky-500/15 via-amber-500/10 to-sky-500/15'
+      };
+    }
+    if (pathname.startsWith('/safety-tips')) {
+      return {
+        bg: 'bg-gradient-to-r from-[#051821] via-[#0a3832] to-[#051821]',
+        border: 'border-b border-teal-500/40',
+        badge: 'bg-gradient-to-r from-amber-400 via-yellow-300 to-amber-500 text-teal-950 shadow-teal-950/50 border border-amber-300/80',
+        textColor: 'text-teal-100',
+        highlightColor: 'text-amber-300',
+        pillBg: 'bg-teal-950/70 hover:bg-teal-900/90 border-teal-400/40 text-teal-200 hover:text-white',
+        phoneIcon: 'text-teal-300',
+        waIcon: 'text-emerald-400',
+        glow: 'from-teal-500/15 via-amber-500/10 to-teal-500/15'
+      };
+    }
+    // Default / Home:
+    return {
+      bg: 'bg-gradient-to-r from-[#051329] via-[#092548] to-[#051329]',
+      border: 'border-b border-sky-500/40',
+      badge: 'bg-gradient-to-r from-amber-400 via-yellow-300 to-amber-500 text-sky-950 shadow-sky-950/50 border border-amber-300/80',
+      textColor: 'text-sky-100',
+      highlightColor: 'text-amber-300',
+      pillBg: 'bg-sky-950/70 hover:bg-sky-900/90 border-sky-400/40 text-sky-200 hover:text-white',
+      phoneIcon: 'text-sky-300',
+      waIcon: 'text-emerald-400',
+      glow: 'from-sky-500/15 via-amber-500/10 to-sky-500/15'
+    };
+  };
+
+  const topTheme = getPageTheme();
+
   return (
     <header className="sticky top-0 z-40 w-full shadow-md">
-      {/* Top Notification Bar */}
-      <div className="bg-gradient-to-r from-sky-950 via-sky-900 to-indigo-950 text-white text-xs py-2 px-3 sm:px-4 border-b border-sky-800/40">
-        <div className="max-w-7xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-1.5 sm:gap-2">
-          <div className="flex items-center gap-2 font-medium text-center sm:text-left text-[11px] sm:text-xs">
-            <span className="bg-amber-400 text-sky-950 px-2 py-0.5 rounded-full font-black text-[9px] tracking-wide animate-pulse shrink-0">
-              MEGA SALE
+      {/* Top Notification Bar - Dynamic Color Theme per Page with Luxury Glassmorphism */}
+      <div className={`relative overflow-hidden ${topTheme.bg} text-white text-xs py-2 px-3 sm:px-6 ${topTheme.border} transition-colors duration-500 shadow-sm`}>
+        {/* Subtle Ambient Shimmer Glow */}
+        <div className={`absolute inset-0 bg-gradient-to-r ${topTheme.glow} pointer-events-none opacity-80`} />
+
+        <div className="relative z-10 max-w-7xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-2">
+          {/* Left: Mega Sale Pill & Offer Text with Icons */}
+          <div className="flex items-center gap-2.5 font-medium text-center sm:text-left text-[11px] sm:text-xs">
+            <span className={`inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full font-black text-[9px] uppercase tracking-wider shadow-md backdrop-blur-md ${topTheme.badge} shrink-0`}>
+              <Flame className="w-3 h-3 fill-current animate-pulse" />
+              <span>MEGA SALE</span>
             </span>
-            <span className="truncate">💥 FLAT 80% OFF on All Crackers Direct from Sivakasi Factory!</span>
+            <span className={`${topTheme.textColor} truncate drop-shadow-sm`}>
+              <Sparkles className="w-3.5 h-3.5 inline mr-1 text-amber-300 shrink-0" />
+              <strong className={topTheme.highlightColor}>FLAT 80% OFF</strong> on All Crackers Direct from Sivakasi Factory!
+            </span>
           </div>
-          <div className="flex flex-wrap items-center justify-center gap-2.5 sm:gap-4 text-sky-200 text-[11px] sm:text-xs">
+
+          {/* Right: WhatsApp & Call Glass Pills */}
+          <div className="flex flex-wrap items-center justify-center gap-2 sm:gap-2.5 text-[11px] sm:text-xs">
             <a 
               href={whatsappUrl} 
               target="_blank" 
               rel="noopener noreferrer"
-              className="flex items-center gap-1.5 hover:text-amber-300 transition-colors"
+              className={`inline-flex items-center gap-1.5 px-3 py-1 rounded-full border shadow-sm backdrop-blur-md transition-all active:scale-95 ${topTheme.pillBg}`}
             >
-              <Phone className="w-3.5 h-3.5 text-green-400 shrink-0" />
-              <span>WhatsApp: <strong className="text-white">{whatsappDisplay}</strong></span>
+              <Phone className={`w-3.5 h-3.5 ${topTheme.waIcon} shrink-0`} />
+              <span>WhatsApp: <strong className="text-white drop-shadow font-extrabold">{whatsappDisplay}</strong></span>
             </a>
-            <span className="hidden sm:inline text-sky-400">|</span>
+
             <a 
               href={`tel:${cleanSecPhone}`} 
-              className="hidden sm:flex items-center gap-1.5 hover:text-amber-300 transition-colors"
+              className={`hidden sm:inline-flex items-center gap-1.5 px-3 py-1 rounded-full border shadow-sm backdrop-blur-md transition-all active:scale-95 ${topTheme.pillBg}`}
             >
-              <span>Call: <strong className="text-white">{secondaryPhoneDisplay}</strong></span>
+              <Phone className={`w-3.5 h-3.5 ${topTheme.phoneIcon} shrink-0`} />
+              <span>Call: <strong className="text-white drop-shadow font-extrabold">{secondaryPhoneDisplay}</strong></span>
             </a>
           </div>
         </div>
