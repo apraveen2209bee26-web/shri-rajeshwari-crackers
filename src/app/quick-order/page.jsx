@@ -11,6 +11,7 @@ import {
   FileSpreadsheet
 } from 'lucide-react';
 import { useCart } from '@/context/CartContext';
+import PageHeroHeader from '@/components/layout/PageHeroHeader';
 
 export default function QuickOrderPage() {
   const { 
@@ -92,22 +93,18 @@ export default function QuickOrderPage() {
 
   return (
     <div className="max-w-7xl mx-auto px-4 sm:px-6 py-8 pb-32">
-      {/* Title & Banner */}
-      <div className="bg-gradient-to-r from-sky-900 via-sky-800 to-indigo-950 rounded-3xl p-6 sm:p-10 text-white mb-8 shadow-xl relative overflow-hidden">
-        <div className="relative z-10 space-y-2">
-          <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-amber-400 text-sky-950 text-xs font-black">
-            <Zap className="w-3.5 h-3.5 fill-sky-950" />
-            <span>BULK PURCHASE MODE • SPEED ORDERING MATRIX</span>
-          </div>
-          <h1 className="text-2xl sm:text-4xl font-black">
-            Quick Order Spreadsheet
-          </h1>
-          <p className="text-xs sm:text-sm text-sky-200 max-w-xl">
-            Rapidly enter quantities row-by-row like a spreadsheet. Live calculations, direct factory discounts, and instant WhatsApp submission.
-          </p>
-        </div>
-        <div className="absolute -right-8 -bottom-8 w-60 h-60 bg-amber-400/10 rounded-full blur-2xl" />
-      </div>
+      {/* Title & Banner with Bursting Sky Crackers */}
+      <PageHeroHeader
+        theme="royal-blue"
+        bgImage="/images/sakkaram.jpeg"
+        badge="BULK PURCHASE MODE • SPEED ORDERING MATRIX"
+        badgeIcon={Zap}
+        title="Quick Bulk Order Sheet &"
+        titleHighlight="Speed Matrix"
+        tamilTitle="விரைவு மொத்த ஆர்டர் படிவம் • நேரடி கணக்கீடு"
+        subtitle="Rapid spreadsheet entry built for families, marriages, communities, and resellers. Live discount calculation and one-tap WhatsApp checkout."
+        breadcrumbs={[{ label: 'Quick Order' }]}
+      />
 
       {/* Control Bar: Search & Category Jump */}
       <div className="sticky top-20 z-30 mb-6 glass-panel rounded-2xl p-4 border border-sky-200/80 shadow-lg flex flex-col md:flex-row items-center justify-between gap-4">

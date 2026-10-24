@@ -23,6 +23,7 @@ import {
 } from 'lucide-react';
 import { useCart } from '@/context/CartContext';
 import { useSettings } from '@/context/SettingsContext';
+import PageHeroHeader from '@/components/layout/PageHeroHeader';
 
 export default function ComboOffersPage() {
   const { addToCart } = useCart();
@@ -174,27 +175,22 @@ export default function ComboOffersPage() {
 
   return (
     <div className="min-h-screen bg-slate-50/60 pb-20">
-      {/* 1. FESTIVE TOP BANNER (As seen in skmsparkhub style) */}
-      <div className="relative bg-gradient-to-r from-red-900 via-rose-900 to-indigo-950 text-white py-14 px-4 sm:px-6 shadow-lg overflow-hidden">
-        <div 
-          className="absolute inset-0 opacity-20 bg-cover bg-center pointer-events-none"
-          style={{ backgroundImage: `url('/images/illustration-diwali-crackers.avif')` }}
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 pt-6">
+        {/* 1. FESTIVE TOP BANNER WITH GOLD THEME & BURSTING SKY CRACKERS */}
+        <PageHeroHeader
+          theme="gold"
+          bgImage="/images/banner.jpeg"
+          badge="FESTIVAL MEGA BUNDLES • SAVE UP TO 80%"
+          badgeIcon={Flame}
+          title="Mega Combo Offers &"
+          titleHighlight="Value Packs"
+          tamilTitle="தரமான பட்டாசுகள் குறைந்த விலையில்! குடும்பத்திற்கான பிரம்மாண்ட காம்போ"
+          subtitle="Curated cracker assortments packed with up to 62 premium fireworks items. Enjoy verified Sivakasi quality and instant savings up to ₹19,900!"
+          breadcrumbs={[{ label: 'Festival Combos' }]}
         />
-        <div className="relative max-w-7xl mx-auto text-center space-y-2 z-10">
-          <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-amber-400 text-slate-950 text-xs font-black mb-1">
-            <Flame className="w-3.5 h-3.5 text-red-600 fill-red-600" />
-            <span>FESTIVAL MEGA BUNDLES • SAVE UP TO 80%</span>
-          </div>
-          <h1 className="text-3xl sm:text-5xl font-black tracking-tight">
-            Mega Combo Offers
-          </h1>
-          <p className="text-xs sm:text-sm text-rose-200 font-medium">
-            <Link href="/" className="hover:underline">Home</Link> / <span className="text-white">Festival Combos</span>
-          </p>
-        </div>
       </div>
 
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 -mt-7 z-20 relative space-y-8">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 z-20 relative space-y-8">
         {/* 2. DYNAMIC COMBO OFFER TAB SELECTOR PILLS */}
         <div className="bg-white rounded-2xl shadow-xl border border-slate-200/80 p-2 flex flex-wrap items-center justify-center gap-2 max-w-2xl mx-auto">
           {combos.map((combo) => {

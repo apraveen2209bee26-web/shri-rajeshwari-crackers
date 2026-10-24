@@ -12,6 +12,7 @@ import {
 } from 'lucide-react';
 import { useCart } from '@/context/CartContext';
 import { STORE_CONFIG } from '@/lib/constants';
+import PageHeroHeader from '@/components/layout/PageHeroHeader';
 
 export default function PriceListPage() {
   const { setIsCartOpen } = useCart();
@@ -64,38 +65,34 @@ export default function PriceListPage() {
     <div className="max-w-7xl mx-auto px-4 sm:px-6 py-8">
       {/* Non-print Header & Toolbar */}
       <div className="no-print space-y-6 mb-8">
-        <div className="bg-gradient-to-r from-sky-900 via-sky-800 to-indigo-950 rounded-3xl p-6 sm:p-10 text-white shadow-xl relative overflow-hidden flex flex-col md:flex-row items-center justify-between gap-6">
-          <div className="relative z-10 space-y-2 text-center md:text-left">
-            <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-amber-400 text-sky-950 text-xs font-black shadow-sm">
-              <Sparkles className="w-3.5 h-3.5" />
-              <span>{STORE_CONFIG.name.toUpperCase()} • 80% MEGA DISCOUNT</span>
-            </div>
-            <h1 className="text-2xl sm:text-4xl font-black">
-              Official Cracker Price Matrix
-            </h1>
-            <p className="text-xs sm:text-sm text-sky-200 max-w-xl">
-              12/291/1 Rathnapuri Nagar, Sivakasi • All 139 verified items with authentic photos, MRP, and 80% discounted factory rates. Printable for offline orders.
-            </p>
-          </div>
-
-          <div className="flex flex-wrap items-center gap-3 relative z-10">
+        <PageHeroHeader
+          theme="slate-gold"
+          bgImage="/images/banner.jpeg"
+          badge={`${STORE_CONFIG.name.toUpperCase()} • 80% MEGA DISCOUNT`}
+          badgeIcon={Sparkles}
+          title="Official 2026 Price List &"
+          titleHighlight="Rate Matrix"
+          tamilTitle="ஸ்ரீ ராஜேஸ்வரி கிராக்கர்ஸ் அதிகாரப்பூர்வ விலைப்பட்டியல் 2026"
+          subtitle="Transparent factory rates for all 139 products with authentic photos, standard MRP, and 80% discounted rates. Print or save offline for community & family orders."
+          breadcrumbs={[{ label: '2026 Price List' }]}
+        >
+          <div className="flex flex-wrap items-center gap-3 pt-2">
             <button
               onClick={handlePrint}
-              className="px-5 py-3 rounded-xl bg-white hover:bg-sky-50 text-sky-950 font-bold text-xs sm:text-sm shadow-md border border-white flex items-center gap-2 active:scale-95 transition-all"
+              className="px-5 py-3 rounded-full bg-white hover:bg-amber-50 text-slate-950 font-black text-xs sm:text-sm shadow-xl flex items-center gap-2 active:scale-95 transition-all border border-amber-400"
             >
               <Printer className="w-4 h-4 text-sky-600" />
               <span>Print / Save as PDF</span>
             </button>
             <button
               onClick={() => setIsCartOpen(true)}
-              className="px-4 py-3 rounded-xl bg-sky-600 hover:bg-sky-700 text-white font-bold text-xs sm:text-sm shadow-md flex items-center gap-1.5"
+              className="px-5 py-3 rounded-full bg-sky-600 hover:bg-sky-700 text-white font-black text-xs sm:text-sm shadow-xl flex items-center gap-1.5 active:scale-95 transition-all border border-sky-400"
             >
               <ShoppingBag className="w-4 h-4" />
               <span>View Cart</span>
             </button>
           </div>
-          <div className="absolute -right-8 -bottom-8 w-60 h-60 bg-amber-400/10 rounded-full blur-2xl" />
-        </div>
+        </PageHeroHeader>
 
         {/* Search Bar */}
         <div className="glass-panel rounded-2xl p-4 border border-sky-200/80 flex flex-col sm:flex-row items-center justify-between gap-4">

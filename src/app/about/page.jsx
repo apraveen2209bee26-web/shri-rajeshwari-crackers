@@ -21,6 +21,7 @@ import {
 } from 'lucide-react';
 import { useSettings } from '@/context/SettingsContext';
 import { STORE_CONFIG } from '@/lib/constants';
+import PageHeroHeader from '@/components/layout/PageHeroHeader';
 
 export default function AboutPage() {
   const { 
@@ -35,22 +36,18 @@ export default function AboutPage() {
 
   return (
     <div className="max-w-7xl mx-auto px-4 sm:px-6 py-10 space-y-16">
-      {/* 1. Header Hero */}
-      <div className="bg-gradient-to-r from-sky-950 via-sky-900 to-indigo-950 rounded-3xl p-8 sm:p-14 text-white shadow-xl relative overflow-hidden">
-        <div className="relative z-10 max-w-2xl space-y-3">
-          <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-amber-400 text-sky-950 text-xs font-black">
-            <Sparkles className="w-3.5 h-3.5" />
-            <span>SIVAKASI FACTORY OUTLET • AUTHENTIC FIREWORKS</span>
-          </div>
-          <h1 className="text-3xl sm:text-5xl font-black">
-            About {settings.shop_name}
-          </h1>
-          <p className="text-xs sm:text-base text-sky-200 leading-relaxed">
-            {STORE_CONFIG.tamilName} — Pioneering vibrant, safe, and world-class festive illuminations straight from the pyrotechnic capital of India — Sivakasi, Tamil Nadu.
-          </p>
-        </div>
-        <div className="absolute -right-10 -bottom-10 w-72 h-72 bg-amber-400/10 rounded-full blur-3xl" />
-      </div>
+      {/* 1. Header Hero with Bursting Sky Crackers */}
+      <PageHeroHeader
+        theme="navy-azure"
+        bgImage="/images/alltype.jpeg"
+        badge="ESTD. SIVAKASI • 100% PESO GREEN CERTIFIED"
+        badgeIcon={Sparkles}
+        title={`About ${settings.shop_name} &`}
+        titleHighlight="Sivakasi Heritage"
+        tamilTitle={`${STORE_CONFIG.tamilName} — நேரடி தொழிற்சாலை பட்டாசு விற்பனையகம்`}
+        subtitle="Pioneering vibrant, safe, and world-class festive illuminations straight from the pyrotechnic capital of India — Sivakasi, Tamil Nadu. Direct manufacturer rates with no middleman markups."
+        breadcrumbs={[{ label: 'About Us' }]}
+      />
 
       {/* 2. Brand Story Section */}
       <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 items-center">

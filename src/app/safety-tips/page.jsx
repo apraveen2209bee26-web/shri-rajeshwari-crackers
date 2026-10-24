@@ -16,6 +16,7 @@ import {
   Baby
 } from 'lucide-react';
 import { STORE_CONFIG } from '@/lib/constants';
+import PageHeroHeader from '@/components/layout/PageHeroHeader';
 
 export default function SafetyTipsPage() {
   const [activeTab, setActiveTab] = useState('all');
@@ -104,22 +105,18 @@ export default function SafetyTipsPage() {
 
   return (
     <div className="max-w-7xl mx-auto px-4 sm:px-6 py-10 space-y-12">
-      {/* Hero Banner */}
-      <div className="bg-gradient-to-r from-sky-900 via-sky-800 to-indigo-950 rounded-3xl p-8 sm:p-12 text-white shadow-xl relative overflow-hidden">
-        <div className="relative z-10 max-w-2xl space-y-3">
-          <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-emerald-400 text-slate-950 text-xs font-black">
-            <ShieldCheck className="w-3.5 h-3.5" />
-            <span>SAFE CELEBRATION GUIDELINES • SIVAKASI PROTOCOLS</span>
-          </div>
-          <h1 className="text-3xl sm:text-5xl font-black">
-            Diwali Safety Tips & Protocols
-          </h1>
-          <p className="text-xs sm:text-sm text-sky-200 leading-relaxed">
-            Festivals are best celebrated when happiness is paired with safety. Review our essential Do&apos;s and Don&apos;ts to safeguard your family and neighborhood.
-          </p>
-        </div>
-        <div className="absolute -right-10 -bottom-10 w-72 h-72 bg-emerald-400/10 rounded-full blur-3xl" />
-      </div>
+      {/* Hero Banner with Bursting Sky Crackers */}
+      <PageHeroHeader
+        theme="emerald-gold"
+        bgImage="/images/sakkaram.jpeg"
+        badge="SAFE CELEBRATION GUIDELINES • SIVAKASI PROTOCOLS"
+        badgeIcon={ShieldCheck}
+        title="Diwali Safety Protocols &"
+        titleHighlight="Celebration Guide"
+        tamilTitle="பாதுகாப்பான பட்டாசு கொண்டாட்ட வழிகாட்டுதல்கள்"
+        subtitle="Festivals are best celebrated when happiness is paired with safety. Review our essential Do's and Don'ts to safeguard your family and neighborhood."
+        breadcrumbs={[{ label: 'Safety Guidelines' }]}
+      />
 
       {/* Tabs Filter */}
       <div className="flex justify-center">

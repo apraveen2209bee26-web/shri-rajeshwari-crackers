@@ -16,6 +16,7 @@ import {
 } from 'lucide-react';
 import { useCart } from '@/context/CartContext';
 import { MACRO_CATEGORIES, SUB_CATEGORIES } from '@/lib/constants';
+import PageHeroHeader from '@/components/layout/PageHeroHeader';
 
 function ShopContent() {
   const searchParams = useSearchParams();
@@ -90,22 +91,18 @@ function ShopContent() {
 
   return (
     <div className="max-w-7xl mx-auto px-4 sm:px-6 py-8">
-      {/* Header Banner */}
-      <div className="rounded-3xl bg-gradient-to-r from-sky-900 via-sky-800 to-indigo-950 p-6 sm:p-10 text-white mb-8 shadow-xl relative overflow-hidden">
-        <div className="relative z-10 space-y-2">
-          <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-amber-400 text-sky-950 text-xs font-black">
-            <Sparkles className="w-3.5 h-3.5" />
-            <span>DIRECT FACTORY CATALOG • 80% MEGA DISCOUNT</span>
-          </div>
-          <h1 className="text-2xl sm:text-4xl font-black">
-            Diwali Crackers Catalog
-          </h1>
-          <p className="text-xs sm:text-sm text-sky-200 max-w-xl">
-            Browse our full 139-product Sivakasi fireworks collection. Filter by Daylight, Nightlight, or browse premium celebration combos.
-          </p>
-        </div>
-        <div className="absolute -right-8 -bottom-8 w-60 h-60 bg-amber-400/10 rounded-full blur-2xl" />
-      </div>
+      {/* Header Banner with Bursting Sky Crackers */}
+      <PageHeroHeader
+        theme="light-blue"
+        bgImage="/images/alltype.jpeg"
+        badge="139+ FIREWORKS • FLAT 80% MEGA DISCOUNT"
+        badgeIcon={Sparkles}
+        title="Diwali Crackers Catalog &"
+        titleHighlight="Factory Rates"
+        tamilTitle="சிவகாசி தரமான பட்டாசுகள் • 80% அதிரடி தள்ளுபடி"
+        subtitle="Explore our certified direct Sivakasi outlet collection. Daylight sound crackers, sparkling fountains, and aerial repeating shots with instant cart ordering."
+        breadcrumbs={[{ label: 'Crackers Catalog' }]}
+      />
 
       {/* Main Layout: Sidebar Filters + Products Grid */}
       <div className="grid grid-cols-1 lg:grid-cols-4 gap-8">
