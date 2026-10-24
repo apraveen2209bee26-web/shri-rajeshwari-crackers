@@ -26,7 +26,9 @@ import {
   Phone,
   Database,
   RefreshCw,
-  SlidersHorizontal
+  SlidersHorizontal,
+  ChevronLeft,
+  ChevronRight
 } from 'lucide-react';
 import { STORE_CONFIG, SUB_CATEGORIES } from '@/lib/constants';
 
@@ -42,9 +44,38 @@ export default function AdminDashboardPage() {
   const [categoryFilter, setCategoryFilter] = useState('All');
   const [stockFilter, setStockFilter] = useState('All'); // 'All' | 'in' | 'out'
 
-  // Orders State
+  // Orders State & Search / Pagination
   const [orders, setOrders] = useState([]);
   const [ordersLoading, setOrdersLoading] = useState(false);
+  const [orderSearch, setOrderSearch] = useState('');
+  const [orderPage, setOrderPage] = useState(1);
+  const ordersPerPage = 10;
+
+  // Filter orders by Order Reference (#SR-...), Mobile Number, Customer Name, or City
+  const filteredOrders = React.useMemo(() => {
+    if (!orderSearch.trim()) return orders;
+    const q = orderSearch.toLowerCase().trim();
+    const qDigits = q.replace(/[^0-9]/g, '');
+    return orders.filter(ord => {
+      const matchRef = (ord.orderRef || '').toLowerCase().includes(q);
+      const matchPhone = qDigits.length > 0 && (ord.whatsappNumber || '').replace(/[^0-9]/g, '').includes(qDigits);
+      const matchName = (ord.customerName || '').toLowerCase().includes(q);
+      const matchCity = (ord.city || '').toLowerCase().includes(q);
+      const matchAddress = (ord.address || '').toLowerCase().includes(q);
+      return matchRef || matchPhone || matchName || matchCity || matchAddress;
+    });
+  }, [orders, orderSearch]);
+
+  const totalOrderPages = Math.ceil(filteredOrders.length / ordersPerPage) || 1;
+  const paginatedOrders = React.useMemo(() => {
+    const start = (orderPage - 1) * ordersPerPage;
+    return filteredOrders.slice(start, start + ordersPerPage);
+  }, [filteredOrders, orderPage, ordersPerPage]);
+
+  React.useEffect(() => {
+    setOrderPage(1);
+  }, [orderSearch]);
+
 
   // Dynamic Store & WhatsApp Settings State
   const [settings, setSettings] = useState({
@@ -843,22 +874,22 @@ export default function AdminDashboardPage() {
         </div>
       )}
 
-      {/* TAB 2: WHATSAPP ORDERS WITH CSV EXPORT & STORAGE FULL ADVISORY */}
+      {/* TAB 2: WHATSAPP ORDERS WITH CSV EXPORT, SEARCH, PAGINATION & CLOUD STORAGE ADVISORY */}
       {activeTab === 'orders' && (
         <div className="space-y-5">
-          {/* DATABASE STORAGE FULL ADVISORY BANNER */}
+          {/* DATABASE STORAGE CAPACITY ADVISORY BANNER (Updated to reflect Cloud PostgreSQL Neon AWS) */}
           <div className="bg-amber-50 border-2 border-amber-300 rounded-2xl p-4 sm:p-5 text-amber-950 flex flex-col sm:flex-row items-start justify-between gap-4 shadow-sm">
             <div className="flex items-start gap-3">
               <AlertTriangle className="w-5 h-5 text-amber-600 shrink-0 mt-0.5" />
               <div className="space-y-1 text-xs">
                 <p className="font-extrabold text-amber-950 text-sm">
-                  ⚠️ Database Storage Capacity Advisory & Regular Backup Reminder
+                  ⚡ Cloud PostgreSQL Database Storage (Neon AWS) & Regular Backup Reminder
                 </p>
                 <p className="text-amber-900 leading-relaxed max-w-2xl">
-                  Local SQLite database storage is continuously accumulating customer order logs and JSON cart payload data. To avoid running into database storage limits and ensure zero loss of valuable order information, it is strongly recommended to periodically <strong>Export orders to CSV</strong> and keep safe offline copies.
+                  Your store is connected live to a high-speed Cloud PostgreSQL database on AWS. To keep your database query speeds lightning-fast and ensure you stay within your <strong>100% Free Forever Tier</strong> without consuming quota, it is strongly recommended to periodically <strong>Download CSV Backup</strong> and use <strong>Annual Cleanup</strong> at the end of each festive season.
                 </p>
                 <p className="text-[11px] text-amber-800 font-semibold pt-1">
-                  Current Database Submissions: <strong>{orders.length} orders saved</strong>
+                  Current Cloud Database Submissions: <strong>{orders.length} orders saved</strong>
                 </p>
               </div>
             </div>
@@ -900,6 +931,43 @@ export default function AdminDashboardPage() {
             </div>
           </div>
 
+          {/* Search & Filter Bar for Orders */}
+          <div className="glass-panel rounded-2xl p-4 border border-sky-100 flex flex-col sm:flex-row items-center justify-between gap-3 shadow-sm">
+            <div className="relative w-full sm:w-96">
+              <Search className="w-4 h-4 text-slate-400 absolute left-3 top-2.5" />
+              <input
+                type="text"
+                value={orderSearch}
+                onChange={(e) => setOrderSearch(e.target.value)}
+                placeholder="Search by Mobile (e.g. 916369...), Order Ref #SR-, Name, City..."
+                className="w-full pl-9 pr-8 py-2 text-xs rounded-xl border border-slate-200 focus:outline-none focus:ring-2 focus:ring-sky-500 bg-white"
+              />
+              {orderSearch && (
+                <button
+                  onClick={() => setOrderSearch('')}
+                  className="absolute right-2.5 top-2.5 text-slate-400 hover:text-slate-600 p-0.5"
+                  title="Clear search"
+                >
+                  <X className="w-3.5 h-3.5" />
+                </button>
+              )}
+            </div>
+
+            <div className="flex items-center gap-3 w-full sm:w-auto justify-between sm:justify-end text-xs text-slate-600 font-medium">
+              <span>
+                Showing <strong className="text-slate-900 font-bold">{filteredOrders.length}</strong> of {orders.length} orders
+              </span>
+              {orderSearch && (
+                <button
+                  onClick={() => setOrderSearch('')}
+                  className="text-xs text-sky-600 hover:text-sky-800 font-bold underline"
+                >
+                  Reset Filter
+                </button>
+              )}
+            </div>
+          </div>
+
           {/* Orders Content List */}
           {ordersLoading ? (
             <p className="text-xs text-slate-500">Loading orders...</p>
@@ -907,9 +975,19 @@ export default function AdminDashboardPage() {
             <div className="glass-panel rounded-2xl p-12 text-center text-slate-500 text-xs">
               No WhatsApp orders placed yet. As customers checkout from the cart, their orders will appear here automatically with real-time stock decrements!
             </div>
+          ) : filteredOrders.length === 0 ? (
+            <div className="glass-panel rounded-2xl p-10 text-center text-slate-500 text-xs space-y-2">
+              <p>No orders found matching &ldquo;<strong>{orderSearch}</strong>&rdquo;.</p>
+              <button
+                onClick={() => setOrderSearch('')}
+                className="px-3 py-1 rounded-lg bg-sky-600 text-white font-bold text-xs"
+              >
+                Clear Search
+              </button>
+            </div>
           ) : (
             <div className="space-y-3">
-              {orders.map((ord) => {
+              {paginatedOrders.map((ord) => {
                 let itemsList = [];
                 try {
                   itemsList = JSON.parse(ord.itemsJson);
@@ -969,6 +1047,56 @@ export default function AdminDashboardPage() {
                   </div>
                 );
               })}
+            </div>
+          )}
+
+          {/* Pagination Controls (10 orders per page) */}
+          {filteredOrders.length > ordersPerPage && (
+            <div className="glass-panel rounded-2xl p-4 border border-sky-100 flex flex-col sm:flex-row items-center justify-between gap-4 shadow-sm">
+              <p className="text-xs text-slate-600 font-medium">
+                Showing <strong className="text-slate-900 font-bold">{(orderPage - 1) * ordersPerPage + 1}</strong> to <strong className="text-slate-900 font-bold">{Math.min(orderPage * ordersPerPage, filteredOrders.length)}</strong> of <strong className="text-slate-900 font-bold">{filteredOrders.length}</strong> orders (Page {orderPage} of {totalOrderPages})
+              </p>
+
+              <div className="flex items-center gap-1.5">
+                <button
+                  onClick={() => setOrderPage(prev => Math.max(1, prev - 1))}
+                  disabled={orderPage === 1}
+                  className="px-3 py-1.5 rounded-xl border border-slate-200 bg-white hover:bg-slate-50 text-slate-700 text-xs font-bold flex items-center gap-1 disabled:opacity-40 disabled:cursor-not-allowed transition-all"
+                >
+                  <ChevronLeft className="w-3.5 h-3.5" />
+                  <span>Previous</span>
+                </button>
+
+                {Array.from({ length: totalOrderPages }, (_, i) => i + 1)
+                  .filter(p => p === 1 || p === totalOrderPages || Math.abs(p - orderPage) <= 1)
+                  .map((p, idx, arr) => {
+                    const showEllipsisBefore = idx > 0 && p - arr[idx - 1] > 1;
+                    return (
+                      <React.Fragment key={p}>
+                        {showEllipsisBefore && <span className="px-1 text-slate-400 text-xs">...</span>}
+                        <button
+                          onClick={() => setOrderPage(p)}
+                          className={`w-8 h-8 rounded-xl text-xs font-bold transition-all ${
+                            orderPage === p
+                              ? 'bg-sky-600 text-white shadow-sm'
+                              : 'bg-white text-slate-700 hover:bg-slate-50 border border-slate-200'
+                          }`}
+                        >
+                          {p}
+                        </button>
+                      </React.Fragment>
+                    );
+                  })}
+
+                <button
+                  onClick={() => setOrderPage(prev => Math.min(totalOrderPages, prev + 1))}
+                  disabled={orderPage === totalOrderPages}
+                  className="px-3 py-1.5 rounded-xl border border-slate-200 bg-white hover:bg-slate-50 text-slate-700 text-xs font-bold flex items-center gap-1 disabled:opacity-40 disabled:cursor-not-allowed transition-all"
+                >
+                  <span>Next</span>
+                  <ChevronRight className="w-3.5 h-3.5" />
+                </button>
+              </div>
             </div>
           )}
         </div>
