@@ -29,6 +29,7 @@ import {
 import { useCart } from '@/context/CartContext';
 import { useSettings } from '@/context/SettingsContext';
 import { STORE_CONFIG } from '@/lib/constants';
+import FireworksBurstCanvas from '@/components/effects/FireworksBurstCanvas';
 
 export default function HomePage() {
   const router = useRouter();
@@ -39,7 +40,7 @@ export default function HomePage() {
   const [heroSearch, setHeroSearch] = useState('');
   const [activeSlide, setActiveSlide] = useState(0);
 
-  // Moving Banner Slides within the Hero Banner
+  // Moving Banner Slides within the Hero Banner (Blue, Gold, Black, White theme)
   const heroSlides = [
     {
       id: 1,
@@ -49,7 +50,7 @@ export default function HomePage() {
       image: '/images/alltype.jpeg',
       linkText: 'Explore Combos',
       linkUrl: '/combo-offers',
-      color: 'from-amber-500 to-rose-600'
+      color: 'from-amber-400 to-yellow-500'
     },
     {
       id: 2,
@@ -59,7 +60,7 @@ export default function HomePage() {
       image: '/images/banner.jpeg',
       linkText: 'Shop Catalog',
       linkUrl: '/shop',
-      color: 'from-rose-600 to-red-700'
+      color: 'from-sky-500 to-blue-700'
     },
     {
       id: 3,
@@ -69,7 +70,7 @@ export default function HomePage() {
       image: '/images/sakkaram.jpeg',
       linkText: 'Quick Order Now',
       linkUrl: '/quick-order',
-      color: 'from-sky-600 to-indigo-800'
+      color: 'from-blue-600 to-sky-700'
     }
   ];
 
@@ -122,116 +123,123 @@ export default function HomePage() {
 
   return (
     <div className="space-y-16 pb-20">
-      {/* 1. FESTIVE TICKER BANNER (As seen in screenshot 4) */}
-      <div className="bg-gradient-to-r from-red-950 via-rose-900 to-red-950 text-white text-xs py-2 px-3 overflow-hidden border-b border-red-800 shadow-sm">
+      {/* 1. FESTIVE TICKER BANNER (Blue, Golden, Black & White Theme) */}
+      <div className="bg-gradient-to-r from-slate-950 via-[#0a2540] to-slate-950 text-white text-xs py-2 px-3 overflow-hidden border-b border-sky-500/30 shadow-md">
         <div className="flex items-center gap-6 whitespace-nowrap animate-marquee font-bold tracking-wide">
           <span className="flex items-center gap-1.5 text-amber-300">
             🔥 உங்களுக்கு எங்கள் குடும்பத்தாருக்கும் இனிய தீபாவளி நல்வாழ்த்துக்கள் 🪔
           </span>
-          <span className="text-white/60">•</span>
+          <span className="text-sky-300/60">•</span>
           <span className="text-white">
             சிவகாசி ஸ்ரீ ராஜேஸ்வரி கிராக்கர்ஸ் • நேரடி தொழிற்சாலை தள்ளுபடி 80%
           </span>
-          <span className="text-white/60">•</span>
+          <span className="text-sky-300/60">•</span>
           <span className="text-amber-300">
             💥 100% Genuine PESO Certified Green Crackers • Safe All-India Transport
           </span>
-          <span className="text-white/60">•</span>
+          <span className="text-sky-300/60">•</span>
           <span className="text-white">
             🎁 Mega Combo Packs Available • Save up to ₹19,900!
           </span>
-          <span className="text-white/60">•</span>
+          <span className="text-sky-300/60">•</span>
           <span className="flex items-center gap-1.5 text-amber-300">
             🔥 உங்களுக்கு எங்கள் குடும்பத்தாருக்கும் இனிய தீபாவளி நல்வாழ்த்துக்கள் 🪔
           </span>
         </div>
       </div>
 
-      {/* 2. FESTIVE HERO SECTION WITH CRACKERS BACKDROP & MOVING BANNER (From Screenshot 4) */}
-      <section className="relative overflow-hidden bg-slate-950 text-white py-12 md:py-20 px-4 sm:px-6 shadow-2xl">
-        {/* Background Cracker Image with Rich Dark Gradient */}
+      {/* 2. FESTIVE HERO SECTION WITH SKY BLUE ATMOSPHERE & BURSTING SKY CRACKERS (From Screenshot 4) */}
+      <section className="relative overflow-hidden bg-gradient-to-b from-[#051329] via-[#092548] to-[#0284c7] text-white py-12 md:py-20 px-4 sm:px-6 shadow-2xl">
+        {/* Subtle Background Cracker Image Silhouette */}
         <div 
-          className="absolute inset-0 bg-cover bg-center opacity-35 filter brightness-75 scale-105 pointer-events-none transition-transform duration-1000"
+          className="absolute inset-0 bg-cover bg-center opacity-20 filter brightness-90 contrast-125 pointer-events-none transition-transform duration-1000 mix-blend-overlay"
           style={{ backgroundImage: `url('/images/banner.jpeg')` }}
         />
-        <div className="absolute inset-0 bg-gradient-to-r from-black/90 via-slate-950/85 to-red-950/75 pointer-events-none" />
+        
+        {/* Light Blue Atmosphere & Radial Glow Layer */}
+        <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_35%,rgba(56,189,248,0.30)_0%,rgba(14,116,144,0.18)_45%,rgba(5,19,41,0.85)_100%)] pointer-events-none" />
 
-        {/* Colorful Fireworks Sparks Burst Effects (Subtle & Elegant) */}
-        <div className="absolute top-10 left-1/4 w-3 h-3 rounded-full bg-amber-400 blur-[1px] animate-ping pointer-events-none" style={{ animationDuration: '3s' }} />
-        <div className="absolute top-20 right-1/3 w-3 h-3 rounded-full bg-rose-400 blur-[1px] animate-ping pointer-events-none" style={{ animationDuration: '2.5s' }} />
-        <div className="absolute bottom-16 left-1/3 w-2.5 h-2.5 rounded-full bg-emerald-400 blur-[1px] animate-ping pointer-events-none" style={{ animationDuration: '4s' }} />
-        <div className="absolute top-1/2 right-10 w-3 h-3 rounded-full bg-sky-400 blur-[1px] animate-ping pointer-events-none" style={{ animationDuration: '3.5s' }} />
+        {/* Dynamic Light Blue Horizon Beam */}
+        <div className="absolute -bottom-24 left-1/2 -translate-x-1/2 w-3/4 h-48 bg-sky-400/25 blur-3xl rounded-full pointer-events-none" />
+
+        {/* REAL-TIME BURSTING SKY CRACKERS (HTML5 Canvas Particles & Rockets) */}
+        <FireworksBurstCanvas />
 
         <div className="relative max-w-7xl mx-auto z-10">
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 items-center">
             {/* Left Hero Column: Headline, Search Box & Action Buttons */}
             <div className="lg:col-span-7 space-y-6 text-center lg:text-left">
               {/* Gold 100% Satisfaction Badge */}
-              <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-amber-400/20 border border-amber-400/50 text-amber-300 text-xs font-black shadow-md backdrop-blur-sm">
+              <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-amber-400/15 border border-amber-400/60 text-amber-300 text-xs font-black shadow-lg backdrop-blur-md">
                 <Star className="w-4 h-4 fill-amber-400 text-amber-400 animate-pulse" />
                 <span>100% Satisfaction Guaranteed • Direct Sivakasi Outlet</span>
               </div>
 
-              {/* Red Bold Headline (From Screenshot 4) */}
-              <div className="space-y-1">
-                <h1 className="text-4xl sm:text-5xl lg:text-6xl font-black text-rose-500 tracking-tight leading-[1.12] drop-shadow-md">
-                  Quality Crackers &{' '}
-                  <span className="text-amber-400">Genuine Price</span>
+              {/* Blue, Golden, Black & White Headline (Refined per User Request) */}
+              <div className="space-y-1.5">
+                <h1 className="text-4xl sm:text-5xl lg:text-6xl font-black tracking-tight leading-[1.12] drop-shadow-xl">
+                  <span className="text-white drop-shadow-[0_2px_10px_rgba(0,0,0,0.9)]">Quality Crackers &amp;</span>{' '}
+                  <span className="text-transparent bg-clip-text bg-gradient-to-r from-amber-300 via-yellow-200 to-amber-400 font-black drop-shadow-[0_4px_16px_rgba(245,158,11,0.6)]">
+                    Genuine Price
+                  </span>
                 </h1>
-                <p className="text-xs sm:text-sm font-bold text-sky-200 tracking-wide">
+                <p className="text-xs sm:text-sm font-bold text-sky-100 tracking-wide drop-shadow">
                   {settings.shop_name} • தரமான பட்டாசுகள் குறைந்த விலையில்!
                 </p>
               </div>
 
-              <p className="text-xs sm:text-base text-slate-300 max-w-xl mx-auto lg:mx-0 leading-relaxed font-normal">
-                Authentic Sivakasi direct factory outlet. Premium aerial repeating shots, sparkling fountains, sound crackers, and curated celebration combo packs at a <strong className="text-amber-300 font-extrabold">Flat 80% Mega Discount</strong>.
+              <p className="text-xs sm:text-base text-slate-100 max-w-xl mx-auto lg:mx-0 leading-relaxed font-medium drop-shadow-sm">
+                Authentic Sivakasi direct factory outlet. Premium aerial repeating shots, sparkling fountains, sound crackers, and curated celebration combo packs at a <strong className="text-amber-300 font-black underline decoration-amber-400/60 underline-offset-4">Flat 80% Mega Discount</strong>.
               </p>
 
-              {/* SEARCH BOX FOR CRACKERS (From Screenshot 4) */}
+              {/* SEARCH BOX FOR CRACKERS (Crisp White & Golden Border) */}
               <form 
                 onSubmit={handleHeroSearchSubmit}
-                className="max-w-xl mx-auto lg:mx-0 bg-white rounded-full p-1.5 sm:p-2 shadow-2xl flex items-center border-2 border-amber-400/80 focus-within:ring-4 focus-within:ring-rose-500/40 transition-all"
+                className="max-w-xl mx-auto lg:mx-0 bg-white rounded-full p-1.5 sm:p-2 shadow-2xl flex items-center border-2 border-amber-400 focus-within:ring-4 focus-within:ring-sky-400/40 transition-all"
               >
                 <input
                   type="text"
                   value={heroSearch}
                   onChange={(e) => setHeroSearch(e.target.value)}
                   placeholder="Search for crackers (e.g. kuruvi, 12 shot, flower pot)..."
-                  className="flex-1 px-4 py-2 text-xs sm:text-sm text-slate-900 rounded-full focus:outline-none placeholder-slate-400"
+                  className="flex-1 px-4 py-2 text-xs sm:text-sm text-slate-900 rounded-full focus:outline-none placeholder-slate-400 font-medium"
                 />
                 <button
                   type="submit"
-                  className="px-5 sm:px-6 py-2.5 sm:py-3 rounded-full bg-gradient-to-r from-red-600 via-rose-600 to-red-700 hover:from-red-500 hover:to-red-600 text-white font-extrabold text-xs sm:text-sm shadow-md flex items-center gap-1.5 shrink-0 transition-transform active:scale-95"
+                  className="px-5 sm:px-6 py-2.5 sm:py-3 rounded-full bg-gradient-to-r from-sky-600 via-blue-700 to-sky-800 hover:from-sky-500 hover:to-blue-600 text-white font-black text-xs sm:text-sm shadow-md flex items-center gap-1.5 shrink-0 transition-transform active:scale-95 border border-sky-400/30"
                 >
                   <Search className="w-4 h-4" />
                   <span className="hidden sm:inline">Search</span>
                 </button>
               </form>
 
-              {/* ACTION BUTTONS (Order Now! & Combo Offers) */}
+              {/* ACTION BUTTONS (Golden "Order Now!" & Blue "Combo Offers") */}
               <div className="flex flex-wrap items-center justify-center lg:justify-start gap-3 pt-1">
+                {/* 1. Golden Order Now Button */}
                 <Link
                   href="/quick-order"
                   onClick={triggerConfetti}
-                  className="px-6 py-3.5 rounded-full bg-gradient-to-r from-rose-600 via-red-600 to-amber-600 hover:from-rose-500 hover:to-amber-500 text-white font-black text-sm shadow-xl shadow-red-600/30 active:scale-95 transition-all flex items-center gap-2 border border-white/30"
+                  className="px-6 py-3.5 rounded-full bg-gradient-to-r from-amber-400 via-yellow-300 to-amber-500 hover:from-amber-300 hover:to-yellow-200 text-slate-950 font-black text-sm shadow-xl shadow-amber-400/30 active:scale-95 transition-all flex items-center gap-2 border border-white/50"
                 >
-                  <Zap className="w-4 h-4 text-yellow-300" />
+                  <Zap className="w-4 h-4 text-slate-950 fill-slate-950" />
                   <span>Order Now!</span>
                 </Link>
 
+                {/* 2. Royal Blue Combo Offers Button */}
                 <Link
                   href="/combo-offers"
-                  className="px-5 py-3.5 rounded-full bg-amber-400 hover:bg-amber-300 text-slate-950 font-black text-sm shadow-lg active:scale-95 transition-all flex items-center gap-2"
+                  className="px-5 py-3.5 rounded-full bg-sky-600/90 hover:bg-sky-500 text-white font-black text-sm shadow-xl shadow-sky-600/30 border-2 border-amber-400 active:scale-95 transition-all flex items-center gap-2 backdrop-blur-sm"
                 >
-                  <Gift className="w-4 h-4 text-red-600" />
+                  <Gift className="w-4 h-4 text-amber-300" />
                   <span>Combo Offers 🔥</span>
                 </Link>
 
+                {/* 3. WhatsApp Direct Connect */}
                 <a
                   href={whatsappUrl}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="px-5 py-3.5 rounded-full bg-green-600 hover:bg-green-700 text-white font-bold text-xs sm:text-sm shadow-md flex items-center gap-2 transition-colors"
+                  className="px-5 py-3.5 rounded-full bg-emerald-600 hover:bg-emerald-700 text-white font-bold text-xs sm:text-sm shadow-lg flex items-center gap-2 transition-colors border border-emerald-400/40"
                 >
                   <Phone className="w-4 h-4" />
                   <span>WhatsApp: {whatsappDisplay}</span>
@@ -239,9 +247,9 @@ export default function HomePage() {
               </div>
             </div>
 
-            {/* Right Hero Column: MOVING SLIDER BANNER (From Screenshot 4) */}
+            {/* Right Hero Column: MOVING SLIDER BANNER (Blue, Golden, Black & White) */}
             <div className="lg:col-span-5 relative">
-              <div className="relative mx-auto max-w-md rounded-3xl overflow-hidden bg-slate-900/90 border-2 border-amber-400/50 shadow-2xl backdrop-blur-md p-3 group">
+              <div className="relative mx-auto max-w-md rounded-3xl overflow-hidden bg-slate-950/85 border-2 border-amber-400 shadow-2xl shadow-sky-950/60 backdrop-blur-md p-3 group">
                 {/* Moving Banner Slide Item */}
                 <div className="relative h-64 sm:h-80 rounded-2xl overflow-hidden bg-slate-950">
                   <img
@@ -252,7 +260,7 @@ export default function HomePage() {
                   <div className="absolute inset-0 bg-gradient-to-t from-slate-950 via-slate-950/50 to-transparent" />
 
                   {/* Top Badge */}
-                  <div className="absolute top-3 left-3 bg-gradient-to-r from-amber-400 to-amber-500 text-slate-950 font-black text-[10px] px-2.5 py-1 rounded-md shadow-md">
+                  <div className="absolute top-3 left-3 bg-gradient-to-r from-amber-400 to-yellow-400 text-slate-950 font-black text-[10px] px-2.5 py-1 rounded-md shadow-md">
                     {heroSlides[activeSlide].badge}
                   </div>
 
@@ -261,29 +269,29 @@ export default function HomePage() {
                     <h3 className="text-lg sm:text-xl font-black leading-tight text-white drop-shadow-md">
                       {heroSlides[activeSlide].title}
                     </h3>
-                    <p className="text-xs text-slate-300 line-clamp-1">
+                    <p className="text-xs text-slate-300 line-clamp-1 font-medium">
                       {heroSlides[activeSlide].subtitle}
                     </p>
                     <Link
                       href={heroSlides[activeSlide].linkUrl}
-                      className="inline-flex items-center gap-1.5 px-4 py-2 rounded-xl bg-gradient-to-r from-red-600 to-rose-600 hover:from-red-500 hover:to-rose-500 text-white font-bold text-xs shadow-md transition-transform active:scale-95"
+                      className="inline-flex items-center gap-1.5 px-4 py-2 rounded-xl bg-gradient-to-r from-sky-600 via-blue-700 to-sky-800 hover:from-sky-500 hover:to-blue-600 text-white font-bold text-xs shadow-md transition-transform active:scale-95 border border-amber-400/50"
                     >
                       <span>{heroSlides[activeSlide].linkText}</span>
-                      <ArrowRight className="w-3.5 h-3.5" />
+                      <ArrowRight className="w-3.5 h-3.5 text-amber-300" />
                     </Link>
                   </div>
 
-                  {/* Prev / Next Slider Arrows (From Screenshot 4) */}
+                  {/* Prev / Next Slider Arrows (Golden & White) */}
                   <button
                     onClick={() => setActiveSlide(prev => (prev - 1 + heroSlides.length) % heroSlides.length)}
-                    className="absolute left-2.5 top-1/2 -translate-y-1/2 w-8 h-8 rounded-full bg-slate-900/80 hover:bg-slate-900 text-white flex items-center justify-center transition-all opacity-80 hover:opacity-100"
+                    className="absolute left-2.5 top-1/2 -translate-y-1/2 w-8 h-8 rounded-full bg-slate-900/80 hover:bg-slate-900 text-amber-400 border border-amber-400/40 flex items-center justify-center transition-all opacity-85 hover:opacity-100 shadow-md"
                     aria-label="Previous slide"
                   >
                     <ChevronLeft className="w-4 h-4" />
                   </button>
                   <button
                     onClick={() => setActiveSlide(prev => (prev + 1) % heroSlides.length)}
-                    className="absolute right-2.5 top-1/2 -translate-y-1/2 w-8 h-8 rounded-full bg-slate-900/80 hover:bg-slate-900 text-white flex items-center justify-center transition-all opacity-80 hover:opacity-100"
+                    className="absolute right-2.5 top-1/2 -translate-y-1/2 w-8 h-8 rounded-full bg-slate-900/80 hover:bg-slate-900 text-amber-400 border border-amber-400/40 flex items-center justify-center transition-all opacity-85 hover:opacity-100 shadow-md"
                     aria-label="Next slide"
                   >
                     <ChevronRight className="w-4 h-4" />
@@ -297,7 +305,7 @@ export default function HomePage() {
                       key={idx}
                       onClick={() => setActiveSlide(idx)}
                       className={`h-1.5 rounded-full transition-all ${
-                        activeSlide === idx ? 'w-6 bg-amber-400' : 'w-2 bg-slate-700'
+                        activeSlide === idx ? 'w-6 bg-amber-400 shadow-sm shadow-amber-400/50' : 'w-2 bg-slate-700 hover:bg-slate-500'
                       }`}
                       aria-label={`Go to slide ${idx + 1}`}
                     />
