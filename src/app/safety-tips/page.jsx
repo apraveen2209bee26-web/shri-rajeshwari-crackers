@@ -104,10 +104,10 @@ export default function SafetyTipsPage() {
   ];
 
   return (
-    <div className="max-w-7xl mx-auto px-4 sm:px-6 py-10 space-y-12">
-      {/* Hero Banner with Bursting Sky Crackers */}
+    <div className="min-h-screen bg-gradient-to-b from-teal-50/40 via-slate-50/70 to-white pb-24">
+      {/* 1. Full-Width Edge-to-Edge Hero Banner (Citrine Teal Theme & Sky Crackers) */}
       <PageHeroHeader
-        theme="emerald-gold"
+        theme="citrine"
         bgImage="/images/sakkaram.jpeg"
         badge="SAFE CELEBRATION GUIDELINES • SIVAKASI PROTOCOLS"
         badgeIcon={ShieldCheck}
@@ -118,17 +118,19 @@ export default function SafetyTipsPage() {
         breadcrumbs={[{ label: 'Safety Guidelines' }]}
       />
 
-      {/* Tabs Filter */}
-      <div className="flex justify-center">
-        <div className="inline-flex p-1.5 rounded-2xl glass-panel border border-sky-200/80 gap-1">
-          <button
-            onClick={() => setActiveTab('all')}
-            className={`px-5 py-2 rounded-xl text-xs font-bold transition-all ${
-              activeTab === 'all' ? 'bg-sky-600 text-white shadow-md' : 'text-slate-600 hover:text-sky-900'
-            }`}
-          >
-            All Guidelines
-          </button>
+      {/* 2. Main Page Layout (Centered Max-W-7xl) */}
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 pt-10 space-y-12">
+        {/* Tabs Filter */}
+        <div className="flex justify-center">
+          <div className="inline-flex p-1.5 rounded-2xl glass-panel border border-teal-200/80 gap-1 bg-white/95 backdrop-blur-md shadow-md">
+            <button
+              onClick={() => setActiveTab('all')}
+              className={`px-5 py-2 rounded-xl text-xs font-bold transition-all ${
+                activeTab === 'all' ? 'bg-teal-700 text-white shadow-md shadow-teal-700/25' : 'text-slate-600 hover:text-teal-900'
+              }`}
+            >
+              All Guidelines
+            </button>
           <button
             onClick={() => setActiveTab('dos')}
             className={`px-5 py-2 rounded-xl text-xs font-bold transition-all flex items-center gap-1.5 ${
@@ -297,6 +299,7 @@ export default function SafetyTipsPage() {
             );
           })}
         </div>
+      </div>
       </div>
     </div>
   );

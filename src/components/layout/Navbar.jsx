@@ -47,13 +47,49 @@ export default function Navbar() {
   }, []);
 
   const navLinks = [
-    { href: '/', label: 'Home' },
-    { href: '/shop', label: 'Shop Catalog' },
-    { href: '/combo-offers', label: 'Combo Offers', badge: 'HOT' },
-    { href: '/quick-order', label: 'Quick Order (Bulk)' },
-    { href: '/price-list', label: 'Price List' },
-    { href: '/safety-tips', label: 'Safety Tips' },
-    { href: '/about', label: 'About & Branches' },
+    { 
+      href: '/', 
+      label: 'Home',
+      desktopActive: 'bg-sky-500/15 text-sky-950 border-sky-400',
+      mobileActive: 'bg-gradient-to-r from-sky-600 to-blue-700 text-white shadow-sky-600/25'
+    },
+    { 
+      href: '/shop', 
+      label: 'Shop Catalog',
+      desktopActive: 'bg-purple-500/15 text-purple-950 border-purple-400',
+      mobileActive: 'bg-gradient-to-r from-purple-600 to-indigo-700 text-white shadow-purple-600/25'
+    },
+    { 
+      href: '/combo-offers', 
+      label: 'Combo Offers', 
+      badge: 'HOT',
+      desktopActive: 'bg-amber-500/20 text-amber-950 border-amber-400',
+      mobileActive: 'bg-gradient-to-r from-amber-500 via-yellow-500 to-amber-600 text-slate-950 font-black shadow-amber-500/30'
+    },
+    { 
+      href: '/quick-order', 
+      label: 'Quick Order (Bulk)',
+      desktopActive: 'bg-rose-500/15 text-rose-950 border-rose-400',
+      mobileActive: 'bg-gradient-to-r from-red-600 to-rose-700 text-white shadow-rose-600/25'
+    },
+    { 
+      href: '/price-list', 
+      label: 'Price List',
+      desktopActive: 'bg-emerald-500/15 text-emerald-950 border-emerald-400',
+      mobileActive: 'bg-gradient-to-r from-emerald-600 to-teal-700 text-white shadow-emerald-600/25'
+    },
+    { 
+      href: '/safety-tips', 
+      label: 'Safety Tips',
+      desktopActive: 'bg-teal-500/15 text-teal-950 border-teal-400',
+      mobileActive: 'bg-gradient-to-r from-teal-600 to-cyan-700 text-white shadow-teal-600/25'
+    },
+    { 
+      href: '/about', 
+      label: 'About & Branches',
+      desktopActive: 'bg-sky-500/15 text-sky-950 border-sky-400',
+      mobileActive: 'bg-gradient-to-r from-sky-600 to-indigo-700 text-white shadow-sky-600/25'
+    },
   ];
 
   const isActive = (path) => {
@@ -131,7 +167,7 @@ export default function Navbar() {
                   href={link.href}
                   className={`px-3 py-2 rounded-xl text-xs sm:text-sm font-bold transition-all relative flex items-center gap-1.5 ${
                     active
-                      ? 'bg-sky-500/15 text-sky-950 shadow-sm border border-sky-300'
+                      ? `${link.desktopActive || 'bg-sky-500/15 text-sky-950 border-sky-300'} shadow-sm border`
                       : 'text-slate-700 hover:text-sky-900 hover:bg-sky-50'
                   }`}
                 >
@@ -196,7 +232,7 @@ export default function Navbar() {
                   onClick={() => setMobileMenuOpen(false)}
                   className={`px-4 py-2.5 rounded-xl text-sm font-bold transition-all flex items-center justify-between ${
                     active
-                      ? 'bg-sky-600 text-white shadow-sm'
+                      ? `${link.mobileActive || 'bg-sky-600 text-white shadow-sm'}`
                       : 'text-slate-700 hover:bg-sky-50'
                   }`}
                 >

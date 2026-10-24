@@ -8,7 +8,7 @@ import React, { useEffect, useRef } from 'react';
  * featuring realistic rocket launches, glittering radial explosions, colorful particles,
  * gravity physics, and shimmer effects tailored for the festive crackershop hero.
  */
-export default function FireworksBurstCanvas({ className = '' }) {
+export default function FireworksBurstCanvas({ className = '', paletteType = 'all' }) {
   const canvasRef = useRef(null);
 
   useEffect(() => {
@@ -36,22 +36,56 @@ export default function FireworksBurstCanvas({ className = '' }) {
     resizeCanvas();
     window.addEventListener('resize', resizeCanvas);
 
-    // Festive Sky Cracker Color Palettes (Golden, Electric Blue, Vivid Magenta, Emerald, Silver White)
-    const CRACKER_PALETTES = [
-      ['#FFD700', '#FFA500', '#FFF275', '#FFE066'], // Golden Royale & Yellow Sparks
-      ['#00D2FF', '#38BDF8', '#60A5FA', '#93C5FD'], // Electric Sky Blue & Azure
-      ['#FFFFFF', '#E2E8F0', '#FDE047', '#FEF08A'], // Luminous White & Starlight
-      ['#F43F5E', '#FB7185', '#FDA4AF', '#FFE4E6'], // Crimson Rose & Pink Sparks
-      ['#10B981', '#34D399', '#6EE7B7', '#A7F3D0'], // Emerald Green & Lime
-      ['#A855F7', '#C084FC', '#E879F9', '#F0ABFC']  // Royal Violet & Purple Sparks
-    ];
+    // Festive Sky Cracker Color Palettes
+    const PALETTE_COLLECTIONS = {
+      purple: [
+        ['#A855F7', '#C084FC', '#E879F9', '#F0ABFC'], // Royal Violet & Pink Sparks
+        ['#FFD700', '#FFA500', '#FFF275', '#FFE066'], // Golden Sparks
+        ['#FFFFFF', '#F3E8FF', '#E9D5FF', '#D8B4FE'], // Lilac Starlight
+        ['#818CF8', '#A78BFA', '#C4B5FD', '#DDD6FE']  // Electric Indigo
+      ],
+      red: [
+        ['#F43F5E', '#FB7185', '#FDA4AF', '#FFE4E6'], // Crimson Rose & Ruby
+        ['#FFD700', '#FFA500', '#FFF275', '#FFE066'], // Radiant Gold
+        ['#FFFFFF', '#FFE4E6', '#FECDD3', '#FDA4AF'], // Ruby Starlight
+        ['#EF4444', '#DC2626', '#B91C1C', '#FCA5A5']  // Deep Scarlet
+      ],
+      gold: [
+        ['#FFD700', '#FFA500', '#FFF275', '#FFE066'], // Imperial Gold
+        ['#F59E0B', '#D97706', '#B45309', '#FDE68A'], // Warm Amber
+        ['#FFFFFF', '#FEF3C7', '#FDE68A', '#FCD34D'], // Golden Starlight
+        ['#FBBF24', '#F59E0B', '#Eab308', '#FEF9C3']  // Pure Yellow Gold
+      ],
+      emerald: [
+        ['#10B981', '#34D399', '#6EE7B7', '#A7F3D0'], // Emerald Green & Lime
+        ['#FFD700', '#FFA500', '#FFF275', '#FFE066'], // Gold Accents
+        ['#FFFFFF', '#D1FAE5', '#A7F3D0', '#6EE7B7'], // Mint Starlight
+        ['#059669', '#10B981', '#34D399', '#ECFDF5']  // Vivid Green
+      ],
+      blue: [
+        ['#00D2FF', '#38BDF8', '#60A5FA', '#93C5FD'], // Electric Sky Blue & Azure
+        ['#FFD700', '#FFA500', '#FFF275', '#FFE066'], // Gold Accents
+        ['#FFFFFF', '#E0F2FE', '#BAE6FD', '#7DD3FC'], // Sapphire Starlight
+        ['#3B82F6', '#2563EB', '#1D4ED8', '#60A5FA']  // Royal Blue
+      ],
+      all: [
+        ['#FFD700', '#FFA500', '#FFF275', '#FFE066'], // Golden Royale
+        ['#00D2FF', '#38BDF8', '#60A5FA', '#93C5FD'], // Electric Sky Blue
+        ['#FFFFFF', '#E2E8F0', '#FDE047', '#FEF08A'], // Luminous White
+        ['#F43F5E', '#FB7185', '#FDA4AF', '#FFE4E6'], // Crimson Rose
+        ['#10B981', '#34D399', '#6EE7B7', '#A7F3D0'], // Emerald Green
+        ['#A855F7', '#C084FC', '#E879F9', '#F0ABFC']  // Royal Violet
+      ]
+    };
+
+    const activePalettes = PALETTE_COLLECTIONS[paletteType] || PALETTE_COLLECTIONS.all;
 
     function random(min, max) {
       return Math.random() * (max - min) + min;
     }
 
     function getRandomPalette() {
-      return CRACKER_PALETTES[Math.floor(Math.random() * CRACKER_PALETTES.length)];
+      return activePalettes[Math.floor(Math.random() * activePalettes.length)];
     }
 
     // Explosion Burst Particle Class

@@ -7,9 +7,9 @@ import FireworksBurstCanvas from '@/components/effects/FireworksBurstCanvas';
 
 /**
  * PageHeroHeader
- * A unified, ultra-premium hero header banner designed for every page in the application.
- * Supports distinct photo backdrops, theme palettes (gold, light-blue, royal-blue, etc.),
- * and active real-time bursting sky crackers animation.
+ * Full-width edge-to-edge hero header designed to stretch 100% across the viewport
+ * matching the Home page banner, featuring custom color palettes, custom photography,
+ * and live bursting sky crackers tailored to each topic.
  */
 export default function PageHeroHeader({
   badge = 'AUTHENTIC SIVAKASI FIREWORKS',
@@ -20,71 +20,94 @@ export default function PageHeroHeader({
   subtitle = '',
   breadcrumbs = [],
   bgImage = '/images/banner.jpeg',
-  theme = 'light-blue', // 'light-blue' | 'gold' | 'royal-blue' | 'slate-gold' | 'navy-azure' | 'emerald-gold'
+  theme = 'purple', // 'purple' | 'red' | 'gold' | 'emerald' | 'sapphire' | 'citrine' | 'light-blue'
   children
 }) {
-  // Theme gradients & glow maps
+  // Theme gradients, borders, and fireworks palette maps
   const themeStyles = {
-    'light-blue': {
-      bg: 'bg-gradient-to-b from-[#051329] via-[#092548] to-[#0284c7]',
-      radial: 'bg-[radial-gradient(circle_at_50%_35%,rgba(56,189,248,0.32)_0%,rgba(14,116,144,0.18)_45%,rgba(5,19,41,0.85)_100%)]',
-      horizon: 'bg-sky-400/25',
-      badgeBg: 'bg-amber-400/15 border-amber-400/60 text-amber-300',
+    'purple': {
+      bg: 'bg-gradient-to-b from-[#100424] via-[#23094c] to-[#7c3aed]',
+      radial: 'bg-[radial-gradient(circle_at_50%_35%,rgba(168,85,247,0.35)_0%,rgba(109,40,217,0.22)_45%,rgba(16,4,36,0.9)_100%)]',
+      horizon: 'bg-purple-400/30',
+      border: 'border-purple-500/30',
+      palette: 'purple',
+      badgeBg: 'bg-purple-400/20 border-purple-400/60 text-purple-200',
+      badgeDot: 'text-amber-300',
+      highlightGradient: 'from-amber-300 via-yellow-200 to-amber-400',
+      subtitleColor: 'text-purple-100'
+    },
+    'red': {
+      bg: 'bg-gradient-to-b from-[#1c0309] via-[#430915] to-[#b91c1c]',
+      radial: 'bg-[radial-gradient(circle_at_50%_35%,rgba(244,63,94,0.35)_0%,rgba(185,28,28,0.22)_45%,rgba(28,3,9,0.9)_100%)]',
+      horizon: 'bg-rose-500/30',
+      border: 'border-rose-500/30',
+      palette: 'red',
+      badgeBg: 'bg-amber-400/20 border-amber-400/60 text-amber-300',
       badgeDot: 'text-amber-400',
       highlightGradient: 'from-amber-300 via-yellow-200 to-amber-400',
-      subtitleColor: 'text-sky-100'
+      subtitleColor: 'text-rose-100'
     },
     'gold': {
-      bg: 'bg-gradient-to-b from-[#0b1424] via-[#1f1908] to-[#b45309]',
-      radial: 'bg-[radial-gradient(circle_at_50%_35%,rgba(245,158,11,0.30)_0%,rgba(180,83,9,0.18)_45%,rgba(11,20,36,0.9)_100%)]',
-      horizon: 'bg-amber-400/30',
+      bg: 'bg-gradient-to-b from-[#140e03] via-[#2a1d05] to-[#b45309]',
+      radial: 'bg-[radial-gradient(circle_at_50%_35%,rgba(245,158,11,0.35)_0%,rgba(180,83,9,0.22)_45%,rgba(20,14,3,0.9)_100%)]',
+      horizon: 'bg-amber-400/35',
+      border: 'border-amber-400/40',
+      palette: 'gold',
       badgeBg: 'bg-amber-400/20 border-amber-300/70 text-amber-300',
       badgeDot: 'text-yellow-300',
       highlightGradient: 'from-yellow-200 via-amber-300 to-yellow-400',
       subtitleColor: 'text-amber-100'
     },
-    'royal-blue': {
-      bg: 'bg-gradient-to-b from-[#040e21] via-[#0a2754] to-[#1d4ed8]',
-      radial: 'bg-[radial-gradient(circle_at_50%_35%,rgba(59,130,246,0.32)_0%,rgba(29,78,216,0.20)_45%,rgba(4,14,33,0.9)_100%)]',
-      horizon: 'bg-blue-400/25',
-      badgeBg: 'bg-sky-400/20 border-sky-400/60 text-sky-200',
-      badgeDot: 'text-sky-300',
-      highlightGradient: 'from-amber-300 via-yellow-200 to-amber-400',
-      subtitleColor: 'text-blue-100'
-    },
-    'slate-gold': {
-      bg: 'bg-gradient-to-b from-[#081324] via-[#152336] to-[#d97706]',
-      radial: 'bg-[radial-gradient(circle_at_50%_35%,rgba(217,119,6,0.28)_0%,rgba(30,58,138,0.20)_45%,rgba(8,19,36,0.9)_100%)]',
-      horizon: 'bg-amber-500/25',
-      badgeBg: 'bg-amber-400/15 border-amber-400/60 text-amber-300',
+    'emerald': {
+      bg: 'bg-gradient-to-b from-[#021812] via-[#064232] to-[#059669]',
+      radial: 'bg-[radial-gradient(circle_at_50%_35%,rgba(16,185,129,0.35)_0%,rgba(5,150,105,0.22)_45%,rgba(2,24,18,0.9)_100%)]',
+      horizon: 'bg-emerald-400/30',
+      border: 'border-emerald-500/30',
+      palette: 'emerald',
+      badgeBg: 'bg-amber-400/20 border-amber-400/60 text-amber-300',
       badgeDot: 'text-amber-400',
-      highlightGradient: 'from-amber-200 via-yellow-300 to-amber-400',
-      subtitleColor: 'text-slate-200'
+      highlightGradient: 'from-amber-300 via-yellow-200 to-amber-400',
+      subtitleColor: 'text-emerald-100'
     },
-    'navy-azure': {
-      bg: 'bg-gradient-to-b from-[#020b18] via-[#072244] to-[#0284c7]',
-      radial: 'bg-[radial-gradient(circle_at_50%_35%,rgba(56,189,248,0.32)_0%,rgba(3,105,161,0.20)_45%,rgba(2,11,24,0.9)_100%)]',
-      horizon: 'bg-sky-400/30',
+    'sapphire': {
+      bg: 'bg-gradient-to-b from-[#020b18] via-[#07244a] to-[#0284c7]',
+      radial: 'bg-[radial-gradient(circle_at_50%_35%,rgba(56,189,248,0.35)_0%,rgba(3,105,161,0.22)_45%,rgba(2,11,24,0.9)_100%)]',
+      horizon: 'bg-sky-400/35',
+      border: 'border-sky-500/30',
+      palette: 'blue',
       badgeBg: 'bg-amber-400/20 border-amber-400/70 text-amber-300',
       badgeDot: 'text-amber-400',
       highlightGradient: 'from-amber-300 via-yellow-200 to-amber-400',
       subtitleColor: 'text-sky-100'
     },
-    'emerald-gold': {
-      bg: 'bg-gradient-to-b from-[#031524] via-[#052b22] to-[#047857]',
-      radial: 'bg-[radial-gradient(circle_at_50%_35%,rgba(16,185,129,0.30)_0%,rgba(4,120,87,0.20)_45%,rgba(3,21,36,0.9)_100%)]',
-      horizon: 'bg-emerald-400/25',
-      badgeBg: 'bg-emerald-400/20 border-emerald-400/60 text-emerald-200',
-      badgeDot: 'text-emerald-300',
+    'citrine': {
+      bg: 'bg-gradient-to-b from-[#051821] via-[#0a3832] to-[#0f766e]',
+      radial: 'bg-[radial-gradient(circle_at_50%_35%,rgba(20,184,166,0.30)_0%,rgba(15,118,110,0.20)_45%,rgba(5,24,33,0.9)_100%)]',
+      horizon: 'bg-teal-400/30',
+      border: 'border-teal-500/30',
+      palette: 'all',
+      badgeBg: 'bg-teal-400/20 border-teal-400/60 text-teal-200',
+      badgeDot: 'text-amber-300',
       highlightGradient: 'from-amber-300 via-yellow-200 to-amber-400',
-      subtitleColor: 'text-emerald-100'
+      subtitleColor: 'text-teal-100'
+    },
+    'light-blue': {
+      bg: 'bg-gradient-to-b from-[#051329] via-[#092548] to-[#0284c7]',
+      radial: 'bg-[radial-gradient(circle_at_50%_35%,rgba(56,189,248,0.35)_0%,rgba(14,116,144,0.20)_45%,rgba(5,19,41,0.9)_100%)]',
+      horizon: 'bg-sky-400/30',
+      border: 'border-sky-400/30',
+      palette: 'blue',
+      badgeBg: 'bg-amber-400/15 border-amber-400/60 text-amber-300',
+      badgeDot: 'text-amber-400',
+      highlightGradient: 'from-amber-300 via-yellow-200 to-amber-400',
+      subtitleColor: 'text-sky-100'
     }
   };
 
-  const currentTheme = themeStyles[theme] || themeStyles['light-blue'];
+  const currentTheme = themeStyles[theme] || themeStyles['purple'];
 
   return (
-    <div className={`relative overflow-hidden ${currentTheme.bg} text-white rounded-3xl p-6 sm:p-10 md:p-14 mb-8 shadow-2xl border border-sky-400/20`}>
+    <section className={`w-full relative overflow-hidden ${currentTheme.bg} text-white py-12 md:py-20 px-4 sm:px-6 shadow-2xl border-b ${currentTheme.border}`}>
       {/* Background Image Texture */}
       <div 
         className="absolute inset-0 bg-cover bg-center opacity-20 filter brightness-90 contrast-125 pointer-events-none transition-transform duration-1000 mix-blend-overlay"
@@ -97,12 +120,12 @@ export default function PageHeroHeader({
       {/* Radiant Horizon Glow */}
       <div className={`absolute -bottom-24 left-1/2 -translate-x-1/2 w-3/4 h-48 ${currentTheme.horizon} blur-3xl rounded-full pointer-events-none`} />
 
-      {/* Real-time Bursting Sky Crackers (Canvas Fireworks) */}
-      <FireworksBurstCanvas />
+      {/* Real-time Bursting Sky Crackers (Canvas Fireworks matched to Palette) */}
+      <FireworksBurstCanvas paletteType={currentTheme.palette} />
 
-      {/* Content Layer */}
-      <div className="relative z-10 max-w-4xl mx-auto md:mx-0 space-y-4 text-center md:text-left">
-        {/* Breadcrumbs (if provided) */}
+      {/* Content Container (Full Width Exterior, Max-W-7xl Interior) */}
+      <div className="relative max-w-7xl mx-auto z-10 space-y-4 text-center md:text-left">
+        {/* Breadcrumbs Navigation */}
         {breadcrumbs && breadcrumbs.length > 0 && (
           <nav className="flex items-center justify-center md:justify-start gap-1.5 text-xs text-white/70 font-semibold mb-2">
             <Link href="/" className="hover:text-amber-300 transition-colors">Home</Link>
@@ -121,7 +144,7 @@ export default function PageHeroHeader({
           </nav>
         )}
 
-        {/* Badge */}
+        {/* Highlight Badge */}
         {badge && (
           <div className={`inline-flex items-center gap-2 px-4 py-1.5 rounded-full border text-xs font-black shadow-lg backdrop-blur-md ${currentTheme.badgeBg}`}>
             {BadgeIcon && <BadgeIcon className={`w-3.5 h-3.5 fill-current ${currentTheme.badgeDot}`} />}
@@ -129,7 +152,7 @@ export default function PageHeroHeader({
           </div>
         )}
 
-        {/* Headline */}
+        {/* Dual-Tone Headline */}
         <div className="space-y-1">
           <h1 className="text-3xl sm:text-4xl md:text-5xl font-black tracking-tight leading-tight drop-shadow-xl">
             <span className="text-white drop-shadow-[0_2px_10px_rgba(0,0,0,0.9)]">{title}</span>
@@ -150,20 +173,20 @@ export default function PageHeroHeader({
           )}
         </div>
 
-        {/* Subtitle */}
+        {/* Subtitle Description */}
         {subtitle && (
           <p className={`text-xs sm:text-sm md:text-base leading-relaxed font-medium max-w-2xl drop-shadow-sm ${currentTheme.subtitleColor}`}>
             {subtitle}
           </p>
         )}
 
-        {/* Optional Interactive Children (Search input, action buttons, counters) */}
+        {/* Optional Interactive Children (Action Buttons, Search, Stats) */}
         {children && (
           <div className="pt-2">
             {children}
           </div>
         )}
       </div>
-    </div>
+    </section>
   );
 }

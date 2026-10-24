@@ -35,10 +35,10 @@ export default function AboutPage() {
   } = useSettings();
 
   return (
-    <div className="max-w-7xl mx-auto px-4 sm:px-6 py-10 space-y-16">
-      {/* 1. Header Hero with Bursting Sky Crackers */}
+    <div className="min-h-screen bg-gradient-to-b from-sky-50/40 via-slate-50/70 to-white pb-24">
+      {/* 1. Full-Width Edge-to-Edge Hero Banner (Sapphire Navy Theme & Sky Crackers) */}
       <PageHeroHeader
-        theme="navy-azure"
+        theme="sapphire"
         bgImage="/images/alltype.jpeg"
         badge="ESTD. SIVAKASI • 100% PESO GREEN CERTIFIED"
         badgeIcon={Sparkles}
@@ -48,6 +48,9 @@ export default function AboutPage() {
         subtitle="Pioneering vibrant, safe, and world-class festive illuminations straight from the pyrotechnic capital of India — Sivakasi, Tamil Nadu. Direct manufacturer rates with no middleman markups."
         breadcrumbs={[{ label: 'About Us' }]}
       />
+
+      {/* 2. Main Page Layout (Centered Max-W-7xl) */}
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 pt-10 space-y-16">
 
       {/* 2. Brand Story Section */}
       <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 items-center">
@@ -314,6 +317,7 @@ export default function AboutPage() {
             </a>
           </div>
         </div>
+      </div>
       </div>
     </div>
   );

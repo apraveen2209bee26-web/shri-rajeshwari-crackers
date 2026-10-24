@@ -174,25 +174,24 @@ export default function ComboOffersPage() {
   }
 
   return (
-    <div className="min-h-screen bg-slate-50/60 pb-20">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 pt-6">
-        {/* 1. FESTIVE TOP BANNER WITH GOLD THEME & BURSTING SKY CRACKERS */}
-        <PageHeroHeader
-          theme="gold"
-          bgImage="/images/banner.jpeg"
-          badge="FESTIVAL MEGA BUNDLES • SAVE UP TO 80%"
-          badgeIcon={Flame}
-          title="Mega Combo Offers &"
-          titleHighlight="Value Packs"
-          tamilTitle="தரமான பட்டாசுகள் குறைந்த விலையில்! குடும்பத்திற்கான பிரம்மாண்ட காம்போ"
-          subtitle="Curated cracker assortments packed with up to 62 premium fireworks items. Enjoy verified Sivakasi quality and instant savings up to ₹19,900!"
-          breadcrumbs={[{ label: 'Festival Combos' }]}
-        />
-      </div>
+    <div className="min-h-screen bg-gradient-to-b from-amber-50/40 via-slate-50/70 to-white pb-24">
+      {/* 1. Full-Width Edge-to-Edge Hero Banner (Gold Theme & Sky Crackers) */}
+      <PageHeroHeader
+        theme="gold"
+        bgImage="/images/banner.jpeg"
+        badge="FESTIVAL MEGA BUNDLES • SAVE UP TO 80%"
+        badgeIcon={Flame}
+        title="Mega Combo Offers &"
+        titleHighlight="Value Packs"
+        tamilTitle="தரமான பட்டாசுகள் குறைந்த விலையில்! குடும்பத்திற்கான பிரம்மாண்ட காம்போ"
+        subtitle="Curated cracker assortments packed with up to 62 premium fireworks items. Enjoy verified Sivakasi quality and instant savings up to ₹19,900!"
+        breadcrumbs={[{ label: 'Festival Combos' }]}
+      />
 
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 z-20 relative space-y-8">
-        {/* 2. DYNAMIC COMBO OFFER TAB SELECTOR PILLS */}
-        <div className="bg-white rounded-2xl shadow-xl border border-slate-200/80 p-2 flex flex-wrap items-center justify-center gap-2 max-w-2xl mx-auto">
+      {/* 2. Main Page Layout (Centered Max-W-7xl) */}
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 pt-8 space-y-8">
+        {/* Dynamic Combo Offer Tab Selector Pills */}
+        <div className="bg-white/95 backdrop-blur-md rounded-2xl shadow-xl border border-amber-200/80 p-2 flex flex-wrap items-center justify-center gap-2 max-w-2xl mx-auto">
           {combos.map((combo) => {
             const isSelected = combo.slug === activeCombo?.slug;
             return (
@@ -205,8 +204,8 @@ export default function ComboOffersPage() {
                 }}
                 className={`flex-1 min-w-[160px] py-3 px-4 rounded-xl text-center font-bold transition-all ${
                   isSelected
-                    ? 'bg-gradient-to-r from-rose-600 to-red-700 text-white shadow-lg shadow-rose-600/30 scale-[1.02]'
-                    : 'bg-slate-50 hover:bg-slate-100 text-slate-700 border border-slate-200'
+                    ? 'bg-gradient-to-r from-amber-500 via-yellow-500 to-amber-600 text-slate-950 shadow-lg shadow-amber-500/30 scale-[1.02] border border-amber-400'
+                    : 'bg-slate-50 hover:bg-amber-50/50 text-slate-700 border border-slate-200'
                 }`}
               >
                 <span className="block text-[10px] uppercase tracking-wider font-extrabold opacity-90">
@@ -214,7 +213,7 @@ export default function ComboOffersPage() {
                 </span>
                 <span className="text-base sm:text-lg font-black tracking-tight">
                   ₹{combo.offerPrice.toLocaleString('en-IN')}{' '}
-                  <span className="text-xs font-medium opacity-85">({combo.itemsCount})</span>
+                  <span className="text-xs font-semibold opacity-80">({combo.itemsCount})</span>
                 </span>
               </button>
             );

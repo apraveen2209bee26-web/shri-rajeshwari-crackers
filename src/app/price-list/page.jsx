@@ -62,11 +62,11 @@ export default function PriceListPage() {
   };
 
   return (
-    <div className="max-w-7xl mx-auto px-4 sm:px-6 py-8">
-      {/* Non-print Header & Toolbar */}
-      <div className="no-print space-y-6 mb-8">
+    <div className="min-h-screen bg-gradient-to-b from-emerald-50/40 via-slate-50/70 to-white pb-24">
+      {/* 1. Full-Width Edge-to-Edge Hero Banner (Emerald Theme & Sky Crackers) */}
+      <div className="no-print">
         <PageHeroHeader
-          theme="slate-gold"
+          theme="emerald"
           bgImage="/images/banner.jpeg"
           badge={`${STORE_CONFIG.name.toUpperCase()} • 80% MEGA DISCOUNT`}
           badgeIcon={Sparkles}
@@ -79,23 +79,26 @@ export default function PriceListPage() {
           <div className="flex flex-wrap items-center gap-3 pt-2">
             <button
               onClick={handlePrint}
-              className="px-5 py-3 rounded-full bg-white hover:bg-amber-50 text-slate-950 font-black text-xs sm:text-sm shadow-xl flex items-center gap-2 active:scale-95 transition-all border border-amber-400"
+              className="px-5 py-3 rounded-full bg-white hover:bg-emerald-50 text-slate-950 font-black text-xs sm:text-sm shadow-xl flex items-center gap-2 active:scale-95 transition-all border border-emerald-400"
             >
-              <Printer className="w-4 h-4 text-sky-600" />
+              <Printer className="w-4 h-4 text-emerald-600" />
               <span>Print / Save as PDF</span>
             </button>
             <button
               onClick={() => setIsCartOpen(true)}
-              className="px-5 py-3 rounded-full bg-sky-600 hover:bg-sky-700 text-white font-black text-xs sm:text-sm shadow-xl flex items-center gap-1.5 active:scale-95 transition-all border border-sky-400"
+              className="px-5 py-3 rounded-full bg-emerald-600 hover:bg-emerald-700 text-white font-black text-xs sm:text-sm shadow-xl flex items-center gap-1.5 active:scale-95 transition-all border border-emerald-500 shadow-emerald-600/30"
             >
               <ShoppingBag className="w-4 h-4" />
               <span>View Cart</span>
             </button>
           </div>
         </PageHeroHeader>
+      </div>
 
-        {/* Search Bar */}
-        <div className="glass-panel rounded-2xl p-4 border border-sky-200/80 flex flex-col sm:flex-row items-center justify-between gap-4">
+      {/* 2. Main Page Layout (Centered Max-W-7xl) */}
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 pt-8">
+        {/* Search Bar Toolbar */}
+        <div className="no-print mb-8 glass-panel rounded-2xl p-4 border border-emerald-200/80 shadow-md flex flex-col sm:flex-row items-center justify-between gap-4 bg-white/95 backdrop-blur-md">
           <div className="relative w-full sm:w-96">
             <Search className="w-4 h-4 text-slate-400 absolute left-3 top-2.5" />
             <input
@@ -103,15 +106,14 @@ export default function PriceListPage() {
               value={search}
               onChange={(e) => setSearch(e.target.value)}
               placeholder="Search by Product Name, Tamil Name, or S.No..."
-              className="w-full pl-9 pr-3 py-2 text-xs rounded-xl border border-slate-200 focus:outline-none focus:ring-2 focus:ring-sky-500 bg-white"
+              className="w-full pl-9 pr-3 py-2 text-xs rounded-xl border border-slate-200 focus:outline-none focus:ring-2 focus:ring-emerald-500 bg-white"
             />
           </div>
 
           <p className="text-xs font-semibold text-slate-500">
-            Showing <strong className="text-slate-800">{filtered.length}</strong> of 139 items
+            Showing <strong className="text-emerald-900 font-black">{filtered.length}</strong> of 139 items
           </p>
         </div>
-      </div>
 
       {/* Print-Only Header */}
       <div className="hidden print:block mb-6 text-center border-b-2 border-slate-900 pb-4">
@@ -145,16 +147,19 @@ export default function PriceListPage() {
           {Object.entries(grouped).map(([categoryName, items]) => (
             <div 
               key={categoryName}
-              className="glass-panel rounded-2xl overflow-hidden border border-sky-100 shadow-sm print:border print:border-slate-400 print:rounded-none"
+              className="glass-panel rounded-2xl overflow-hidden border border-emerald-100/90 shadow-sm print:border print:border-slate-400 print:rounded-none bg-white"
             >
-              <div className="bg-sky-800 print:bg-slate-200 text-white print:text-slate-900 px-4 py-2 font-black text-xs sm:text-sm uppercase tracking-wider flex justify-between items-center">
-                <span>{categoryName}</span>
-                <span className="text-[11px] font-normal opacity-90 print:opacity-100">{items.length} items</span>
+              <div className="bg-gradient-to-r from-[#021812] via-[#064232] to-[#047857] print:bg-slate-200 text-white print:text-slate-900 px-4 py-2.5 font-black text-xs sm:text-sm uppercase tracking-wider flex justify-between items-center border-b border-emerald-900/40">
+                <div className="flex items-center gap-2">
+                  <span className="w-2 h-2 rounded-full bg-amber-400 animate-pulse print:hidden" />
+                  <span>{categoryName}</span>
+                </div>
+                <span className="text-[11px] font-semibold opacity-90 print:opacity-100 bg-black/30 px-2.5 py-0.5 rounded-full border border-emerald-500/30">{items.length} items</span>
               </div>
 
               <div className="overflow-x-auto">
                 <table className="w-full text-left text-xs">
-                  <thead className="bg-sky-50 print:bg-slate-100 border-b border-sky-100 print:border-slate-300 font-bold text-slate-700">
+                  <thead className="bg-emerald-50/70 print:bg-slate-100 border-b border-emerald-100 print:border-slate-300 font-bold text-slate-700">
                     <tr>
                       <th className="py-2.5 px-3 w-12 text-center">S.NO</th>
                       <th className="py-2.5 px-2 w-14 text-center">PHOTO</th>
@@ -162,7 +167,7 @@ export default function PriceListPage() {
                       <th className="py-2.5 px-3">பட்டாசின் பெயர்</th>
                       <th className="py-2.5 px-3 w-20">PER</th>
                       <th className="py-2.5 px-3 w-24 text-right">RATE</th>
-                      <th className="py-2.5 px-3 w-28 text-right font-black text-sky-950">NET RATE</th>
+                      <th className="py-2.5 px-3 w-28 text-right font-black text-emerald-950">NET RATE</th>
                       <th className="py-2.5 px-4 w-32 text-center">DISCOUNT & SAVINGS</th>
                     </tr>
                   </thead>
@@ -172,12 +177,12 @@ export default function PriceListPage() {
                       const discountPct = item.originalPrice > 0 ? Math.round((savings / item.originalPrice) * 100) : 80;
 
                       return (
-                        <tr key={item.id} className="hover:bg-sky-50/50 print:hover:bg-transparent transition-colors">
+                        <tr key={item.id} className="hover:bg-emerald-50/40 print:hover:bg-transparent transition-colors">
                           <td className="py-2 px-3 text-center font-mono font-bold text-slate-500">
                             {item.sNo}
                           </td>
                           <td className="py-2 px-2 text-center">
-                            <div className="w-10 h-10 rounded-lg overflow-hidden bg-slate-100 border border-sky-200/60 mx-auto flex items-center justify-center">
+                            <div className="w-10 h-10 rounded-lg overflow-hidden bg-slate-100 border border-emerald-100 mx-auto flex items-center justify-center">
                               <img 
                                 src={item.image || '/images/illustration-diwali-crackers.avif'} 
                                 alt={item.name} 
@@ -200,7 +205,7 @@ export default function PriceListPage() {
                           <td className="py-2 px-3 text-right text-slate-400 line-through">
                             ₹{item.originalPrice.toFixed(2)}
                           </td>
-                          <td className="py-2 px-3 text-right font-black text-sky-900 text-sm">
+                          <td className="py-2 px-3 text-right font-black text-emerald-900 text-sm">
                             ₹{item.price.toFixed(2)}
                           </td>
                           <td className="py-2 px-4 text-center">
@@ -228,6 +233,7 @@ export default function PriceListPage() {
       <div className="hidden print:block mt-8 pt-4 border-t-2 border-slate-900 text-center text-xs">
         <p className="font-bold">{STORE_CONFIG.name} • {STORE_CONFIG.address} • WhatsApp: {STORE_CONFIG.whatsappDisplay} • Call: {STORE_CONFIG.secondaryPhoneDisplay}</p>
         <p className="text-[10px] text-slate-500 mt-1">Manufactured & packed under strict PESO Indian Safety Standards.</p>
+      </div>
       </div>
     </div>
   );
