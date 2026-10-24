@@ -1,5 +1,5 @@
 datasource db {
-  provider = "sqlite"
+  provider = "postgresql"
   url      = env("DATABASE_URL")
 }
 
@@ -35,7 +35,7 @@ model Order {
   address        String
   city           String
   pincode        String
-  deliveryDate   String
+  deliveryDate   String   @default("")
   itemsJson      String   // Serialized cart items array
   totalMrp       Float
   totalSavings   Float
