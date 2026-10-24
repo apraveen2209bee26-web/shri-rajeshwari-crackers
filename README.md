@@ -1,24 +1,26 @@
-# 💥 SACHIN PYROTECH - Modern E-Commerce Platform
+# 💥 SHRI RAJESHWARI CRACKERS (ஸ்ரீ ராஜேஸ்வரி கிராக்கர்ஸ்) - Modern E-Commerce Platform
 
-> **"Light Up the Celebration"** • Authentic Sivakasi Fireworks Direct Factory Outlet • **Flat 80% Mega Discount**  
-> Direct Phone & WhatsApp Order Desk: **+91 9361849171**
+> **"Light Up Your Celebrations with Sivakasi's Finest Fireworks"** • Authentic Sivakasi Direct Factory Outlet • **Flat 80% Mega Discount**  
+> Direct Phone & WhatsApp Order Desk: **+91 9361849171** / **+91 8610260462**  
+> Store Address: **12/291/1 Rathnapuri Nagar, Sivakasi - 626123**  
+> Live Production URL: **[https://shri-rajeshwari-crackers.vercel.app](https://shri-rajeshwari-crackers.vercel.app)**
 
-A state-of-the-art, high-performance, multi-platform e-commerce web application optimized for Laptops, Tablets, and Mobile. Built using **Next.js (App Router)**, **Tailwind CSS**, and **Prisma ORM** (configured for local SQLite zero-config running and permanent free-tier deployment on **Vercel/Netlify** + **Neon/Supabase PostgreSQL**).
+A state-of-the-art, high-performance, multi-platform e-commerce web application optimized for Laptops, Tablets, and Mobile. Built using **Next.js (App Router)**, **Tailwind CSS**, and **Prisma ORM** connected to a **Serverless Cloud PostgreSQL (Neon on AWS)**, deployed on **Vercel Hobby Tier** with zero hosting and database costs (100% Free Forever).
 
 ---
 
 ## 🌟 Key Features
 
 ### 1. Modern Festive Design & UI/UX Architecture
-- **Curated Color Palette**: Base theme of light blue (`#E3F2FD`, `#B3E5FC`) fading seamlessly into crisp white gradients (`#FFFFFF`), accented with metallic gold (`#F59E0B`, `#D97706`), soft amber, and midnight blue highlights.
-- **Glassmorphism Panels**: Blur-backed floating navigation, translucent product cards with interactive hover states.
-- **Particle Sparkler & Fireworks Animation**: CSS sparkler particles on hover and celebration confetti triggers.
-- **Skeleton Loaders & Lazy-Loading**: Optimized loading skeletons for fast perceived load times.
+- **Curated Color Palette**: Festive sky blue (`#0284C7`), cyan gradients, and crisp white panels, accented with Diwali gold (`#F59E0B`, `#D97706`), emerald green, and midnight slate.
+- **Glassmorphism Panels**: Blur-backed floating navigation, translucent cracker cards with interactive hover steppers.
+- **Micro-Animations**: Celebration confetti, live sparkler particle effects, and animated banner notifications.
+- **Optimized Caching & Speed**: Sub-100ms API response times with in-memory caching and connection pooling.
 
 ### 2. Public Pages & Dynamic Navigation Flow
 1. **Home Page (`/`)**:
    - Hero banner with festive headline, countdown badges, and Sivakasi direct pricing pledge.
-   - **Three Prominent Category Cards** (inspired by sparkstarcrackers.com & skmsparkhub.in):
+   - **Three Prominent Category Cards**:
      * **"Daylight Crackers"**: Redirects to `/shop?category=Daylight` with the Daylight filter pre-applied.
      * **"Nightlight Crackers"**: Redirects to `/shop?category=Nightlight` with the Nightlight filter pre-applied.
      * **"Gift Boxes"**: Redirects to `/shop` with NO filters applied (displays the complete catalog).
@@ -43,9 +45,9 @@ A state-of-the-art, high-performance, multi-platform e-commerce web application 
    - Dynamic table pulling all 139 products live from the database.
    - Print / Save as PDF button formatted with `@media print` clean invoice styling.
 6. **About Us Page (`/about`)**:
-   - The Sachin Pyrotech heritage, Sivakasi craftsmanship, PESO green cracker formulations, and transparent 80% discount model.
+   - The Shri Rajeshwari Crackers heritage, Sivakasi craftsmanship, PESO green cracker formulations, and transparent 80% discount model.
 
-### 3. Shopping Cart & WhatsApp Checkout (Zero Payment Gateway)
+### 3. Shopping Cart & Direct WhatsApp Checkout
 - **Slide-out Cart Drawer**:
   * Itemized breakdown with thumbnails, units, quantities, and individual subtotals.
   * Real-time savings calculations (Total MRP vs. 80% Discounted Net Total).
@@ -53,115 +55,49 @@ A state-of-the-art, high-performance, multi-platform e-commerce web application 
   * Persistent button at bottom-right corner across Shop and Quick Order pages displaying live item count and net amount.
 - **Multi-Step Checkout Form**:
   * Captures Customer Name, WhatsApp Number, Delivery Address, City, Pincode, Preferred Delivery Date, and Special Notes.
-- **Human-Readable WhatsApp Receipt Serialization**:
-  * Instead of a payment gateway, serializes the cart into a structured, human-readable WhatsApp message and redirects to:  
-    `https://wa.me/919361849171?text=<ENCODED_RECEIPT_STRING>`
-  * Order is simultaneously saved into the database (`Order` model) for admin tracking.
+- **Automated WhatsApp Order Dispatch**:
+  * Serializes cart items into a beautifully formatted WhatsApp text message with order summary, customer details, and total savings.
+  * Automatically records order to database with collision-proof Order Reference (e.g., `#SR-4856-C95B8A`).
+  * Decrements product inventory automatically.
 
-### 4. Secure Admin Dashboard (`/admin/dashboard`)
+### 4. Administrative Control Center (`/admin/dashboard`)
 - Password-protected layout (login at `/admin/login`).
 - **Default Credentials**:
   * Username: `admin`
-  * Password: `sachinadmin123`
-- **Full CRUD Capabilities**:
-  * Create new cracker listings.
-  * Edit existing products (Name, Tamil Name, Category, Timing, Unit, MRP, Net Selling Price, Stock, Image).
-  * Delete products.
-  * One-click In Stock / Out of Stock status toggle.
-  * **Live State Synchronization**: Any change immediately updates database layers and reflects on the User Shop, Quick Order spreadsheet, and Price List view without manual system rebuilds.
-  * Review customer WhatsApp order submissions.
+  * Password: `rajeshwari123`
+- **Product Inventory Management (CRUD)**:
+  * Add new crackers with instant photo preview.
+  * Real-time inline edit and stock status toggle (In Stock / Out of Stock).
+  * 1-click delete with instant cache invalidation.
+- **Customer WhatsApp Orders Tracking**:
+  * **Search & Filter**: Real-time search by Customer Mobile Number (e.g. `9163697...`), Order Reference (`#SR-...`), Customer Name, or City.
+  * **Pagination**: Clean 10 orders per page view with page numbers, Previous/Next navigation, and total order counts.
+  * **CSV Export**: One-click download of all customer orders in Excel/CSV format for bookkeeping.
+  * **Annual Cleanup**: Safely purge orders after festival season backup to keep database permanently clean and within the 100% free tier.
+- **Dynamic WhatsApp Routing & Store Settings**:
+  * Update primary WhatsApp number, secondary phone, and shop address directly from the dashboard without touching code or redeploying.
 
 ---
 
-## 📂 Project Architecture
+## ☁️ 100% Free Forever Cloud Architecture
 
-```text
-crackershop/
-├── prisma/
-│   ├── schema.prisma         # Prisma ORM schema (SQLite locally, Postgres for Cloud)
-│   ├── seedData.js           # 139 Official products from Sachin Pyrotech price list
-│   └── seed.js               # Database population & settings script
-├── public/
-│   └── images/               # Branded cracker assets, illustrations, and banners
-├── src/
-│   ├── app/
-│   │   ├── layout.jsx        # Root Layout with CartProvider, Nav, CartDrawer, Modals
-│   │   ├── globals.css       # Festive light blue gradient & glassmorphism styles
-│   │   ├── page.jsx          # Home Page (3 Category cards, Hero, Bestsellers)
-│   │   ├── shop/page.jsx     # Shop Catalog with sidebar filters
-│   │   ├── quick-order/      # Spreadsheet bulk order layout
-│   │   ├── safety-tips/      # Safety Do's and Don'ts with custom SVG icons
-│   │   ├── price-list/       # Dynamic printable price table
-│   │   ├── about/            # Sachin Pyrotech Sivakasi story
-│   │   ├── admin/
-│   │   │   ├── login/        # Admin Authentication
-│   │   │   └── dashboard/    # Administrative CRUD Control Center
-│   │   └── api/
-│   │       ├── products/     # Products List & Create API
-│   │       ├── products/[id]/# Single Product GET, PUT, DELETE API
-│   │       ├── orders/       # Order tracking API
-│   │       └── admin/        # Admin login/logout/session API
-│   ├── components/
-│   │   ├── layout/           # Navbar, Footer
-│   │   └── cart/             # CartDrawer, CheckoutModal, FloatingCartButton
-│   ├── context/
-│   │   └── CartContext.jsx   # Global cart state with localStorage persistence
-│   └── lib/
-│       ├── prisma.js         # Prisma singleton with connection pooling guard
-│       └── constants.js      # Store info, categories, and WhatsApp receipt serializer
-├── .env.local                # Local environment configuration
-├── .env.example              # Free-tier template for Vercel/Netlify deployment
-├── next.config.mjs           # Next.js configuration
-├── tailwind.config.js        # Festive theme colors & animations
-└── package.json
-```
+| Component | Platform | Free Tier Specifications | Monthly Cost |
+| :--- | :--- | :--- | :--- |
+| **Frontend & API** | **Vercel** (Hobby) | Unlimited deploys, fast CDN, serverless execution | **₹0 (Free)** |
+| **Relational Database** | **Neon PostgreSQL** (AWS) | 500 MB storage, connection pooling, high-speed queries | **₹0 (Free)** |
+| **Product Media** | **Cloudinary** | 25 GB monthly media bandwidth & transformations | **₹0 (Free)** |
+| **Total Cost** | | | **₹0 / Month** |
+
+> 💡 **Storage Capacity Insight**: 139 cracker catalog items take ~1.5 MB of database storage. Each customer order record consumes ~1 KB. This means the 500 MB free tier easily supports **over 450,000+ orders** before requiring an annual CSV backup cleanup.
 
 ---
 
-## 🚀 Running Locally
+## 🛠️ Technology Stack
 
-### 1. Install Dependencies
-```bash
-npm install
-```
-
-### 2. Setup Database & Seed Products
-```bash
-# Push schema to SQLite database and populate all 139 products
-npx prisma db push
-node prisma/seed.js
-```
-
-### 3. Start Development Server
-```bash
-npm run dev
-```
-Open **[http://localhost:3000](http://localhost:3000)** in your browser.
-
----
-
-## ☁️ 100% Free-Tier Deployment (Vercel / Netlify + Supabase / Neon)
-
-The application is engineered to operate completely free of cost with zero upkeep expenses:
-
-1. **Frontend + Backend API**: Next.js App Router bundles UI and API routes into a single deployment on **Vercel Hobby Tier** or **Netlify Starter Tier** (100% free).
-2. **Relational Database**:
-   - Create a free project on **[Neon.tech](https://neon.tech)** or **[Supabase.com](https://supabase.com)** (permanent free tier).
-   - In `prisma/schema.prisma`, update provider to `postgresql`:
-     ```prisma
-     datasource db {
-       provider = "postgresql"
-       url      = env("DATABASE_URL")
-     }
-     ```
-   - In your Vercel/Netlify Environment Variables, set `DATABASE_URL` with the pooled connection string (`pgbouncer=true` or pooler port 6543) to stay within free connection limits.
-   - Run `npx prisma db push && node prisma/seed.js` to seed the cloud database.
-3. **Environment Variables**:
-   Copy the values from `.env.example` into your Vercel or Netlify project dashboard:
-   - `DATABASE_URL`: Connection string to Supabase/Neon PostgreSQL.
-   - `NEXT_PUBLIC_SHOP_NAME`: `SACHIN PYROTECH`
-   - `NEXT_PUBLIC_SHOP_PHONE`: `9361849171`
-   - `NEXT_PUBLIC_SHOP_WHATSAPP`: `9361849171`
-   - `ADMIN_USERNAME`: `admin`
-   - `ADMIN_PASSWORD`: Your chosen secure admin password
-   - `ADMIN_SESSION_SECRET`: Random 32-character string
+- **Framework**: Next.js 14.2 (App Router)
+- **Styling**: Tailwind CSS & Vanilla CSS Design Tokens
+- **Icons**: Lucide React
+- **Database ORM**: Prisma 5.22
+- **Database Engine**: Serverless PostgreSQL (Neon AWS us-east-2)
+- **Deployment**: Vercel Serverless Platform
+- **Version Control**: Git & GitHub
