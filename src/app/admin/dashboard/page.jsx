@@ -412,6 +412,32 @@ export default function AdminDashboardPage() {
     showNotification('CSV order backup downloaded successfully!');
   };
 
+  // Clear / Purge All Orders (Annual Cleanup to stay 100% Free Forever)
+  const handleClearAllOrders = async () => {
+    if (!orders || orders.length === 0) {
+      alert('There are no orders to clear.');
+      return;
+    }
+    const confirmBackup = confirm(
+      `⚠️ ANNUAL DATABASE CLEANUP:\n\nYou are about to permanently delete all ${orders.length} orders from the database to keep your store 100% free.\n\nHave you already clicked "Download CSV File" to save your backup?\n\nClick OK to permanently clear the orders list.`
+    );
+    if (!confirmBackup) return;
+
+    try {
+      const res = await fetch('/api/orders', { method: 'DELETE' });
+      const data = await res.json();
+      if (data.success) {
+        setOrders([]);
+        showNotification(`Database cleanup successful! Cleared ${data.count} orders. Your database is now 100% lean and fast.`);
+      } else {
+        alert(data.error || 'Failed to clear orders');
+      }
+    } catch (e) {
+      alert('Error clearing orders from database');
+    }
+  };
+
+
   const filteredProducts = products.filter(p => {
     const matchSearch = search.trim() === '' || 
       p.name.toLowerCase().includes(search.toLowerCase()) ||
@@ -848,19 +874,30 @@ export default function AdminDashboardPage() {
           </div>
 
           {/* Orders Header Actions */}
-          <div className="flex items-center justify-between">
+          <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3">
             <h3 className="font-bold text-slate-800 text-sm flex items-center gap-2">
               <ShoppingCart className="w-4 h-4 text-sky-600" />
               <span>WhatsApp Direct Customer Orders ({orders.length})</span>
             </h3>
-            <button
-              onClick={handleExportCSV}
-              disabled={orders.length === 0}
-              className="px-3.5 py-1.5 rounded-xl bg-emerald-600 hover:bg-emerald-700 text-white font-bold text-xs shadow-sm flex items-center gap-1.5 transition-colors disabled:bg-slate-300"
-            >
-              <FileSpreadsheet className="w-3.5 h-3.5" />
-              <span>Download CSV File</span>
-            </button>
+            <div className="flex items-center gap-2 w-full sm:w-auto">
+              <button
+                onClick={handleExportCSV}
+                disabled={orders.length === 0}
+                className="px-3.5 py-1.5 rounded-xl bg-emerald-600 hover:bg-emerald-700 text-white font-bold text-xs shadow-sm flex items-center justify-center gap-1.5 transition-colors disabled:bg-slate-300 flex-1 sm:flex-none"
+              >
+                <FileSpreadsheet className="w-3.5 h-3.5" />
+                <span>Download CSV Backup</span>
+              </button>
+              <button
+                onClick={handleClearAllOrders}
+                disabled={orders.length === 0}
+                className="px-3 py-1.5 rounded-xl bg-rose-50 hover:bg-rose-100 text-rose-700 border border-rose-300 font-bold text-xs shadow-sm flex items-center justify-center gap-1.5 transition-colors disabled:opacity-40 disabled:cursor-not-allowed flex-1 sm:flex-none"
+                title="Purge all orders after downloading backup to keep database 100% free"
+              >
+                <Trash2 className="w-3.5 h-3.5" />
+                <span>Annual Cleanup</span>
+              </button>
+            </div>
           </div>
 
           {/* Orders Content List */}

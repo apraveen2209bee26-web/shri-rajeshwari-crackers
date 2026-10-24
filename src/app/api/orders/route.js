@@ -102,3 +102,18 @@ export async function POST(request) {
   }
 }
 
+export async function DELETE() {
+  try {
+    const deleteResult = await prisma.order.deleteMany({});
+    return NextResponse.json({ 
+      success: true, 
+      message: `Cleared ${deleteResult.count} orders from database`,
+      count: deleteResult.count 
+    });
+  } catch (error) {
+    console.error('Error clearing orders:', error);
+    return NextResponse.json({ success: false, error: 'Failed to clear orders' }, { status: 500 });
+  }
+}
+
+
