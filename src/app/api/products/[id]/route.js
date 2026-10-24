@@ -1,6 +1,7 @@
 import { NextResponse } from 'next/server';
 import prisma from '@/lib/prisma';
 import { invalidateProductsCache } from '@/lib/cache';
+import { verifyAdminAuth } from '@/lib/auth';
 
 export const dynamic = 'force-dynamic';
 export const revalidate = 0;
@@ -29,6 +30,13 @@ export async function GET(request, { params }) {
 
 export async function PUT(request, { params }) {
   try {
+    if (!verifyAdminAuth(request)) {
+      return NextResponse.json(
+        { success: false, error: 'Unauthorized. Admin credentials required to modify products.' },
+        { status: 401 }
+      );
+    }
+
     const id = parseInt(params.id, 10);
     if (isNaN(id)) {
       return NextResponse.json({ success: false, error: 'Invalid ID' }, { status: 400 });
@@ -80,6 +88,13 @@ export async function PUT(request, { params }) {
 
 export async function DELETE(request, { params }) {
   try {
+    if (!verifyAdminAuth(request)) {
+      return NextResponse.json(
+        { success: false, error: 'Unauthorized. Admin credentials required to delete products.' },
+        { status: 401 }
+      );
+    }
+
     const id = parseInt(params.id, 10);
     if (isNaN(id)) {
       return NextResponse.json({ success: false, error: 'Invalid ID' }, { status: 400 });

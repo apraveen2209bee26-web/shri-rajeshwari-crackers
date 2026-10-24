@@ -1,5 +1,6 @@
 import { NextResponse } from 'next/server';
 import { cookies } from 'next/headers';
+import { createAdminToken } from '@/lib/auth';
 
 export const dynamic = 'force-dynamic';
 
@@ -21,9 +22,10 @@ export async function POST(request) {
       (envPass && inputPass === envPass);
 
     if (isUserValid && isPassValid) {
-      // Set secure auth cookie
+      // Set tamper-proof cryptographically signed HMAC auth cookie
+      const token = createAdminToken(inputUser);
       const cookieStore = cookies();
-      cookieStore.set('admin_auth_token', 'authenticated_sachin_admin_session_active', {
+      cookieStore.set('admin_auth_token', token, {
         httpOnly: true,
         secure: process.env.NODE_ENV === 'production',
         sameSite: 'lax',

@@ -1,13 +1,13 @@
 import { NextResponse } from 'next/server';
-import { cookies } from 'next/headers';
+import { verifyAdminAuth } from '@/lib/auth';
 
-export async function GET() {
-  const cookieStore = cookies();
-  const token = cookieStore.get('admin_auth_token');
+export const dynamic = 'force-dynamic';
 
-  if (token && token.value === 'authenticated_sachin_admin_session_active') {
+export async function GET(request) {
+  if (verifyAdminAuth(request)) {
     return NextResponse.json({ authenticated: true });
   }
 
   return NextResponse.json({ authenticated: false }, { status: 401 });
 }
+

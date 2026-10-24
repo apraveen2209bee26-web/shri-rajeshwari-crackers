@@ -2,6 +2,7 @@ import { NextResponse } from 'next/server';
 import prisma from '@/lib/prisma';
 import { STORE_CONFIG } from '@/lib/constants';
 import { getCachedSettings, setCachedSettings, invalidateSettingsCache } from '@/lib/cache';
+import { verifyAdminAuth } from '@/lib/auth';
 
 export const dynamic = 'force-dynamic';
 
@@ -58,6 +59,13 @@ export async function GET() {
 
 export async function PUT(request) {
   try {
+    if (!verifyAdminAuth(request)) {
+      return NextResponse.json(
+        { success: false, error: 'Unauthorized. Admin credentials required to modify store settings.' },
+        { status: 401 }
+      );
+    }
+
     const body = await request.json();
     const { whatsapp_number, secondary_phone, shop_name, address } = body;
 

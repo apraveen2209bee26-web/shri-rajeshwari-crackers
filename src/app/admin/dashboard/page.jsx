@@ -401,6 +401,17 @@ export default function AdminDashboardPage() {
       'Status'
     ];
 
+    // Helper to prevent CSV Formula Injection in Excel/Google Sheets
+    const sanitizeCsvCell = (val) => {
+      if (val === null || val === undefined) return '""';
+      let str = String(val);
+      // If cell begins with formula characters (=, +, -, @), prefix with a single quote
+      if (/^[=+\-@\t\r]/.test(str)) {
+        str = `'${str}`;
+      }
+      return `"${str.replace(/"/g, '""')}"`;
+    };
+
     const rows = orders.map(ord => {
       let itemsList = [];
       try {
@@ -412,20 +423,20 @@ export default function AdminDashboardPage() {
         .join('; ');
 
       return [
-        `"${ord.orderRef}"`,
-        `"${new Date(ord.createdAt).toLocaleString('en-IN')}"`,
-        `"${(ord.customerName || '').replace(/"/g, '""')}"`,
-        `"${ord.whatsappNumber || ''}"`,
-        `"${(ord.city || '').replace(/"/g, '""')}"`,
-        `"${ord.pincode || ''}"`,
-        `"${(ord.address || '').replace(/"/g, '""')}"`,
-        `"${ord.deliveryDate || ''}"`,
+        sanitizeCsvCell(ord.orderRef),
+        sanitizeCsvCell(new Date(ord.createdAt).toLocaleString('en-IN')),
+        sanitizeCsvCell(ord.customerName || ''),
+        sanitizeCsvCell(ord.whatsappNumber || ''),
+        sanitizeCsvCell(ord.city || ''),
+        sanitizeCsvCell(ord.pincode || ''),
+        sanitizeCsvCell(ord.address || ''),
+        sanitizeCsvCell(ord.deliveryDate || ''),
         itemsList.length,
-        `"${itemsSummary.replace(/"/g, '""')}"`,
+        sanitizeCsvCell(itemsSummary),
         ord.totalMrp || 0,
         ord.totalSavings || 0,
         ord.finalAmount || 0,
-        `"${ord.status || 'Order Placed'}"`
+        sanitizeCsvCell(ord.status || 'Order Placed')
       ].join(',');
     });
 
