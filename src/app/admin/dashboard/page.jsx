@@ -43,6 +43,7 @@ import {
 import { STORE_CONFIG, SUB_CATEGORIES } from '@/lib/constants';
 import ComboManager from '@/components/admin/ComboManager';
 import BranchManager from '@/components/admin/BranchManager';
+import CalendarManager from '@/components/admin/CalendarManager';
 
 export default function AdminDashboardPage() {
   const router = useRouter();
@@ -896,6 +897,21 @@ export default function AdminDashboardPage() {
         </button>
 
         <button
+          onClick={() => setActiveTab('calendars')}
+          className={`pb-3 font-bold text-xs sm:text-sm flex items-center gap-2 border-b-2 whitespace-nowrap transition-all ${
+            activeTab === 'calendars'
+              ? 'border-emerald-600 text-emerald-800'
+              : 'border-transparent text-slate-500 hover:text-slate-800'
+          }`}
+        >
+          <Calendar className="w-4 h-4 text-emerald-600" />
+          <span className="flex items-center gap-1.5">
+            Calendars Management
+            <span className="bg-emerald-600 text-white text-[10px] font-black px-1.5 py-0.2 rounded-full uppercase">2026</span>
+          </span>
+        </button>
+
+        <button
           onClick={() => setActiveTab('orders')}
           className={`pb-3 font-bold text-xs sm:text-sm flex items-center gap-2 border-b-2 whitespace-nowrap transition-all ${
             activeTab === 'orders'
@@ -1674,6 +1690,16 @@ export default function AdminDashboardPage() {
             </div>
           )}
         </div>
+      )}
+
+      {/* TAB 2: COMBO OFFERS CONFIGURATION */}
+      {activeTab === 'combos' && (
+        <ComboManager onNotification={showNotification} />
+      )}
+
+      {/* TAB 3: CALENDARS PRODUCTION & PRICING CONFIGURATION */}
+      {activeTab === 'calendars' && (
+        <CalendarManager onNotification={showNotification} />
       )}
 
       {/* TAB 4: BRANCH LOCATIONS & GOOGLE MAPS CONFIGURATION */}

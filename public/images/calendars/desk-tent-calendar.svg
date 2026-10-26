@@ -1,0 +1,247 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 800" width="1000" height="800">
+  <defs>
+    <linearGradient id="deskWood" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#1e1b18"/>
+      <stop offset="60%" stop-color="#141210"/>
+      <stop offset="100%" stop-color="#0a0908"/>
+    </linearGradient>
+    <linearGradient id="cardGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#ffffff"/>
+      <stop offset="100%" stop-color="#f8fafc"/>
+    </linearGradient>
+    <linearGradient id="tentStand" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#1e293b"/>
+      <stop offset="100%" stop-color="#0f172a"/>
+    </linearGradient>
+    <linearGradient id="emeraldBar" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#047857"/>
+      <stop offset="50%" stop-color="#10b981"/>
+      <stop offset="100%" stop-color="#059669"/>
+    </linearGradient>
+    <filter id="deskShadow" x="-10%" y="-10%" width="130%" height="130%">
+      <feDropShadow dx="0" dy="25" stdDeviation="25" flood-color="#000000" flood-opacity="0.8"/>
+    </filter>
+  </defs>
+
+  <!-- Workstation Tabletop Surface -->
+  <rect width="1000" height="800" fill="url(#deskWood)"/>
+  
+  <!-- Desk Calendar Tent Stand Shadow -->
+  <ellipse cx="500" cy="680" rx="420" ry="40" fill="#000000" opacity="0.6"/>
+
+  <!-- 3D Triangular Tent Base (300 GSM Heavy Art Card) -->
+  <path d="M120 660 L880 660 L840 690 L160 690 Z" fill="#090d16" stroke="#1e293b"/>
+  <path d="M150 160 L850 160 L880 660 L120 660 Z" fill="url(#tentStand)" filter="url(#deskShadow)"/>
+
+  <!-- Calendar Leaf Sheet Mounted on Stand -->
+  <rect x="160" y="180" width="680" height="460" rx="8" fill="url(#cardGrad)" stroke="#e2e8f0" stroke-width="2"/>
+
+  <!-- Wire-O Top Loops on Desk Calendar -->
+  
+      <rect x="200" y="165" width="10" height="30" rx="5" fill="#e5e7eb" stroke="#475569" stroke-width="1"/>
+      <line x1="203" y1="170" x2="203" y2="190" stroke="#ffffff" stroke-width="2"/>
+    
+      <rect x="235" y="165" width="10" height="30" rx="5" fill="#e5e7eb" stroke="#475569" stroke-width="1"/>
+      <line x1="238" y1="170" x2="238" y2="190" stroke="#ffffff" stroke-width="2"/>
+    
+      <rect x="270" y="165" width="10" height="30" rx="5" fill="#e5e7eb" stroke="#475569" stroke-width="1"/>
+      <line x1="273" y1="170" x2="273" y2="190" stroke="#ffffff" stroke-width="2"/>
+    
+      <rect x="305" y="165" width="10" height="30" rx="5" fill="#e5e7eb" stroke="#475569" stroke-width="1"/>
+      <line x1="308" y1="170" x2="308" y2="190" stroke="#ffffff" stroke-width="2"/>
+    
+      <rect x="340" y="165" width="10" height="30" rx="5" fill="#e5e7eb" stroke="#475569" stroke-width="1"/>
+      <line x1="343" y1="170" x2="343" y2="190" stroke="#ffffff" stroke-width="2"/>
+    
+      <rect x="375" y="165" width="10" height="30" rx="5" fill="#e5e7eb" stroke="#475569" stroke-width="1"/>
+      <line x1="378" y1="170" x2="378" y2="190" stroke="#ffffff" stroke-width="2"/>
+    
+      <rect x="410" y="165" width="10" height="30" rx="5" fill="#e5e7eb" stroke="#475569" stroke-width="1"/>
+      <line x1="413" y1="170" x2="413" y2="190" stroke="#ffffff" stroke-width="2"/>
+    
+      <rect x="445" y="165" width="10" height="30" rx="5" fill="#e5e7eb" stroke="#475569" stroke-width="1"/>
+      <line x1="448" y1="170" x2="448" y2="190" stroke="#ffffff" stroke-width="2"/>
+    
+      <rect x="480" y="165" width="10" height="30" rx="5" fill="#e5e7eb" stroke="#475569" stroke-width="1"/>
+      <line x1="483" y1="170" x2="483" y2="190" stroke="#ffffff" stroke-width="2"/>
+    
+      <rect x="515" y="165" width="10" height="30" rx="5" fill="#e5e7eb" stroke="#475569" stroke-width="1"/>
+      <line x1="518" y1="170" x2="518" y2="190" stroke="#ffffff" stroke-width="2"/>
+    
+      <rect x="550" y="165" width="10" height="30" rx="5" fill="#e5e7eb" stroke="#475569" stroke-width="1"/>
+      <line x1="553" y1="170" x2="553" y2="190" stroke="#ffffff" stroke-width="2"/>
+    
+      <rect x="585" y="165" width="10" height="30" rx="5" fill="#e5e7eb" stroke="#475569" stroke-width="1"/>
+      <line x1="588" y1="170" x2="588" y2="190" stroke="#ffffff" stroke-width="2"/>
+    
+      <rect x="620" y="165" width="10" height="30" rx="5" fill="#e5e7eb" stroke="#475569" stroke-width="1"/>
+      <line x1="623" y1="170" x2="623" y2="190" stroke="#ffffff" stroke-width="2"/>
+    
+      <rect x="655" y="165" width="10" height="30" rx="5" fill="#e5e7eb" stroke="#475569" stroke-width="1"/>
+      <line x1="658" y1="170" x2="658" y2="190" stroke="#ffffff" stroke-width="2"/>
+    
+      <rect x="690" y="165" width="10" height="30" rx="5" fill="#e5e7eb" stroke="#475569" stroke-width="1"/>
+      <line x1="693" y1="170" x2="693" y2="190" stroke="#ffffff" stroke-width="2"/>
+    
+      <rect x="725" y="165" width="10" height="30" rx="5" fill="#e5e7eb" stroke="#475569" stroke-width="1"/>
+      <line x1="728" y1="170" x2="728" y2="190" stroke="#ffffff" stroke-width="2"/>
+    
+      <rect x="760" y="165" width="10" height="30" rx="5" fill="#e5e7eb" stroke="#475569" stroke-width="1"/>
+      <line x1="763" y1="170" x2="763" y2="190" stroke="#ffffff" stroke-width="2"/>
+    
+      <rect x="795" y="165" width="10" height="30" rx="5" fill="#e5e7eb" stroke="#475569" stroke-width="1"/>
+      <line x1="798" y1="170" x2="798" y2="190" stroke="#ffffff" stroke-width="2"/>
+    
+
+  <!-- Left Side: Month Grid & Dates -->
+  <g transform="translate(190, 220)">
+    <rect width="360" height="40" rx="6" fill="url(#emeraldBar)"/>
+    <text x="20" y="26" font-family="'Inter', sans-serif" font-size="18" font-weight="900" fill="#ffffff">OCTOBER 2026</text>
+    <text x="340" y="26" font-family="'Noto Sans Tamil', sans-serif" font-size="14" font-weight="700" fill="#fef08a" text-anchor="end">ஐப்பசி மாதம்</text>
+
+    <!-- Days Table -->
+    <g transform="translate(0, 55)">
+      
+        <text x="25" y="15" font-family="'Inter', sans-serif" font-size="13" font-weight="800" fill="#dc2626" text-anchor="middle">S</text>
+      
+        <text x="76" y="15" font-family="'Inter', sans-serif" font-size="13" font-weight="800" fill="#475569" text-anchor="middle">M</text>
+      
+        <text x="127" y="15" font-family="'Inter', sans-serif" font-size="13" font-weight="800" fill="#475569" text-anchor="middle">T</text>
+      
+        <text x="178" y="15" font-family="'Inter', sans-serif" font-size="13" font-weight="800" fill="#475569" text-anchor="middle">W</text>
+      
+        <text x="229" y="15" font-family="'Inter', sans-serif" font-size="13" font-weight="800" fill="#475569" text-anchor="middle">T</text>
+      
+        <text x="280" y="15" font-family="'Inter', sans-serif" font-size="13" font-weight="800" fill="#475569" text-anchor="middle">F</text>
+      
+        <text x="331" y="15" font-family="'Inter', sans-serif" font-size="13" font-weight="800" fill="#475569" text-anchor="middle">S</text>
+      
+      <line x1="0" y1="25" x2="360" y2="25" stroke="#e2e8f0" stroke-width="1.5"/>
+
+      <!-- Date Matrix -->
+      
+          
+          <text x="229" y="50" font-family="'Inter', sans-serif" font-size="15" font-weight="600" fill="#1e293b" text-anchor="middle">1</text>
+        
+          
+          <text x="280" y="50" font-family="'Inter', sans-serif" font-size="15" font-weight="600" fill="#1e293b" text-anchor="middle">2</text>
+        
+          
+          <text x="331" y="50" font-family="'Inter', sans-serif" font-size="15" font-weight="600" fill="#1e293b" text-anchor="middle">3</text>
+        
+          
+          <text x="25" y="88" font-family="'Inter', sans-serif" font-size="15" font-weight="800" fill="#dc2626" text-anchor="middle">4</text>
+        
+          
+          <text x="76" y="88" font-family="'Inter', sans-serif" font-size="15" font-weight="600" fill="#1e293b" text-anchor="middle">5</text>
+        
+          
+          <text x="127" y="88" font-family="'Inter', sans-serif" font-size="15" font-weight="600" fill="#1e293b" text-anchor="middle">6</text>
+        
+          
+          <text x="178" y="88" font-family="'Inter', sans-serif" font-size="15" font-weight="600" fill="#1e293b" text-anchor="middle">7</text>
+        
+          
+          <text x="229" y="88" font-family="'Inter', sans-serif" font-size="15" font-weight="600" fill="#1e293b" text-anchor="middle">8</text>
+        
+          
+          <text x="280" y="88" font-family="'Inter', sans-serif" font-size="15" font-weight="600" fill="#1e293b" text-anchor="middle">9</text>
+        
+          
+          <text x="331" y="88" font-family="'Inter', sans-serif" font-size="15" font-weight="600" fill="#1e293b" text-anchor="middle">10</text>
+        
+          
+          <text x="25" y="126" font-family="'Inter', sans-serif" font-size="15" font-weight="800" fill="#dc2626" text-anchor="middle">11</text>
+        
+          
+          <text x="76" y="126" font-family="'Inter', sans-serif" font-size="15" font-weight="600" fill="#1e293b" text-anchor="middle">12</text>
+        
+          
+          <text x="127" y="126" font-family="'Inter', sans-serif" font-size="15" font-weight="600" fill="#1e293b" text-anchor="middle">13</text>
+        
+          
+          <text x="178" y="126" font-family="'Inter', sans-serif" font-size="15" font-weight="600" fill="#1e293b" text-anchor="middle">14</text>
+        
+          
+          <text x="229" y="126" font-family="'Inter', sans-serif" font-size="15" font-weight="600" fill="#1e293b" text-anchor="middle">15</text>
+        
+          
+          <text x="280" y="126" font-family="'Inter', sans-serif" font-size="15" font-weight="600" fill="#1e293b" text-anchor="middle">16</text>
+        
+          
+          <text x="331" y="126" font-family="'Inter', sans-serif" font-size="15" font-weight="600" fill="#1e293b" text-anchor="middle">17</text>
+        
+          
+          <text x="25" y="164" font-family="'Inter', sans-serif" font-size="15" font-weight="800" fill="#dc2626" text-anchor="middle">18</text>
+        
+          
+          <text x="76" y="164" font-family="'Inter', sans-serif" font-size="15" font-weight="600" fill="#1e293b" text-anchor="middle">19</text>
+        
+          <circle cx="127" cy="159" r="16" fill="#fef08a" stroke="#f59e0b" stroke-width="1.5"/>
+          <text x="127" y="164" font-family="'Inter', sans-serif" font-size="15" font-weight="900" fill="#b45309" text-anchor="middle">20</text>
+        
+          
+          <text x="178" y="164" font-family="'Inter', sans-serif" font-size="15" font-weight="600" fill="#1e293b" text-anchor="middle">21</text>
+        
+          
+          <text x="229" y="164" font-family="'Inter', sans-serif" font-size="15" font-weight="600" fill="#1e293b" text-anchor="middle">22</text>
+        
+          
+          <text x="280" y="164" font-family="'Inter', sans-serif" font-size="15" font-weight="600" fill="#1e293b" text-anchor="middle">23</text>
+        
+          
+          <text x="331" y="164" font-family="'Inter', sans-serif" font-size="15" font-weight="600" fill="#1e293b" text-anchor="middle">24</text>
+        
+          
+          <text x="25" y="202" font-family="'Inter', sans-serif" font-size="15" font-weight="800" fill="#dc2626" text-anchor="middle">25</text>
+        
+          
+          <text x="76" y="202" font-family="'Inter', sans-serif" font-size="15" font-weight="600" fill="#1e293b" text-anchor="middle">26</text>
+        
+          
+          <text x="127" y="202" font-family="'Inter', sans-serif" font-size="15" font-weight="600" fill="#1e293b" text-anchor="middle">27</text>
+        
+          
+          <text x="178" y="202" font-family="'Inter', sans-serif" font-size="15" font-weight="600" fill="#1e293b" text-anchor="middle">28</text>
+        
+          
+          <text x="229" y="202" font-family="'Inter', sans-serif" font-size="15" font-weight="600" fill="#1e293b" text-anchor="middle">29</text>
+        
+          
+          <text x="280" y="202" font-family="'Inter', sans-serif" font-size="15" font-weight="600" fill="#1e293b" text-anchor="middle">30</text>
+        
+          
+          <text x="331" y="202" font-family="'Inter', sans-serif" font-size="15" font-weight="600" fill="#1e293b" text-anchor="middle">31</text>
+        
+    </g>
+  </g>
+
+  <!-- Right Side: Festive Artwork & Company Branding -->
+  <g transform="translate(580, 220)">
+    <rect width="230" height="300" rx="8" fill="#f0fdf4" stroke="#86efac" stroke-width="1"/>
+    
+    <!-- Mini Brand Logo -->
+    <rect x="25" y="25" width="180" height="110" rx="6" fill="#064e3b"/>
+    <text x="115" y="65" font-family="'Noto Sans Tamil', sans-serif" font-size="14" font-weight="900" fill="#fef08a" text-anchor="middle">ஸ்ரீ ராஜேஸ்வரி</text>
+    <text x="115" y="85" font-family="'Inter', sans-serif" font-size="11" font-weight="800" fill="#ffffff" text-anchor="middle">CALENDARS &amp; CRACKERS</text>
+    <text x="115" y="105" font-family="'Inter', sans-serif" font-size="9" font-weight="600" fill="#a7f3d0" text-anchor="middle">SIVAKASI • TAMIL NADU</text>
+
+    <!-- Notes & Target Checklist Section -->
+    <g transform="translate(25, 155)">
+      <text x="0" y="15" font-family="'Inter', sans-serif" font-size="12" font-weight="800" fill="#1e293b">MONTHLY GOALS / NOTES:</text>
+      <line x1="0" y1="35" x2="180" y2="35" stroke="#cbd5e1" stroke-width="1" stroke-dasharray="3,3"/>
+      <line x1="0" y1="60" x2="180" y2="60" stroke="#cbd5e1" stroke-width="1" stroke-dasharray="3,3"/>
+      <line x1="0" y1="85" x2="180" y2="85" stroke="#cbd5e1" stroke-width="1" stroke-dasharray="3,3"/>
+      <line x1="0" y1="110" x2="180" y2="110" stroke="#cbd5e1" stroke-width="1" stroke-dasharray="3,3"/>
+    </g>
+
+    <!-- Specification Badge -->
+    <rect x="25" y="295" width="180" height="24" rx="4" fill="#047857"/>
+    <text x="115" y="311" font-family="'Inter', sans-serif" font-size="9" font-weight="800" fill="#ffffff" text-anchor="middle">300 GSM RIGID TENT ART CARD</text>
+  </g>
+
+  <!-- Bottom Brand Footnote -->
+  <text x="500" y="615" font-family="'Inter', sans-serif" font-size="12" font-weight="700" fill="#64748b" text-anchor="middle">
+    COMPACT TABLETOP FORMAT • EXECUTIVE CORPORATE GIFTING • SHIPPED DIRECT FROM SIVAKASI PRESS
+  </text>
+</svg>

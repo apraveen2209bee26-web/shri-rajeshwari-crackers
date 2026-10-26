@@ -1,0 +1,269 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 1000" width="800" height="1000">
+  <defs>
+    <linearGradient id="bgWall" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#021c17"/>
+      <stop offset="50%" stop-color="#04382e"/>
+      <stop offset="100%" stop-color="#011410"/>
+    </linearGradient>
+    <linearGradient id="paperGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#ffffff"/>
+      <stop offset="85%" stop-color="#fdfbf7"/>
+      <stop offset="100%" stop-color="#f5ede0"/>
+    </linearGradient>
+    <linearGradient id="goldGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#f9d423"/>
+      <stop offset="50%" stop-color="#ff4e50"/>
+      <stop offset="100%" stop-color="#f9d423"/>
+    </linearGradient>
+    <linearGradient id="goldMetallic" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#bf953f"/>
+      <stop offset="25%" stop-color="#fcf6ba"/>
+      <stop offset="50%" stop-color="#b38728"/>
+      <stop offset="75%" stop-color="#fbf5b7"/>
+      <stop offset="100%" stop-color="#aa771c"/>
+    </linearGradient>
+    <linearGradient id="spiralRing" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#ffffff"/>
+      <stop offset="40%" stop-color="#d1d5db"/>
+      <stop offset="70%" stop-color="#4b5563"/>
+      <stop offset="100%" stop-color="#1f2937"/>
+    </linearGradient>
+    <filter id="shadow" x="-10%" y="-10%" width="130%" height="130%">
+      <feDropShadow dx="0" dy="16" stdDeviation="20" flood-color="#000000" flood-opacity="0.6"/>
+    </filter>
+    <filter id="glow" x="-20%" y="-20%" width="140%" height="140%">
+      <feGaussianBlur stdDeviation="8" result="blur"/>
+      <feComposite in="SourceGraphic" in2="blur" operator="over"/>
+    </filter>
+  </defs>
+
+  <!-- Background Studio Atmosphere -->
+  <rect width="800" height="1000" fill="url(#bgWall)" />
+  <circle cx="400" cy="300" r="350" fill="#059669" opacity="0.15" filter="url(#glow)"/>
+
+  <!-- Wall Hanging Nail & Wire -->
+  <circle cx="400" cy="40" r="12" fill="#71717a" stroke="#d4d4d8" stroke-width="3"/>
+  <path d="M400 40 L340 100 M400 40 L460 100" stroke="#a1a1aa" stroke-width="2.5" stroke-dasharray="4,2"/>
+
+  <!-- Main Calendar Sheet (with shadow) -->
+  <rect x="100" y="90" width="600" height="840" rx="14" fill="url(#paperGrad)" filter="url(#shadow)" stroke="#e5e7eb" stroke-width="2"/>
+
+  <!-- Top Hanging Wire Hook Bar -->
+  <rect x="140" y="90" width="520" height="24" rx="4" fill="url(#goldMetallic)" opacity="0.9"/>
+  <path d="M380 90 Q400 68 420 90" fill="none" stroke="url(#goldMetallic)" stroke-width="6" stroke-linecap="round"/>
+
+  <!-- Wire-O Spiral Rings (Repeated Loops) -->
+  
+      <rect x="145" y="80" width="8" height="28" rx="4" fill="url(#spiralRing)" stroke="#374151" stroke-width="0.8"/>
+      <ellipse cx="149" cy="84" rx="3" ry="2" fill="#ffffff" opacity="0.8"/>
+    
+      <rect x="168.5" y="80" width="8" height="28" rx="4" fill="url(#spiralRing)" stroke="#374151" stroke-width="0.8"/>
+      <ellipse cx="172.5" cy="84" rx="3" ry="2" fill="#ffffff" opacity="0.8"/>
+    
+      <rect x="192" y="80" width="8" height="28" rx="4" fill="url(#spiralRing)" stroke="#374151" stroke-width="0.8"/>
+      <ellipse cx="196" cy="84" rx="3" ry="2" fill="#ffffff" opacity="0.8"/>
+    
+      <rect x="215.5" y="80" width="8" height="28" rx="4" fill="url(#spiralRing)" stroke="#374151" stroke-width="0.8"/>
+      <ellipse cx="219.5" cy="84" rx="3" ry="2" fill="#ffffff" opacity="0.8"/>
+    
+      <rect x="239" y="80" width="8" height="28" rx="4" fill="url(#spiralRing)" stroke="#374151" stroke-width="0.8"/>
+      <ellipse cx="243" cy="84" rx="3" ry="2" fill="#ffffff" opacity="0.8"/>
+    
+      <rect x="262.5" y="80" width="8" height="28" rx="4" fill="url(#spiralRing)" stroke="#374151" stroke-width="0.8"/>
+      <ellipse cx="266.5" cy="84" rx="3" ry="2" fill="#ffffff" opacity="0.8"/>
+    
+      <rect x="286" y="80" width="8" height="28" rx="4" fill="url(#spiralRing)" stroke="#374151" stroke-width="0.8"/>
+      <ellipse cx="290" cy="84" rx="3" ry="2" fill="#ffffff" opacity="0.8"/>
+    
+      <rect x="309.5" y="80" width="8" height="28" rx="4" fill="url(#spiralRing)" stroke="#374151" stroke-width="0.8"/>
+      <ellipse cx="313.5" cy="84" rx="3" ry="2" fill="#ffffff" opacity="0.8"/>
+    
+      <rect x="333" y="80" width="8" height="28" rx="4" fill="url(#spiralRing)" stroke="#374151" stroke-width="0.8"/>
+      <ellipse cx="337" cy="84" rx="3" ry="2" fill="#ffffff" opacity="0.8"/>
+    
+      <rect x="356.5" y="80" width="8" height="28" rx="4" fill="url(#spiralRing)" stroke="#374151" stroke-width="0.8"/>
+      <ellipse cx="360.5" cy="84" rx="3" ry="2" fill="#ffffff" opacity="0.8"/>
+    
+      <rect x="380" y="80" width="8" height="28" rx="4" fill="url(#spiralRing)" stroke="#374151" stroke-width="0.8"/>
+      <ellipse cx="384" cy="84" rx="3" ry="2" fill="#ffffff" opacity="0.8"/>
+    
+      <rect x="403.5" y="80" width="8" height="28" rx="4" fill="url(#spiralRing)" stroke="#374151" stroke-width="0.8"/>
+      <ellipse cx="407.5" cy="84" rx="3" ry="2" fill="#ffffff" opacity="0.8"/>
+    
+      <rect x="427" y="80" width="8" height="28" rx="4" fill="url(#spiralRing)" stroke="#374151" stroke-width="0.8"/>
+      <ellipse cx="431" cy="84" rx="3" ry="2" fill="#ffffff" opacity="0.8"/>
+    
+      <rect x="450.5" y="80" width="8" height="28" rx="4" fill="url(#spiralRing)" stroke="#374151" stroke-width="0.8"/>
+      <ellipse cx="454.5" cy="84" rx="3" ry="2" fill="#ffffff" opacity="0.8"/>
+    
+      <rect x="474" y="80" width="8" height="28" rx="4" fill="url(#spiralRing)" stroke="#374151" stroke-width="0.8"/>
+      <ellipse cx="478" cy="84" rx="3" ry="2" fill="#ffffff" opacity="0.8"/>
+    
+      <rect x="497.5" y="80" width="8" height="28" rx="4" fill="url(#spiralRing)" stroke="#374151" stroke-width="0.8"/>
+      <ellipse cx="501.5" cy="84" rx="3" ry="2" fill="#ffffff" opacity="0.8"/>
+    
+      <rect x="521" y="80" width="8" height="28" rx="4" fill="url(#spiralRing)" stroke="#374151" stroke-width="0.8"/>
+      <ellipse cx="525" cy="84" rx="3" ry="2" fill="#ffffff" opacity="0.8"/>
+    
+      <rect x="544.5" y="80" width="8" height="28" rx="4" fill="url(#spiralRing)" stroke="#374151" stroke-width="0.8"/>
+      <ellipse cx="548.5" cy="84" rx="3" ry="2" fill="#ffffff" opacity="0.8"/>
+    
+      <rect x="568" y="80" width="8" height="28" rx="4" fill="url(#spiralRing)" stroke="#374151" stroke-width="0.8"/>
+      <ellipse cx="572" cy="84" rx="3" ry="2" fill="#ffffff" opacity="0.8"/>
+    
+      <rect x="591.5" y="80" width="8" height="28" rx="4" fill="url(#spiralRing)" stroke="#374151" stroke-width="0.8"/>
+      <ellipse cx="595.5" cy="84" rx="3" ry="2" fill="#ffffff" opacity="0.8"/>
+    
+      <rect x="615" y="80" width="8" height="28" rx="4" fill="url(#spiralRing)" stroke="#374151" stroke-width="0.8"/>
+      <ellipse cx="619" cy="84" rx="3" ry="2" fill="#ffffff" opacity="0.8"/>
+    
+      <rect x="638.5" y="80" width="8" height="28" rx="4" fill="url(#spiralRing)" stroke="#374151" stroke-width="0.8"/>
+      <ellipse cx="642.5" cy="84" rx="3" ry="2" fill="#ffffff" opacity="0.8"/>
+    
+
+  <!-- Calendar Header Poster Image Zone (Rich Spiritual Sivakasi Print) -->
+  <rect x="120" y="125" width="560" height="360" rx="8" fill="#7f1d1d"/>
+  <rect x="120" y="125" width="560" height="360" rx="8" fill="url(#goldGrad)" opacity="0.3"/>
+  <rect x="126" y="131" width="548" height="348" rx="6" fill="none" stroke="url(#goldMetallic)" stroke-width="3"/>
+
+  <!-- Decorative Border Corners -->
+  <circle cx="140" cy="145" r="8" fill="none" stroke="url(#goldMetallic)" stroke-width="2"/>
+  <circle cx="660" cy="145" r="8" fill="none" stroke="url(#goldMetallic)" stroke-width="2"/>
+  <circle cx="140" cy="465" r="8" fill="none" stroke="url(#goldMetallic)" stroke-width="2"/>
+  <circle cx="660" cy="465" r="8" fill="none" stroke="url(#goldMetallic)" stroke-width="2"/>
+
+  <!-- Deity / Festive Motif Graphic in Gold -->
+  <g transform="translate(400, 270)">
+    <!-- Sunburst Radiance -->
+    
+      <line x1="0" y1="0" x2="110" y2="0" stroke="url(#goldMetallic)" stroke-width="2" opacity="0.4"/>
+    
+      <line x1="0" y1="0" x2="101.62674857624154" y2="42.095177560159875" stroke="url(#goldMetallic)" stroke-width="2" opacity="0.4"/>
+    
+      <line x1="0" y1="0" x2="77.78174593052023" y2="77.78174593052022" stroke="url(#goldMetallic)" stroke-width="2" opacity="0.4"/>
+    
+      <line x1="0" y1="0" x2="42.09517756015988" y2="101.62674857624154" stroke="url(#goldMetallic)" stroke-width="2" opacity="0.4"/>
+    
+      <line x1="0" y1="0" x2="6.735557395310443e-15" y2="110" stroke="url(#goldMetallic)" stroke-width="2" opacity="0.4"/>
+    
+      <line x1="0" y1="0" x2="-42.09517756015987" y2="101.62674857624154" stroke="url(#goldMetallic)" stroke-width="2" opacity="0.4"/>
+    
+      <line x1="0" y1="0" x2="-77.78174593052022" y2="77.78174593052023" stroke="url(#goldMetallic)" stroke-width="2" opacity="0.4"/>
+    
+      <line x1="0" y1="0" x2="-101.62674857624154" y2="42.09517756015989" stroke="url(#goldMetallic)" stroke-width="2" opacity="0.4"/>
+    
+      <line x1="0" y1="0" x2="-110" y2="1.3471114790620885e-14" stroke="url(#goldMetallic)" stroke-width="2" opacity="0.4"/>
+    
+      <line x1="0" y1="0" x2="-101.62674857624155" y2="-42.09517756015986" stroke="url(#goldMetallic)" stroke-width="2" opacity="0.4"/>
+    
+      <line x1="0" y1="0" x2="-77.78174593052024" y2="-77.78174593052022" stroke="url(#goldMetallic)" stroke-width="2" opacity="0.4"/>
+    
+      <line x1="0" y1="0" x2="-42.09517756015994" y2="-101.62674857624151" stroke="url(#goldMetallic)" stroke-width="2" opacity="0.4"/>
+    
+      <line x1="0" y1="0" x2="-2.0206672185931328e-14" y2="-110" stroke="url(#goldMetallic)" stroke-width="2" opacity="0.4"/>
+    
+      <line x1="0" y1="0" x2="42.095177560159904" y2="-101.62674857624152" stroke="url(#goldMetallic)" stroke-width="2" opacity="0.4"/>
+    
+      <line x1="0" y1="0" x2="77.7817459305202" y2="-77.78174593052024" stroke="url(#goldMetallic)" stroke-width="2" opacity="0.4"/>
+    
+      <line x1="0" y1="0" x2="101.62674857624151" y2="-42.09517756015995" stroke="url(#goldMetallic)" stroke-width="2" opacity="0.4"/>
+    
+    <!-- Gold Aura Circle -->
+    <circle cx="0" cy="0" r="75" fill="#991b1b" stroke="url(#goldMetallic)" stroke-width="4"/>
+    <circle cx="0" cy="0" r="68" fill="none" stroke="#fef08a" stroke-width="1.5" stroke-dasharray="5,3"/>
+    
+    <!-- Lord Ganesha / Om Iconography -->
+    <text x="0" y="24" font-family="'Noto Sans Tamil', 'Inter', sans-serif" font-size="70" font-weight="900" fill="url(#goldMetallic)" text-anchor="middle">🕉</text>
+  </g>
+
+  <!-- Header Branding Banner -->
+  <rect x="180" y="380" width="440" height="42" rx="21" fill="#1e1b4b" stroke="url(#goldMetallic)" stroke-width="2"/>
+  <text x="400" y="407" font-family="'Inter', sans-serif" font-size="16" font-weight="800" fill="#fef08a" text-anchor="middle" letter-spacing="2">SHRI RAJESHWARI CALENDARS • SIVAKASI</text>
+
+  <text x="400" y="450" font-family="'Noto Sans Tamil', sans-serif" font-size="20" font-weight="800" fill="#ffffff" text-anchor="middle">ஸ்ரீ ராஜேஸ்வரி பிரீமியம் மாத காலண்டர் 2026</text>
+
+  <!-- Month Grid Section (130-170 GSM Gloss Paper Look) -->
+  <rect x="120" y="500" width="560" height="410" rx="8" fill="#ffffff" stroke="#e2e8f0" stroke-width="1.5"/>
+
+  <!-- Month Bar -->
+  <rect x="120" y="500" width="560" height="52" fill="#0f766e"/>
+  <text x="145" y="534" font-family="'Inter', sans-serif" font-size="24" font-weight="900" fill="#ffffff">JANUARY 2026</text>
+  <text x="655" y="534" font-family="'Noto Sans Tamil', sans-serif" font-size="19" font-weight="800" fill="#fef08a" text-anchor="end">தை / மாசி மாதம்</text>
+
+  <!-- Weekday Columns Header -->
+  <g transform="translate(120, 552)">
+    <rect width="560" height="32" fill="#f1f5f9"/>
+    <text x="40" y="22" font-family="'Inter', sans-serif" font-size="13" font-weight="800" fill="#dc2626" text-anchor="middle">SUN</text>
+    <text x="120" y="22" font-family="'Inter', sans-serif" font-size="13" font-weight="800" fill="#334155" text-anchor="middle">MON</text>
+    <text x="200" y="22" font-family="'Inter', sans-serif" font-size="13" font-weight="800" fill="#334155" text-anchor="middle">TUE</text>
+    <text x="280" y="22" font-family="'Inter', sans-serif" font-size="13" font-weight="800" fill="#334155" text-anchor="middle">WED</text>
+    <text x="360" y="22" font-family="'Inter', sans-serif" font-size="13" font-weight="800" fill="#334155" text-anchor="middle">THU</text>
+    <text x="440" y="22" font-family="'Inter', sans-serif" font-size="13" font-weight="800" fill="#334155" text-anchor="middle">FRI</text>
+    <text x="520" y="22" font-family="'Inter', sans-serif" font-size="13" font-weight="800" fill="#0284c7" text-anchor="middle">SAT</text>
+  </g>
+
+  <!-- Date Matrix (Sample Grid Rows) -->
+  <g transform="translate(120, 595)">
+    <!-- Row 1 -->
+    <text x="280" y="28" font-family="'Inter', sans-serif" font-size="20" font-weight="700" fill="#1e293b" text-anchor="middle">1</text>
+    <text x="360" y="28" font-family="'Inter', sans-serif" font-size="20" font-weight="700" fill="#1e293b" text-anchor="middle">2</text>
+    <text x="440" y="28" font-family="'Inter', sans-serif" font-size="20" font-weight="700" fill="#1e293b" text-anchor="middle">3</text>
+    <text x="520" y="28" font-family="'Inter', sans-serif" font-size="20" font-weight="700" fill="#0369a1" text-anchor="middle">4</text>
+
+    <!-- Row 2 -->
+    <text x="40" y="78" font-family="'Inter', sans-serif" font-size="20" font-weight="800" fill="#dc2626" text-anchor="middle">5</text>
+    <text x="120" y="78" font-family="'Inter', sans-serif" font-size="20" font-weight="700" fill="#1e293b" text-anchor="middle">6</text>
+    <text x="200" y="78" font-family="'Inter', sans-serif" font-size="20" font-weight="700" fill="#1e293b" text-anchor="middle">7</text>
+    <text x="280" y="78" font-family="'Inter', sans-serif" font-size="20" font-weight="700" fill="#1e293b" text-anchor="middle">8</text>
+    <text x="360" y="78" font-family="'Inter', sans-serif" font-size="20" font-weight="700" fill="#1e293b" text-anchor="middle">9</text>
+    <text x="440" y="78" font-family="'Inter', sans-serif" font-size="20" font-weight="700" fill="#1e293b" text-anchor="middle">10</text>
+    <text x="520" y="78" font-family="'Inter', sans-serif" font-size="20" font-weight="700" fill="#0369a1" text-anchor="middle">11</text>
+
+    <!-- Row 3 - Pongal Special Highlight -->
+    <text x="40" y="128" font-family="'Inter', sans-serif" font-size="20" font-weight="800" fill="#dc2626" text-anchor="middle">12</text>
+    <text x="120" y="128" font-family="'Inter', sans-serif" font-size="20" font-weight="700" fill="#1e293b" text-anchor="middle">13</text>
+    
+    <!-- Jan 14 Pongal Highlight Box -->
+    <rect x="175" y="103" width="50" height="36" rx="6" fill="#fef08a" stroke="#eab308" stroke-width="1.5"/>
+    <text x="200" y="128" font-family="'Inter', sans-serif" font-size="20" font-weight="900" fill="#b45309" text-anchor="middle">14</text>
+    <text x="200" y="146" font-family="'Noto Sans Tamil', sans-serif" font-size="9" font-weight="700" fill="#b45309" text-anchor="middle">பொங்கல்</text>
+
+    <text x="280" y="128" font-family="'Inter', sans-serif" font-size="20" font-weight="700" fill="#1e293b" text-anchor="middle">15</text>
+    <text x="360" y="128" font-family="'Inter', sans-serif" font-size="20" font-weight="700" fill="#1e293b" text-anchor="middle">16</text>
+    <text x="440" y="128" font-family="'Inter', sans-serif" font-size="20" font-weight="700" fill="#1e293b" text-anchor="middle">17</text>
+    <text x="520" y="128" font-family="'Inter', sans-serif" font-size="20" font-weight="700" fill="#0369a1" text-anchor="middle">18</text>
+
+    <!-- Row 4 -->
+    <text x="40" y="178" font-family="'Inter', sans-serif" font-size="20" font-weight="800" fill="#dc2626" text-anchor="middle">19</text>
+    <text x="120" y="178" font-family="'Inter', sans-serif" font-size="20" font-weight="700" fill="#1e293b" text-anchor="middle">20</text>
+    <text x="200" y="178" font-family="'Inter', sans-serif" font-size="20" font-weight="700" fill="#1e293b" text-anchor="middle">21</text>
+    <text x="280" y="178" font-family="'Inter', sans-serif" font-size="20" font-weight="700" fill="#1e293b" text-anchor="middle">22</text>
+    <text x="360" y="178" font-family="'Inter', sans-serif" font-size="20" font-weight="700" fill="#1e293b" text-anchor="middle">23</text>
+    <text x="440" y="178" font-family="'Inter', sans-serif" font-size="20" font-weight="700" fill="#1e293b" text-anchor="middle">24</text>
+    <text x="520" y="178" font-family="'Inter', sans-serif" font-size="20" font-weight="700" fill="#0369a1" text-anchor="middle">25</text>
+
+    <!-- Row 5 - Republic Day -->
+    <rect x="15" y="203" width="50" height="36" rx="6" fill="#fee2e2" stroke="#ef4444" stroke-width="1.5"/>
+    <text x="40" y="228" font-family="'Inter', sans-serif" font-size="20" font-weight="900" fill="#dc2626" text-anchor="middle">26</text>
+    <text x="120" y="228" font-family="'Inter', sans-serif" font-size="20" font-weight="700" fill="#1e293b" text-anchor="middle">27</text>
+    <text x="200" y="228" font-family="'Inter', sans-serif" font-size="20" font-weight="700" fill="#1e293b" text-anchor="middle">28</text>
+    <text x="280" y="228" font-family="'Inter', sans-serif" font-size="20" font-weight="700" fill="#1e293b" text-anchor="middle">29</text>
+    <text x="360" y="228" font-family="'Inter', sans-serif" font-size="20" font-weight="700" fill="#1e293b" text-anchor="middle">30</text>
+    <text x="440" y="228" font-family="'Inter', sans-serif" font-size="20" font-weight="700" fill="#1e293b" text-anchor="middle">31</text>
+  </g>
+
+  <!-- Bottom Spec Foil Badge -->
+  <g transform="translate(140, 870)">
+    <rect width="520" height="28" rx="6" fill="#f8fafc" stroke="#cbd5e1" stroke-width="1"/>
+    <text x="260" y="19" font-family="'Inter', sans-serif" font-size="12" font-weight="700" fill="#475569" text-anchor="middle">
+      170 GSM IMPORTED GLOSS ART PAPER • 12-PAGE FLIP • SIVAKASI OFFSET PRINT
+    </text>
+  </g>
+
+  <!-- Gold Stamp in Bottom Right -->
+  <circle cx="680" cy="880" r="38" fill="url(#goldMetallic)" stroke="#92400e" stroke-width="2" filter="url(#shadow)"/>
+  <circle cx="680" cy="880" r="32" fill="none" stroke="#ffffff" stroke-width="1.5" stroke-dasharray="3,2"/>
+  <text x="680" y="874" font-family="'Inter', sans-serif" font-size="10" font-weight="900" fill="#78350f" text-anchor="middle">100% SIVAKASI</text>
+  <text x="680" y="888" font-family="'Inter', sans-serif" font-size="9" font-weight="800" fill="#78350f" text-anchor="middle">QUALITY</text>
+  <text x="680" y="898" font-family="'Inter', sans-serif" font-size="8" font-weight="900" fill="#78350f" text-anchor="middle">2026</text>
+</svg>

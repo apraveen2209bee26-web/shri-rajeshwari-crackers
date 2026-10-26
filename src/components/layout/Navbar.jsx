@@ -109,6 +109,13 @@ export default function Navbar() {
       mobileActive: 'bg-gradient-to-r from-amber-500 via-yellow-500 to-amber-600 text-slate-950 font-black shadow-amber-500/30'
     },
     { 
+      href: '/calendars', 
+      label: 'Calendars', 
+      badge: '2026',
+      desktopActive: 'bg-emerald-500/20 text-emerald-950 border-emerald-400 font-bold',
+      mobileActive: 'bg-gradient-to-r from-emerald-600 via-teal-600 to-emerald-700 text-white shadow-emerald-600/30 font-bold'
+    },
+    { 
       href: '/quick-order', 
       label: 'Quick Order (Bulk)',
       desktopActive: 'bg-rose-500/15 text-rose-950 border-rose-400',
@@ -142,6 +149,19 @@ export default function Navbar() {
 
   // Dynamic color theme matching the active page's hero header
   const getPageTheme = () => {
+    if (pathname.startsWith('/calendars')) {
+      return {
+        bg: 'bg-gradient-to-r from-[#02241e] via-[#04483c] to-[#02241e]',
+        border: 'border-b border-emerald-400/50',
+        badge: 'bg-gradient-to-r from-amber-400 via-yellow-300 to-amber-500 text-emerald-950 shadow-emerald-950/50 border border-amber-300/80',
+        textColor: 'text-emerald-100',
+        highlightColor: 'text-amber-300',
+        pillBg: 'bg-emerald-950/80 hover:bg-emerald-900/90 border-emerald-400/50 text-emerald-200 hover:text-white',
+        phoneIcon: 'text-emerald-300',
+        waIcon: 'text-emerald-400',
+        glow: 'from-emerald-500/20 via-amber-400/15 to-emerald-500/20'
+      };
+    }
     if (pathname.startsWith('/shop')) {
       return {
         bg: 'bg-gradient-to-r from-[#100424] via-[#23094c] to-[#100424]',

@@ -24,7 +24,9 @@ import {
   ChevronLeft,
   ChevronRight,
   Star,
-  CheckCircle2
+  CheckCircle2,
+  Calendar,
+  Printer
 } from 'lucide-react';
 import { useCart } from '@/context/CartContext';
 import { useSettings } from '@/context/SettingsContext';
@@ -72,6 +74,16 @@ export default function HomePage() {
       linkText: 'Quick Order Now',
       linkUrl: '/quick-order',
       color: 'from-blue-600 to-sky-700'
+    },
+    {
+      id: 4,
+      badge: 'NEW YEAR 2026',
+      title: 'Sivakasi Premium Calendars',
+      subtitle: 'Tear-Off Daily Slips, Spiral Wall & Poster Planners',
+      image: '/images/calendars/daily-slip-calendar.jpg',
+      linkText: 'View Calendars',
+      linkUrl: '/calendars',
+      color: 'from-emerald-500 to-teal-700'
     }
   ];
 
@@ -387,7 +399,7 @@ export default function HomePage() {
           </p>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
           {/* Card 1: Daylight Crackers -> Redirects to /shop?category=Daylight */}
           <Link
             href="/shop?category=Daylight"
@@ -491,6 +503,41 @@ export default function HomePage() {
               </span>
             </div>
             <div className="absolute -bottom-8 -right-8 w-32 h-32 bg-rose-200/30 rounded-full blur-2xl group-hover:scale-150 transition-transform" />
+          </Link>
+
+          {/* Card 4: Sivakasi Calendars -> Redirects to /calendars */}
+          <Link
+            href="/calendars"
+            className="group relative rounded-3xl overflow-hidden glass-card border border-emerald-300/80 p-6 flex flex-col justify-between hover:shadow-2xl transition-all bg-gradient-to-br from-emerald-50/50 via-white to-teal-50/50"
+          >
+            <div className="relative z-10 space-y-4">
+              <div className="w-14 h-14 rounded-2xl bg-emerald-100 text-emerald-700 flex items-center justify-center shadow-md group-hover:scale-110 transition-transform">
+                <Calendar className="w-8 h-8 text-emerald-600 animate-pulse" />
+              </div>
+              <div>
+                <span className="text-[11px] font-bold tracking-widest uppercase text-emerald-800 bg-emerald-50 px-2.5 py-0.5 rounded-md border border-emerald-200">
+                  Direct Press • 2026
+                </span>
+                <h3 className="text-2xl font-black text-slate-900 mt-2">
+                  Sivakasi Calendars
+                </h3>
+                <p className="text-xs font-bold text-emerald-800">
+                  தினசரி &amp; மாத காலண்டர்கள்
+                </p>
+              </div>
+              <p className="text-xs text-slate-600 leading-relaxed">
+                Daily Tear-Off Slips, 12-Month Spiral Wall &amp; Single-Sheet Poster Planners on 130-300 GSM art paper.
+              </p>
+            </div>
+
+            <div className="relative z-10 pt-6 mt-4 border-t border-emerald-100 flex items-center justify-between">
+              <span className="text-xs font-extrabold text-emerald-700">Combined Cart</span>
+              <span className="inline-flex items-center gap-1 text-xs font-bold text-emerald-700 group-hover:translate-x-1 transition-transform">
+                <span>View Calendars</span>
+                <ArrowRight className="w-4 h-4" />
+              </span>
+            </div>
+            <div className="absolute -bottom-8 -right-8 w-32 h-32 bg-emerald-200/30 rounded-full blur-2xl group-hover:scale-150 transition-transform" />
           </Link>
         </div>
       </section>

@@ -84,3 +84,26 @@ model BranchLocation {
   createdAt      DateTime @default(now())
   updatedAt      DateTime @updatedAt
 }
+
+model CalendarProduct {
+  id            Int      @id @default(autoincrement())
+  slug          String   @unique
+  name          String
+  tamilName     String   @default("")
+  category      String   @default("Calendars")
+  type          String   // e.g. "Daily Tear-Off Slip", "Wirebound Spiral Flip Wall", "Single-Sheet Poster Planner", "Desk & Tabletop"
+  paperGsm      String   @default("130 - 170 GSM Art Paper")
+  size          String   @default("Standard")
+  originalPrice Float    @default(0)
+  price         Float
+  stock         Int      @default(100)
+  inStock       Boolean  @default(true)
+  image         String   @default("/images/calendars/daily-slip-calendar.jpg")
+  description   String?
+  features      String   @default("[]")
+  minOrderQty   Int      @default(1)
+  featured      Boolean  @default(false)
+  sortOrder     Int      @default(0)
+  createdAt     DateTime @default(now())
+  updatedAt     DateTime @updatedAt
+}

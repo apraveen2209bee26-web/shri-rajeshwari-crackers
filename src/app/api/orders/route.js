@@ -88,20 +88,38 @@ export async function POST(request) {
         validItems.map(async (item) => {
           try {
             await executeWithRetry(async () => {
-              const product = await prisma.product.findUnique({ where: { id: Number(item.id) } });
-              if (product) {
-                const newStock = Math.max(0, product.stock - Number(item.quantity));
-                await prisma.product.update({
-                  where: { id: product.id },
-                  data: {
-                    stock: newStock,
-                    inStock: newStock > 0
+              const isCalendar = item.category === 'Calendars' || String(item.id).startsWith('cal-');
+              if (isCalendar) {
+                const calId = Number(String(item.id).replace('cal-', ''));
+                if (!isNaN(calId)) {
+                  const cal = await prisma.calendarProduct.findUnique({ where: { id: calId } });
+                  if (cal) {
+                    const newStock = Math.max(0, cal.stock - Number(item.quantity));
+                    await prisma.calendarProduct.update({
+                      where: { id: cal.id },
+                      data: {
+                        stock: newStock,
+                        inStock: newStock > 0
+                      }
+                    });
                   }
-                });
+                }
+              } else if (!isNaN(Number(item.id))) {
+                const product = await prisma.product.findUnique({ where: { id: Number(item.id) } });
+                if (product) {
+                  const newStock = Math.max(0, product.stock - Number(item.quantity));
+                  await prisma.product.update({
+                    where: { id: product.id },
+                    data: {
+                      stock: newStock,
+                      inStock: newStock > 0
+                    }
+                  });
+                }
               }
             });
           } catch (stockErr) {
-            console.error(`Failed to decrement stock for product #${item.id}:`, stockErr);
+            console.error(`Failed to decrement stock for item #${item.id}:`, stockErr);
           }
         })
       );
