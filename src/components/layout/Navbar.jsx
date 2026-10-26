@@ -34,6 +34,48 @@ export default function Navbar() {
   } = useSettings();
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
+  // Smart Headroom / Auto-hide on scroll down, show on scroll up
+  const [showHeader, setShowHeader] = useState(true);
+  const [lastScrollY, setLastScrollY] = useState(0);
+
+  React.useEffect(() => {
+    let ticking = false;
+
+    const handleScroll = () => {
+      if (!ticking) {
+        window.requestAnimationFrame(() => {
+          const currentScrollY = window.scrollY;
+
+          // If mobile menu drawer is open, keep header visible
+          if (mobileMenuOpen) {
+            setShowHeader(true);
+            setLastScrollY(currentScrollY);
+            ticking = false;
+            return;
+          }
+
+          // Near top of page, always show header
+          if (currentScrollY <= 25) {
+            setShowHeader(true);
+          } else if (currentScrollY > lastScrollY && currentScrollY > 70) {
+            // Scrolling Down -> Hide Header
+            setShowHeader(false);
+          } else if (currentScrollY < lastScrollY) {
+            // Scrolling Up -> Show Header
+            setShowHeader(true);
+          }
+
+          setLastScrollY(currentScrollY);
+          ticking = false;
+        });
+        ticking = true;
+      }
+    };
+
+    window.addEventListener('scroll', handleScroll, { passive: true });
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, [lastScrollY, mobileMenuOpen]);
+
   // Hidden keyboard shortcut for store owner: Ctrl + Shift + A
   React.useEffect(() => {
     const handleKeyDown = (e) => {
@@ -195,7 +237,9 @@ export default function Navbar() {
   const topTheme = getPageTheme();
 
   return (
-    <header className="sticky top-0 z-40 w-full shadow-md">
+    <header className={`sticky top-0 z-40 w-full shadow-md transition-transform duration-300 ease-in-out will-change-transform ${
+      showHeader ? 'translate-y-0' : '-translate-y-full'
+    }`}>
       {/* Top Notification Bar - Dynamic Color Theme per Page with Luxury Glassmorphism */}
       <div className={`relative overflow-hidden ${topTheme.bg} text-white text-xs py-2 px-3 sm:px-6 ${topTheme.border} transition-colors duration-500 shadow-sm`}>
         {/* Subtle Ambient Shimmer Glow */}
