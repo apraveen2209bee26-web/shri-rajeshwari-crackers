@@ -115,14 +115,15 @@ export default function AdminDashboardPage() {
           selectClass: 'bg-emerald-100 text-emerald-900 border-emerald-300 focus:ring-emerald-400'
         };
       case 'WhatsApp Order Placed':
+      case 'Order Placed':
       default:
         return {
-          tileClass: 'bg-sky-50/60 hover:bg-sky-50/80 border-sky-200/90 hover:border-sky-300 shadow-sm shadow-sky-500/5',
-          refText: 'text-sky-900',
-          accentText: 'text-sky-950',
-          divider: 'border-sky-200/60',
-          itemBadge: 'bg-sky-100/90 text-sky-900 border border-sky-200',
-          selectClass: 'bg-sky-100 text-sky-900 border-sky-300 focus:ring-sky-400'
+          tileClass: 'bg-white hover:bg-slate-50/70 border-slate-200/90 hover:border-sky-300 shadow-sm shadow-slate-900/5',
+          refText: 'text-sky-800',
+          accentText: 'text-slate-950',
+          divider: 'border-slate-100',
+          itemBadge: 'bg-slate-100/90 text-slate-700 border border-slate-200',
+          selectClass: 'bg-slate-50 text-slate-800 border-slate-300 focus:ring-sky-400'
         };
     }
   };
@@ -1388,12 +1389,12 @@ export default function AdminDashboardPage() {
               className={`px-3 py-1.5 rounded-xl text-xs font-bold transition-all flex items-center gap-1.5 ${
                 orderStatusFilter === 'WhatsApp Order Placed'
                   ? 'bg-sky-600 text-white shadow-md ring-2 ring-sky-300'
-                  : 'bg-sky-50/90 text-sky-900 hover:bg-sky-100 border border-sky-300'
+                  : 'bg-white text-slate-800 hover:bg-slate-50 border border-slate-300'
               }`}
             >
               <span>📲 Order Placed</span>
               <span className={`px-1.5 py-0.5 rounded-full text-[10px] font-black ${
-                orderStatusFilter === 'WhatsApp Order Placed' ? 'bg-white/20 text-white' : 'bg-sky-200 text-sky-950'
+                orderStatusFilter === 'WhatsApp Order Placed' ? 'bg-white/20 text-white' : 'bg-slate-100 text-slate-800'
               }`}>
                 {orderCountsByStatus['WhatsApp Order Placed']}
               </span>
