@@ -362,19 +362,19 @@ export default function Navbar() {
                 target="_blank"
                 rel="noopener noreferrer"
                 onClick={() => setMobileMenuOpen(false)}
-                className="py-2.5 px-3 rounded-xl bg-green-600 text-white font-bold text-xs flex items-center justify-center gap-1.5 shadow-sm"
+                className="py-2.5 px-3 rounded-xl bg-green-600 hover:bg-green-700 text-white font-bold text-xs flex items-center justify-center gap-1.5 shadow-sm transition-colors"
               >
                 <Phone className="w-3.5 h-3.5" />
-                <span>WhatsApp</span>
+                <span>WhatsApp Order</span>
               </a>
-              <Link
-                href="/admin/login"
+              <a
+                href={`tel:${cleanSecPhone}`}
                 onClick={() => setMobileMenuOpen(false)}
-                className="py-2.5 px-3 rounded-xl bg-slate-100 hover:bg-slate-200 text-slate-700 font-bold text-xs flex items-center justify-center gap-1.5"
+                className="py-2.5 px-3 rounded-xl bg-sky-600 hover:bg-sky-700 text-white font-bold text-xs flex items-center justify-center gap-1.5 shadow-sm transition-colors"
               >
-                <Lock className="w-3.5 h-3.5" />
-                <span>Owner Login</span>
-              </Link>
+                <Phone className="w-3.5 h-3.5" />
+                <span>Call Store</span>
+              </a>
             </div>
           </div>
         )}

@@ -2,6 +2,7 @@ import { NextResponse } from 'next/server';
 import prisma from '@/lib/prisma';
 import { invalidateProductsCache } from '@/lib/cache';
 import { verifyAdminAuth } from '@/lib/auth';
+import { archiveOrders } from '@/lib/order-archive';
 import crypto from 'crypto';
 
 export const dynamic = 'force-dynamic';
@@ -115,24 +116,52 @@ export async function POST(request) {
   }
 }
 
-// DELETE /api/orders - Protected for authenticated admin only (Annual Cleanup)
+// DELETE /api/orders - Protected for authenticated admin only (Monthly, Annual or Full Cleanup)
 export async function DELETE(request) {
   try {
     if (!verifyAdminAuth(request)) {
       return NextResponse.json(
-        { success: false, error: 'Unauthorized. Admin credentials required to perform annual cleanup.' },
+        { success: false, error: 'Unauthorized. Admin credentials required to perform cleanup.' },
         { status: 401 }
       );
     }
 
-    const deleteResult = await prisma.order.deleteMany({});
+    const { searchParams } = new URL(request.url);
+    const cleanupType = (searchParams.get('type') || searchParams.get('cleanupType') || 'all').toLowerCase();
+
+    let whereClause = {};
+    let label = 'Complete Cleanup';
+
+    if (cleanupType === 'monthly') {
+      const thirtyDaysAgo = new Date(Date.now() - 30 * 24 * 60 * 60 * 1000);
+      whereClause = { createdAt: { lt: thirtyDaysAgo } };
+      label = 'Monthly Cleanup (Older than 30 Days)';
+    } else if (cleanupType === 'annual') {
+      const oneYearAgo = new Date(Date.now() - 365 * 24 * 60 * 60 * 1000);
+      whereClause = { createdAt: { lt: oneYearAgo } };
+      label = 'Annual Cleanup (Older than 1 Year)';
+    }
+
+    // 1. Fetch matching orders to archive them before removal
+    const ordersToArchive = await prisma.order.findMany({ where: whereClause });
+
+    if (ordersToArchive.length > 0) {
+      await archiveOrders(ordersToArchive);
+    }
+
+    // 2. Delete matching orders from active database table
+    const deleteResult = await prisma.order.deleteMany({ where: whereClause });
+
     return NextResponse.json({ 
       success: true, 
-      message: `Cleared ${deleteResult.count} orders from database`,
-      count: deleteResult.count 
+      cleanupType,
+      message: `${label} successful. Removed ${deleteResult.count} orders. All records have been safely preserved in the CSV Archive.`,
+      count: deleteResult.count,
+      archived: ordersToArchive.length
     });
   } catch (error) {
     console.error('Error clearing orders:', error);
     return NextResponse.json({ success: false, error: 'Failed to clear orders' }, { status: 500 });
   }
 }
+

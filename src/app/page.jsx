@@ -131,7 +131,7 @@ export default function HomePage() {
       <div className="bg-gradient-to-r from-slate-950 via-[#0a2540] to-slate-950 text-white text-xs py-2 px-3 overflow-hidden border-b border-sky-500/30 shadow-md">
         <div className="flex items-center gap-6 whitespace-nowrap animate-marquee font-bold tracking-wide">
           <span className="flex items-center gap-1.5 text-amber-300">
-            🔥 உங்களுக்கு எங்கள் குடும்பத்தாருக்கும் இனிய தீபாவளி நல்வாழ்த்துக்கள் 🪔
+            உங்களுக்கும் உங்கள் குடும்பத்தினருக்கும் இனிய தீபாவளி நல்வாழ்த்துகள்! 🪔✨
           </span>
           <span className="text-sky-300/60">•</span>
           <span className="text-white">
@@ -147,8 +147,23 @@ export default function HomePage() {
           </span>
           <span className="text-sky-300/60">•</span>
           <span className="flex items-center gap-1.5 text-amber-300">
-            🔥 உங்களுக்கு எங்கள் குடும்பத்தாருக்கும் இனிய தீபாவளி நல்வாழ்த்துக்கள் 🪔
+            உங்களுக்கும் உங்கள் குடும்பத்தினருக்கும் இனிய தீபாவளி நல்வாழ்த்துகள்! 🪔✨
           </span>
+        </div>
+      </div>
+
+      {/* GRAND FESTIVAL PROMOTIONAL SHOWCASE BANNER (Re-imagined 80% OFF Royal Blue & Gold Display Above Hero Header) */}
+      <div className="w-full relative overflow-hidden bg-gradient-to-r from-[#030a17] via-[#071933] to-[#030a17] border-b border-amber-500/40 shadow-2xl">
+        <div className="max-w-7xl mx-auto px-2 sm:px-4 py-2 sm:py-3">
+          <div className="relative rounded-2xl sm:rounded-3xl overflow-hidden shadow-2xl border border-sky-400/30 group">
+            <img 
+              src="/images/home-festival-banner.jpg" 
+              alt="Shree Rajeshwari Crackers - 80% Off Festival Celebration"
+              className="w-full h-auto object-cover max-h-[560px] transition-transform duration-700 group-hover:scale-[1.01]"
+            />
+            {/* Soft Ambient Horizon Glint */}
+            <div className="absolute inset-0 bg-gradient-to-t from-[#051329]/25 via-transparent to-transparent pointer-events-none" />
+          </div>
         </div>
       </div>
 

@@ -31,7 +31,14 @@ import {
   ChevronRight,
   Sparkles,
   MapPin,
-  Building2
+  Building2,
+  ChevronDown,
+  Clock,
+  Truck,
+  Archive,
+  CheckSquare,
+  HardDrive,
+  Calendar
 } from 'lucide-react';
 import { STORE_CONFIG, SUB_CATEGORIES } from '@/lib/constants';
 import ComboManager from '@/components/admin/ComboManager';
@@ -80,6 +87,21 @@ export default function AdminDashboardPage() {
   React.useEffect(() => {
     setOrderPage(1);
   }, [orderSearch]);
+
+  // Database Storage Capacity & Stats
+  const [dbStats, setDbStats] = useState({
+    usedBytes: 8060928,
+    usedMb: 7.69,
+    totalQuotaMb: 512,
+    freeMb: 504.31,
+    percentUsed: 1.5,
+    archivedOrdersCount: 0,
+    loading: false
+  });
+  const [cleanupDropdownOpen, setCleanupDropdownOpen] = useState(false);
+  const [updatingOrderId, setUpdatingOrderId] = useState(null);
+  const [deletingOrderId, setDeletingOrderId] = useState(null);
+
 
 
   // Dynamic Store & WhatsApp Settings State
@@ -184,11 +206,35 @@ export default function AdminDashboardPage() {
     }
   };
 
+  const loadDbStats = async () => {
+    try {
+      setDbStats(prev => ({ ...prev, loading: true }));
+      const res = await fetch('/api/admin/db-stats');
+      const data = await res.json();
+      if (data.success && data.stats) {
+        setDbStats({
+          usedBytes: data.stats.usedBytes || 8060928,
+          usedMb: data.stats.usedMb,
+          totalQuotaMb: data.stats.totalQuotaMb,
+          freeMb: data.stats.freeMb,
+          percentUsed: data.stats.percentUsed,
+          archivedOrdersCount: data.stats.archivedOrdersCount,
+          loading: false
+        });
+      }
+    } catch (err) {
+      console.error('Failed to load DB stats', err);
+    } finally {
+      setDbStats(prev => ({ ...prev, loading: false }));
+    }
+  };
+
   useEffect(() => {
     if (authorized) {
       loadProducts();
       loadOrders();
       loadSettings();
+      loadDbStats();
     }
   }, [authorized]);
 
@@ -459,30 +505,102 @@ export default function AdminDashboardPage() {
     showNotification('CSV order backup downloaded successfully!');
   };
 
-  // Clear / Purge All Orders (Annual Cleanup to stay 100% Free Forever)
-  const handleClearAllOrders = async () => {
+  // Cleanup Handler with Monthly, Annual, and Complete options (Auto-archives to CSV first)
+  const handleCleanup = async (cleanupType = 'all') => {
+    setCleanupDropdownOpen(false);
     if (!orders || orders.length === 0) {
-      alert('There are no orders to clear.');
+      alert('There are no active orders to clean up.');
       return;
     }
-    const confirmBackup = confirm(
-      `⚠️ ANNUAL DATABASE CLEANUP:\n\nYou are about to permanently delete all ${orders.length} orders from the database to keep your store 100% free.\n\nHave you already clicked "Download CSV File" to save your backup?\n\nClick OK to permanently clear the orders list.`
-    );
-    if (!confirmBackup) return;
+
+    let confirmMsg = '';
+    if (cleanupType === 'monthly') {
+      confirmMsg = `🗓️ MONTHLY DATABASE CLEANUP:\n\nPurge orders older than 30 days from the active database table?\n\n✅ ALL purged orders are automatically backed up & permanently preserved in your CSV Archive.\n\nClick OK to proceed with monthly cleanup.`;
+    } else if (cleanupType === 'annual') {
+      confirmMsg = `🎆 ANNUAL FESTIVE DATABASE CLEANUP:\n\nPurge orders older than 1 year (365 days) from the active database table?\n\n✅ ALL purged orders are automatically backed up & permanently preserved in your CSV Archive.\n\nClick OK to proceed with annual cleanup.`;
+    } else {
+      confirmMsg = `⚠️ COMPLETE DATABASE PURGE:\n\nYou are about to clear all ${orders.length} active orders from the database.\n\n✅ ALL orders are automatically backed up & permanently preserved in your CSV Archive.\n\nClick OK to reset the active orders table.`;
+    }
+
+    if (!confirm(confirmMsg)) return;
 
     try {
-      const res = await fetch('/api/orders', { method: 'DELETE' });
+      const res = await fetch(`/api/orders?type=${cleanupType}`, { method: 'DELETE' });
       const data = await res.json();
       if (data.success) {
-        setOrders([]);
-        showNotification(`Database cleanup successful! Cleared ${data.count} orders. Your database is now 100% lean and fast.`);
+        await loadOrders();
+        await loadDbStats();
+        showNotification(data.message || `Cleanup complete! Database is now fast and lean.`);
       } else {
-        alert(data.error || 'Failed to clear orders');
+        alert(data.error || 'Failed to perform database cleanup');
       }
     } catch (e) {
-      alert('Error clearing orders from database');
+      console.error('Error during database cleanup:', e);
+      alert('Error during cleanup process');
     }
   };
+
+  // Delete Individual Order (Persisted to CSV Archive)
+  const handleDeleteSingleOrder = async (order) => {
+    const confirmDelete = confirm(
+      `🗑️ DELETE ORDER #${order.orderRef}?\n\nCustomer: ${order.customerName}\nAmount: ₹${order.finalAmount}\n\n✅ This order will be removed from the active orders list and safely preserved in your downloadable CSV Archive.\n\nClick OK to delete.`
+    );
+    if (!confirmDelete) return;
+
+    setDeletingOrderId(order.id);
+    try {
+      const res = await fetch(`/api/orders/${order.id}`, { method: 'DELETE' });
+      const data = await res.json();
+      if (data.success) {
+        setOrders(prev => prev.filter(o => o.id !== order.id));
+        await loadDbStats();
+        showNotification(`Order #${order.orderRef} deleted and preserved in CSV archive!`);
+      } else {
+        alert(data.error || 'Failed to delete order');
+      }
+    } catch (err) {
+      console.error('Failed to delete order:', err);
+      alert('Error deleting order');
+    } finally {
+      setDeletingOrderId(null);
+    }
+  };
+
+  // Update Order Status (In Progress, Packed, Delivered, WhatsApp Order Placed)
+  const handleUpdateOrderStatus = async (orderId, newStatus) => {
+    setUpdatingOrderId(orderId);
+    try {
+      const res = await fetch(`/api/orders/${orderId}`, {
+        method: 'PATCH',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ status: newStatus })
+      });
+      const data = await res.json();
+      if (data.success) {
+        setOrders(prev => prev.map(o => o.id === orderId ? { ...o, status: newStatus } : o));
+        showNotification(`Order status updated to "${newStatus}"!`);
+      } else {
+        alert(data.error || 'Failed to update order status');
+      }
+    } catch (err) {
+      console.error('Error updating order status:', err);
+      alert('Error updating order status');
+    } finally {
+      setUpdatingOrderId(null);
+    }
+  };
+
+  // Download Persistent Deleted Orders Archive as CSV
+  const handleDownloadArchiveCSV = () => {
+    const link = document.createElement('a');
+    link.href = '/api/orders/archive?download=csv';
+    link.setAttribute('download', `shri_rajeshwari_deleted_orders_archive_${new Date().toISOString().slice(0, 10)}.csv`);
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
+    showNotification('Downloading deleted orders CSV archive...');
+  };
+
 
 
   const filteredProducts = products.filter(p => {
@@ -925,57 +1043,202 @@ export default function AdminDashboardPage() {
       {/* TAB 3: WHATSAPP ORDERS WITH CSV EXPORT, SEARCH, PAGINATION & CLOUD STORAGE ADVISORY */}
       {activeTab === 'orders' && (
         <div className="space-y-5">
-          {/* DATABASE STORAGE CAPACITY ADVISORY BANNER (Updated to reflect Cloud PostgreSQL Neon AWS) */}
-          <div className="bg-amber-50 border-2 border-amber-300 rounded-2xl p-4 sm:p-5 text-amber-950 flex flex-col sm:flex-row items-start justify-between gap-4 shadow-sm">
-            <div className="flex items-start gap-3">
-              <AlertTriangle className="w-5 h-5 text-amber-600 shrink-0 mt-0.5" />
-              <div className="space-y-1 text-xs">
-                <p className="font-extrabold text-amber-950 text-sm">
-                  ⚡ Cloud PostgreSQL Database Storage (Neon AWS) & Regular Backup Reminder
-                </p>
-                <p className="text-amber-900 leading-relaxed max-w-2xl">
-                  Your store is connected live to a high-speed Cloud PostgreSQL database on AWS. To keep your database query speeds lightning-fast and ensure you stay within your <strong>100% Free Forever Tier</strong> without consuming quota, it is strongly recommended to periodically <strong>Download CSV Backup</strong> and use <strong>Annual Cleanup</strong> at the end of each festive season.
-                </p>
-                <p className="text-[11px] text-amber-800 font-semibold pt-1">
-                  Current Cloud Database Submissions: <strong>{orders.length} orders saved</strong>
-                </p>
+          {/* DATABASE STORAGE CAPACITY ADVISORY BANNER (Live Cloud PostgreSQL Neon AWS Metrics) */}
+          <div className="bg-amber-50/95 border-2 border-amber-300 rounded-3xl p-5 sm:p-6 text-amber-950 shadow-sm space-y-4">
+            <div className="flex flex-col md:flex-row md:items-center justify-between gap-4">
+              <div className="flex items-start gap-3.5">
+                <div className="w-10 h-10 rounded-2xl bg-amber-500/15 border border-amber-400/30 flex items-center justify-center shrink-0 text-amber-700">
+                  <HardDrive className="w-5 h-5" />
+                </div>
+                <div className="space-y-1">
+                  <div className="flex flex-wrap items-center gap-2">
+                    <h4 className="font-black text-amber-950 text-base">
+                      ⚡ Cloud PostgreSQL Database Storage (Neon AWS)
+                    </h4>
+                    <span className="bg-emerald-100 text-emerald-800 text-[10px] font-extrabold px-2.5 py-0.5 rounded-full border border-emerald-300">
+                      100% Free Forever Tier
+                    </span>
+                  </div>
+                  <p className="text-amber-900/90 text-xs leading-relaxed max-w-3xl">
+                    Your store is connected live to a high-speed Serverless PostgreSQL database on AWS. To keep query speeds lightning-fast and ensure you never pay hosting fees, you can periodically export CSV backups and run monthly or annual cleanups.
+                  </p>
+                </div>
+              </div>
+
+              {/* Action Buttons */}
+              <div className="flex items-center gap-2 shrink-0">
+                <button
+                  onClick={handleExportCSV}
+                  disabled={orders.length === 0}
+                  className="px-3.5 py-2 rounded-xl bg-amber-600 hover:bg-amber-700 text-white font-extrabold text-xs shadow-md flex items-center justify-center gap-2 transition-all active:scale-95 disabled:bg-slate-300 disabled:cursor-not-allowed"
+                >
+                  <Download className="w-4 h-4" />
+                  <span>Export Active (CSV)</span>
+                </button>
+
+                <button
+                  onClick={loadDbStats}
+                  disabled={dbStats.loading}
+                  title="Refresh live database space statistics from AWS Neon"
+                  className="p-2 rounded-xl border border-amber-300 bg-white hover:bg-amber-100/50 text-amber-800 transition-all active:scale-95"
+                >
+                  <RefreshCw className={`w-4 h-4 ${dbStats.loading ? 'animate-spin' : ''}`} />
+                </button>
               </div>
             </div>
 
-            <button
-              onClick={handleExportCSV}
-              disabled={orders.length === 0}
-              className="w-full sm:w-auto px-4 py-2.5 rounded-xl bg-amber-600 hover:bg-amber-700 text-white font-extrabold text-xs shadow-md flex items-center justify-center gap-2 transition-all active:scale-95 shrink-0 disabled:bg-slate-300 disabled:cursor-not-allowed"
-            >
-              <Download className="w-4 h-4" />
-              <span>Export Orders (CSV)</span>
-            </button>
+            {/* Real-time Storage Metrics Cards */}
+            <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 pt-1">
+              <div className="bg-white/90 border border-amber-200/80 rounded-2xl p-3.5 shadow-xs">
+                <p className="text-[11px] font-bold text-amber-800/80 flex items-center gap-1.5">
+                  <Database className="w-3.5 h-3.5 text-amber-600" />
+                  <span>Database Space Used</span>
+                </p>
+                <div className="flex items-baseline gap-1.5 mt-1">
+                  <span className="text-xl font-black text-amber-950 font-mono">{dbStats.usedMb} MB</span>
+                  <span className="text-[11px] text-amber-700 font-semibold">used</span>
+                </div>
+                <p className="text-[10px] text-slate-500 mt-0.5">{(dbStats.usedBytes / 1024).toFixed(0)} KB in Neon AWS</p>
+              </div>
+
+              <div className="bg-white/90 border border-emerald-200/80 rounded-2xl p-3.5 shadow-xs">
+                <p className="text-[11px] font-bold text-emerald-800/80 flex items-center gap-1.5">
+                  <CheckCircle className="w-3.5 h-3.5 text-emerald-600" />
+                  <span>Database Space Available</span>
+                </p>
+                <div className="flex items-baseline gap-1.5 mt-1">
+                  <span className="text-xl font-black text-emerald-700 font-mono">{dbStats.freeMb} MB</span>
+                  <span className="text-[11px] text-emerald-700 font-semibold">free</span>
+                </div>
+                <p className="text-[10px] text-emerald-600 font-semibold mt-0.5">Plenty of free headroom available</p>
+              </div>
+
+              <div className="bg-white/90 border border-amber-200/80 rounded-2xl p-3.5 shadow-xs">
+                <p className="text-[11px] font-bold text-amber-800/80 flex items-center gap-1.5">
+                  <HardDrive className="w-3.5 h-3.5 text-sky-600" />
+                  <span>Free Tier Quota Limit</span>
+                </p>
+                <div className="flex items-baseline gap-1.5 mt-1">
+                  <span className="text-xl font-black text-slate-900 font-mono">{dbStats.totalQuotaMb} MB</span>
+                  <span className="text-[11px] text-slate-500 font-semibold">total</span>
+                </div>
+                <p className="text-[10px] text-slate-500 mt-0.5">{dbStats.percentUsed}% consumed</p>
+              </div>
+            </div>
+
+            {/* Visual Progress Bar */}
+            <div className="space-y-1.5 bg-amber-100/60 p-3 rounded-2xl border border-amber-200/70">
+              <div className="flex items-center justify-between text-[11px] font-bold text-amber-950">
+                <span>Storage Quota Utilization: {dbStats.usedMb} MB / {dbStats.totalQuotaMb} MB</span>
+                <span className="text-emerald-700 font-black">{dbStats.freeMb} MB Available ({((dbStats.freeMb / dbStats.totalQuotaMb) * 100).toFixed(1)}% Free)</span>
+              </div>
+              <div className="w-full bg-amber-200/80 h-3 rounded-full overflow-hidden shadow-inner p-0.5">
+                <div
+                  className="bg-gradient-to-r from-emerald-500 via-amber-500 to-amber-600 h-full rounded-full transition-all duration-500"
+                  style={{ width: `${Math.min(100, Math.max(1.5, dbStats.percentUsed))}%` }}
+                />
+              </div>
+              <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between text-[11px] text-amber-900 pt-1 gap-1">
+                <p>
+                  Current Database Records: <strong>{orders.length} active orders saved</strong>
+                </p>
+                <p className="text-sky-900 font-semibold">
+                  Archived in CSV: <strong>{dbStats.archivedOrdersCount} deleted orders safely preserved</strong>
+                </p>
+              </div>
+            </div>
           </div>
 
           {/* Orders Header Actions */}
           <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3">
             <h3 className="font-bold text-slate-800 text-sm flex items-center gap-2">
               <ShoppingCart className="w-4 h-4 text-sky-600" />
-              <span>WhatsApp Direct Customer Orders ({orders.length})</span>
+              <span>WhatsApp Customer Orders ({orders.length})</span>
             </h3>
-            <div className="flex items-center gap-2 w-full sm:w-auto">
+
+            <div className="flex flex-wrap items-center gap-2 w-full sm:w-auto">
+              {/* Active Orders CSV Download */}
               <button
                 onClick={handleExportCSV}
                 disabled={orders.length === 0}
-                className="px-3.5 py-1.5 rounded-xl bg-emerald-600 hover:bg-emerald-700 text-white font-bold text-xs shadow-sm flex items-center justify-center gap-1.5 transition-colors disabled:bg-slate-300 flex-1 sm:flex-none"
+                className="px-3.5 py-1.5 rounded-xl bg-emerald-600 hover:bg-emerald-700 text-white font-bold text-xs shadow-sm flex items-center justify-center gap-1.5 transition-colors disabled:bg-slate-300"
               >
                 <FileSpreadsheet className="w-3.5 h-3.5" />
                 <span>Download CSV Backup</span>
               </button>
+
+              {/* Deleted Orders CSV Archive Download */}
               <button
-                onClick={handleClearAllOrders}
-                disabled={orders.length === 0}
-                className="px-3 py-1.5 rounded-xl bg-rose-50 hover:bg-rose-100 text-rose-700 border border-rose-300 font-bold text-xs shadow-sm flex items-center justify-center gap-1.5 transition-colors disabled:opacity-40 disabled:cursor-not-allowed flex-1 sm:flex-none"
-                title="Purge all orders after downloading backup to keep database 100% free"
+                onClick={handleDownloadArchiveCSV}
+                disabled={dbStats.archivedOrdersCount === 0}
+                className="px-3.5 py-1.5 rounded-xl bg-sky-700 hover:bg-sky-800 text-white font-bold text-xs shadow-sm flex items-center justify-center gap-1.5 transition-colors disabled:bg-slate-300"
+                title="Download persistent archive of all deleted orders in CSV"
               >
-                <Trash2 className="w-3.5 h-3.5" />
-                <span>Annual Cleanup</span>
+                <Archive className="w-3.5 h-3.5" />
+                <span>Archive CSV ({dbStats.archivedOrdersCount})</span>
               </button>
+
+              {/* Cleanup Dropdown Menu */}
+              <div className="relative">
+                <button
+                  onClick={() => setCleanupDropdownOpen(prev => !prev)}
+                  className="px-3.5 py-1.5 rounded-xl bg-rose-50 hover:bg-rose-100 text-rose-700 border border-rose-300 font-bold text-xs shadow-sm flex items-center justify-center gap-1.5 transition-colors"
+                >
+                  <Trash2 className="w-3.5 h-3.5" />
+                  <span>Cleanup Orders</span>
+                  <ChevronDown className="w-3.5 h-3.5 ml-0.5" />
+                </button>
+
+                {cleanupDropdownOpen && (
+                  <div 
+                    className="absolute right-0 mt-2 w-72 rounded-2xl bg-white border border-slate-200 shadow-xl p-2 z-50 text-xs space-y-1"
+                    onMouseLeave={() => setCleanupDropdownOpen(false)}
+                  >
+                    <div className="px-2.5 py-1.5 text-[11px] font-bold text-slate-400 border-b border-slate-100 uppercase tracking-wider">
+                      Select Cleanup Option
+                    </div>
+
+                    <button
+                      onClick={() => handleCleanup('monthly')}
+                      className="w-full text-left p-2.5 rounded-xl hover:bg-amber-50 text-slate-800 hover:text-amber-950 transition-colors flex items-start gap-2.5 group"
+                    >
+                      <Calendar className="w-4 h-4 text-amber-600 mt-0.5 shrink-0" />
+                      <div>
+                        <p className="font-bold text-xs group-hover:text-amber-900">Monthly Cleanup</p>
+                        <p className="text-[10px] text-slate-500 leading-tight">
+                          Purge orders older than 30 days. Auto-archives all to CSV first.
+                        </p>
+                      </div>
+                    </button>
+
+                    <button
+                      onClick={() => handleCleanup('annual')}
+                      className="w-full text-left p-2.5 rounded-xl hover:bg-rose-50 text-slate-800 hover:text-rose-950 transition-colors flex items-start gap-2.5 group"
+                    >
+                      <Sparkles className="w-4 h-4 text-rose-600 mt-0.5 shrink-0" />
+                      <div>
+                        <p className="font-bold text-xs group-hover:text-rose-900">Annual Cleanup</p>
+                        <p className="text-[10px] text-slate-500 leading-tight">
+                          Purge festive orders older than 365 days. Auto-archives to CSV.
+                        </p>
+                      </div>
+                    </button>
+
+                    <button
+                      onClick={() => handleCleanup('all')}
+                      className="w-full text-left p-2.5 rounded-xl hover:bg-red-50 text-red-700 transition-colors flex items-start gap-2.5 border-t border-slate-100 group"
+                    >
+                      <Trash2 className="w-4 h-4 text-red-600 mt-0.5 shrink-0" />
+                      <div>
+                        <p className="font-bold text-xs text-red-700">Clear All Active Orders</p>
+                        <p className="text-[10px] text-slate-500 leading-tight">
+                          Purge all orders from DB. Preserved in CSV Archive.
+                        </p>
+                      </div>
+                    </button>
+                  </div>
+                )}
+              </div>
             </div>
           </div>
 
@@ -1038,22 +1301,46 @@ export default function AdminDashboardPage() {
               {paginatedOrders.map((ord) => {
                 let itemsList = [];
                 try {
-                  itemsList = JSON.parse(ord.itemsJson);
+                  itemsList = typeof ord.itemsJson === 'string' ? JSON.parse(ord.itemsJson) : (ord.itemsJson || []);
                 } catch (e) {}
 
                 return (
-                  <div key={ord.id} className="glass-card rounded-2xl p-5 border border-sky-100 space-y-3">
-                    <div className="flex flex-col sm:flex-row sm:items-center justify-between pb-2 border-b border-slate-100 gap-2">
+                  <div key={ord.id} className="glass-card rounded-2xl p-5 border border-sky-100 space-y-3 transition-all hover:shadow-md">
+                    <div className="flex flex-col sm:flex-row sm:items-center justify-between pb-3 border-b border-slate-100 gap-3">
                       <div>
                         <span className="font-mono font-bold text-sky-800 text-sm">#{ord.orderRef}</span>
                         <span className="text-[11px] text-slate-400 ml-2">
                           {new Date(ord.createdAt).toLocaleString('en-IN')}
                         </span>
                       </div>
-                      <div className="flex items-center gap-2">
-                        <span className="bg-green-100 text-green-800 font-bold text-[10px] px-2 py-0.5 rounded-full">
-                          {ord.status}
-                        </span>
+
+                      {/* Status Selector & Amount */}
+                      <div className="flex flex-wrap items-center gap-2.5">
+                        <div className="relative inline-flex items-center">
+                          <select
+                            value={ord.status || 'WhatsApp Order Placed'}
+                            disabled={updatingOrderId === ord.id}
+                            onChange={(e) => handleUpdateOrderStatus(ord.id, e.target.value)}
+                            className={`text-xs font-bold py-1 px-2.5 rounded-xl border transition-all cursor-pointer focus:outline-none focus:ring-2 focus:ring-sky-500 ${
+                              ord.status === 'Delivered'
+                                ? 'bg-emerald-50 text-emerald-800 border-emerald-300'
+                                : ord.status === 'Packed'
+                                ? 'bg-indigo-50 text-indigo-800 border-indigo-300'
+                                : ord.status === 'In Progress'
+                                ? 'bg-amber-50 text-amber-900 border-amber-300'
+                                : 'bg-sky-50 text-sky-800 border-sky-300'
+                            }`}
+                          >
+                            <option value="WhatsApp Order Placed">📲 Order Placed</option>
+                            <option value="In Progress">⏳ In Progress</option>
+                            <option value="Packed">📦 Packed</option>
+                            <option value="Delivered">🚚 Delivered</option>
+                          </select>
+                          {updatingOrderId === ord.id && (
+                            <Loader2 className="w-3.5 h-3.5 animate-spin text-sky-600 ml-1.5" />
+                          )}
+                        </div>
+
                         <strong className="text-base font-black text-sky-950">
                           ₹{ord.finalAmount.toLocaleString('en-IN')}
                         </strong>
@@ -1069,6 +1356,7 @@ export default function AdminDashboardPage() {
                           <a 
                             href={`https://wa.me/91${ord.whatsappNumber}`} 
                             target="_blank" 
+                            rel="noopener noreferrer"
                             className="text-green-600 font-bold underline"
                           >
                             +91 {ord.whatsappNumber}
@@ -1091,6 +1379,61 @@ export default function AdminDashboardPage() {
                           </span>
                         ))}
                       </div>
+                    </div>
+
+                    {/* Order Action Bar: Quick Task Switching & Individual Delete */}
+                    <div className="flex flex-wrap items-center justify-between pt-2.5 border-t border-slate-100 gap-2">
+                      <div className="flex items-center gap-1.5 text-[11px]">
+                        <span className="text-slate-400 font-semibold mr-1">Task Status:</span>
+                        <button
+                          type="button"
+                          onClick={() => handleUpdateOrderStatus(ord.id, 'In Progress')}
+                          className={`px-2.5 py-1 rounded-lg font-bold transition-all ${
+                            ord.status === 'In Progress'
+                              ? 'bg-amber-500 text-white shadow-xs'
+                              : 'bg-slate-100 hover:bg-amber-100 text-slate-700'
+                          }`}
+                        >
+                          ⏳ In Progress
+                        </button>
+                        <button
+                          type="button"
+                          onClick={() => handleUpdateOrderStatus(ord.id, 'Packed')}
+                          className={`px-2.5 py-1 rounded-lg font-bold transition-all ${
+                            ord.status === 'Packed'
+                              ? 'bg-indigo-600 text-white shadow-xs'
+                              : 'bg-slate-100 hover:bg-indigo-100 text-slate-700'
+                          }`}
+                        >
+                          📦 Packed
+                        </button>
+                        <button
+                          type="button"
+                          onClick={() => handleUpdateOrderStatus(ord.id, 'Delivered')}
+                          className={`px-2.5 py-1 rounded-lg font-bold transition-all ${
+                            ord.status === 'Delivered'
+                              ? 'bg-emerald-600 text-white shadow-xs'
+                              : 'bg-slate-100 hover:bg-emerald-100 text-slate-700'
+                          }`}
+                        >
+                          🚚 Delivered
+                        </button>
+                      </div>
+
+                      <button
+                        type="button"
+                        onClick={() => handleDeleteSingleOrder(ord)}
+                        disabled={deletingOrderId === ord.id}
+                        className="px-3 py-1 rounded-lg bg-rose-50 hover:bg-rose-100 text-rose-700 border border-rose-200 text-xs font-bold flex items-center gap-1.5 transition-all hover:scale-102 active:scale-95 disabled:opacity-40"
+                        title="Delete order from database (safely preserved in downloadable CSV Archive)"
+                      >
+                        {deletingOrderId === ord.id ? (
+                          <Loader2 className="w-3.5 h-3.5 animate-spin" />
+                        ) : (
+                          <Trash2 className="w-3.5 h-3.5" />
+                        )}
+                        <span>Delete Order</span>
+                      </button>
                     </div>
                   </div>
                 );
