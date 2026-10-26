@@ -152,19 +152,13 @@ export default function HomePage() {
         </div>
       </div>
 
-      {/* GRAND FESTIVAL PROMOTIONAL SHOWCASE BANNER (Re-imagined 80% OFF Royal Blue & Gold Display Above Hero Header) */}
-      <div className="w-full relative overflow-hidden bg-gradient-to-r from-[#030a17] via-[#071933] to-[#030a17] border-b border-amber-500/40 shadow-2xl">
-        <div className="max-w-7xl mx-auto px-2 sm:px-4 py-2 sm:py-3">
-          <div className="relative rounded-2xl sm:rounded-3xl overflow-hidden shadow-2xl border border-sky-400/30 group">
-            <img 
-              src="/images/home-festival-banner.jpg" 
-              alt="Shree Rajeshwari Crackers - 80% Off Festival Celebration"
-              className="w-full h-auto object-cover max-h-[560px] transition-transform duration-700 group-hover:scale-[1.01]"
-            />
-            {/* Soft Ambient Horizon Glint */}
-            <div className="absolute inset-0 bg-gradient-to-t from-[#051329]/25 via-transparent to-transparent pointer-events-none" />
-          </div>
-        </div>
+      {/* GRAND FESTIVAL PROMOTIONAL SHOWCASE BANNER - FITTED FULL SCREEN (Edge-to-Edge) */}
+      <div className="w-full relative overflow-hidden bg-[#030a17] border-b-2 border-amber-500/50 shadow-2xl">
+        <img 
+          src="/images/home-festival-banner.jpg" 
+          alt="Shree Rajeshwari Crackers - 80% Off Festival Celebration"
+          className="w-full h-auto object-cover block"
+        />
       </div>
 
       {/* 2. FESTIVE HERO SECTION WITH SKY BLUE ATMOSPHERE & BURSTING SKY CRACKERS (From Screenshot 4) */}
