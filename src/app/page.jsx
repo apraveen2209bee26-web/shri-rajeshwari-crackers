@@ -452,7 +452,7 @@ export default function HomePage() {
                   Nightlight Crackers
                 </h3>
                 <p className="text-xs font-bold text-sky-800">
-                  இரவில் வெடிக்கும் வாணவேடிக்கைகள்
+                  இரவில் வெடிக்கும் வான வேடிக்கைகள்
                 </p>
               </div>
               <p className="text-xs text-slate-600 leading-relaxed">
