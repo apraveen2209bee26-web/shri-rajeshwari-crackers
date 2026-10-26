@@ -60,23 +60,98 @@ export default function AdminDashboardPage() {
   const [orders, setOrders] = useState([]);
   const [ordersLoading, setOrdersLoading] = useState(false);
   const [orderSearch, setOrderSearch] = useState('');
+  const [orderStatusFilter, setOrderStatusFilter] = useState('All'); // 'All' | 'In Progress' | 'Packed' | 'Delivered' | 'WhatsApp Order Placed'
   const [orderPage, setOrderPage] = useState(1);
   const ordersPerPage = 10;
 
-  // Filter orders by Order Reference (#SR-...), Mobile Number, Customer Name, or City
-  const filteredOrders = React.useMemo(() => {
-    if (!orderSearch.trim()) return orders;
-    const q = orderSearch.toLowerCase().trim();
-    const qDigits = q.replace(/[^0-9]/g, '');
-    return orders.filter(ord => {
-      const matchRef = (ord.orderRef || '').toLowerCase().includes(q);
-      const matchPhone = qDigits.length > 0 && (ord.whatsappNumber || '').replace(/[^0-9]/g, '').includes(qDigits);
-      const matchName = (ord.customerName || '').toLowerCase().includes(q);
-      const matchCity = (ord.city || '').toLowerCase().includes(q);
-      const matchAddress = (ord.address || '').toLowerCase().includes(q);
-      return matchRef || matchPhone || matchName || matchCity || matchAddress;
+  // Task Status counts for instant badges
+  const orderCountsByStatus = React.useMemo(() => {
+    const counts = {
+      'All': orders.length,
+      'In Progress': 0,
+      'Packed': 0,
+      'Delivered': 0,
+      'WhatsApp Order Placed': 0
+    };
+    orders.forEach(ord => {
+      const st = ord.status || 'WhatsApp Order Placed';
+      if (counts[st] !== undefined) {
+        counts[st]++;
+      } else {
+        counts['WhatsApp Order Placed']++;
+      }
     });
-  }, [orders, orderSearch]);
+    return counts;
+  }, [orders]);
+
+  // Dynamic light color theme mapping for each order task status
+  const getOrderStatusTheme = (status) => {
+    switch (status) {
+      case 'In Progress':
+        return {
+          tileClass: 'bg-amber-50/70 hover:bg-amber-50/90 border-amber-200/90 hover:border-amber-300 shadow-sm shadow-amber-500/5',
+          refText: 'text-amber-900',
+          accentText: 'text-amber-950',
+          divider: 'border-amber-200/60',
+          itemBadge: 'bg-amber-100/90 text-amber-900 border border-amber-200',
+          selectClass: 'bg-amber-100 text-amber-900 border-amber-300 focus:ring-amber-400'
+        };
+      case 'Packed':
+        return {
+          tileClass: 'bg-indigo-50/70 hover:bg-indigo-50/90 border-indigo-200/90 hover:border-indigo-300 shadow-sm shadow-indigo-500/5',
+          refText: 'text-indigo-900',
+          accentText: 'text-indigo-950',
+          divider: 'border-indigo-200/60',
+          itemBadge: 'bg-indigo-100/90 text-indigo-900 border border-indigo-200',
+          selectClass: 'bg-indigo-100 text-indigo-900 border-indigo-300 focus:ring-indigo-400'
+        };
+      case 'Delivered':
+        return {
+          tileClass: 'bg-emerald-50/70 hover:bg-emerald-50/90 border-emerald-200/90 hover:border-emerald-300 shadow-sm shadow-emerald-500/5',
+          refText: 'text-emerald-900',
+          accentText: 'text-emerald-950',
+          divider: 'border-emerald-200/60',
+          itemBadge: 'bg-emerald-100/90 text-emerald-900 border border-emerald-200',
+          selectClass: 'bg-emerald-100 text-emerald-900 border-emerald-300 focus:ring-emerald-400'
+        };
+      case 'WhatsApp Order Placed':
+      default:
+        return {
+          tileClass: 'bg-sky-50/60 hover:bg-sky-50/80 border-sky-200/90 hover:border-sky-300 shadow-sm shadow-sky-500/5',
+          refText: 'text-sky-900',
+          accentText: 'text-sky-950',
+          divider: 'border-sky-200/60',
+          itemBadge: 'bg-sky-100/90 text-sky-900 border border-sky-200',
+          selectClass: 'bg-sky-100 text-sky-900 border-sky-300 focus:ring-sky-400'
+        };
+    }
+  };
+
+  // Filter orders by Order Reference (#SR-...), Mobile Number, Customer Name, City, or Task Status
+  const filteredOrders = React.useMemo(() => {
+    let list = orders;
+
+    // Filter by task status
+    if (orderStatusFilter !== 'All') {
+      list = list.filter(ord => (ord.status || 'WhatsApp Order Placed') === orderStatusFilter);
+    }
+
+    // Filter by search query
+    if (orderSearch.trim()) {
+      const q = orderSearch.toLowerCase().trim();
+      const qDigits = q.replace(/[^0-9]/g, '');
+      list = list.filter(ord => {
+        const matchRef = (ord.orderRef || '').toLowerCase().includes(q);
+        const matchPhone = qDigits.length > 0 && (ord.whatsappNumber || '').replace(/[^0-9]/g, '').includes(qDigits);
+        const matchName = (ord.customerName || '').toLowerCase().includes(q);
+        const matchCity = (ord.city || '').toLowerCase().includes(q);
+        const matchAddress = (ord.address || '').toLowerCase().includes(q);
+        return matchRef || matchPhone || matchName || matchCity || matchAddress;
+      });
+    }
+
+    return list;
+  }, [orders, orderSearch, orderStatusFilter]);
 
   const totalOrderPages = Math.ceil(filteredOrders.length / ordersPerPage) || 1;
   const paginatedOrders = React.useMemo(() => {
@@ -86,7 +161,7 @@ export default function AdminDashboardPage() {
 
   React.useEffect(() => {
     setOrderPage(1);
-  }, [orderSearch]);
+  }, [orderSearch, orderStatusFilter]);
 
   // Database Storage Capacity & Stats
   const [dbStats, setDbStats] = useState({
@@ -1242,38 +1317,142 @@ export default function AdminDashboardPage() {
             </div>
           </div>
 
+          {/* Task Status Interactive Filter Pills */}
+          <div className="flex flex-wrap items-center gap-2">
+            <button
+              onClick={() => setOrderStatusFilter('All')}
+              className={`px-3 py-1.5 rounded-xl text-xs font-bold transition-all flex items-center gap-1.5 ${
+                orderStatusFilter === 'All'
+                  ? 'bg-slate-900 text-white shadow-md'
+                  : 'bg-white text-slate-700 hover:bg-slate-100 border border-slate-200'
+              }`}
+            >
+              <span>🌟 All Orders</span>
+              <span className={`px-1.5 py-0.5 rounded-full text-[10px] font-black ${
+                orderStatusFilter === 'All' ? 'bg-white/20 text-white' : 'bg-slate-100 text-slate-700'
+              }`}>
+                {orderCountsByStatus['All']}
+              </span>
+            </button>
+
+            <button
+              onClick={() => setOrderStatusFilter('In Progress')}
+              className={`px-3 py-1.5 rounded-xl text-xs font-bold transition-all flex items-center gap-1.5 ${
+                orderStatusFilter === 'In Progress'
+                  ? 'bg-amber-500 text-white shadow-md ring-2 ring-amber-300'
+                  : 'bg-amber-50/90 text-amber-900 hover:bg-amber-100 border border-amber-300'
+              }`}
+            >
+              <span>⏳ In Progress</span>
+              <span className={`px-1.5 py-0.5 rounded-full text-[10px] font-black ${
+                orderStatusFilter === 'In Progress' ? 'bg-white/20 text-white' : 'bg-amber-200 text-amber-950'
+              }`}>
+                {orderCountsByStatus['In Progress']}
+              </span>
+            </button>
+
+            <button
+              onClick={() => setOrderStatusFilter('Packed')}
+              className={`px-3 py-1.5 rounded-xl text-xs font-bold transition-all flex items-center gap-1.5 ${
+                orderStatusFilter === 'Packed'
+                  ? 'bg-indigo-600 text-white shadow-md ring-2 ring-indigo-300'
+                  : 'bg-indigo-50/90 text-indigo-900 hover:bg-indigo-100 border border-indigo-300'
+              }`}
+            >
+              <span>📦 Packed</span>
+              <span className={`px-1.5 py-0.5 rounded-full text-[10px] font-black ${
+                orderStatusFilter === 'Packed' ? 'bg-white/20 text-white' : 'bg-indigo-200 text-indigo-950'
+              }`}>
+                {orderCountsByStatus['Packed']}
+              </span>
+            </button>
+
+            <button
+              onClick={() => setOrderStatusFilter('Delivered')}
+              className={`px-3 py-1.5 rounded-xl text-xs font-bold transition-all flex items-center gap-1.5 ${
+                orderStatusFilter === 'Delivered'
+                  ? 'bg-emerald-600 text-white shadow-md ring-2 ring-emerald-300'
+                  : 'bg-emerald-50/90 text-emerald-900 hover:bg-emerald-100 border border-emerald-300'
+              }`}
+            >
+              <span>🚚 Delivered</span>
+              <span className={`px-1.5 py-0.5 rounded-full text-[10px] font-black ${
+                orderStatusFilter === 'Delivered' ? 'bg-white/20 text-white' : 'bg-emerald-200 text-emerald-950'
+              }`}>
+                {orderCountsByStatus['Delivered']}
+              </span>
+            </button>
+
+            <button
+              onClick={() => setOrderStatusFilter('WhatsApp Order Placed')}
+              className={`px-3 py-1.5 rounded-xl text-xs font-bold transition-all flex items-center gap-1.5 ${
+                orderStatusFilter === 'WhatsApp Order Placed'
+                  ? 'bg-sky-600 text-white shadow-md ring-2 ring-sky-300'
+                  : 'bg-sky-50/90 text-sky-900 hover:bg-sky-100 border border-sky-300'
+              }`}
+            >
+              <span>📲 Order Placed</span>
+              <span className={`px-1.5 py-0.5 rounded-full text-[10px] font-black ${
+                orderStatusFilter === 'WhatsApp Order Placed' ? 'bg-white/20 text-white' : 'bg-sky-200 text-sky-950'
+              }`}>
+                {orderCountsByStatus['WhatsApp Order Placed']}
+              </span>
+            </button>
+          </div>
+
           {/* Search & Filter Bar for Orders */}
-          <div className="glass-panel rounded-2xl p-4 border border-sky-100 flex flex-col sm:flex-row items-center justify-between gap-3 shadow-sm">
-            <div className="relative w-full sm:w-96">
-              <Search className="w-4 h-4 text-slate-400 absolute left-3 top-2.5" />
-              <input
-                type="text"
-                value={orderSearch}
-                onChange={(e) => setOrderSearch(e.target.value)}
-                placeholder="Search by Mobile (e.g. 916369...), Order Ref #SR-, Name, City..."
-                className="w-full pl-9 pr-8 py-2 text-xs rounded-xl border border-slate-200 focus:outline-none focus:ring-2 focus:ring-sky-500 bg-white"
-              />
-              {orderSearch && (
-                <button
-                  onClick={() => setOrderSearch('')}
-                  className="absolute right-2.5 top-2.5 text-slate-400 hover:text-slate-600 p-0.5"
-                  title="Clear search"
+          <div className="glass-panel rounded-2xl p-4 border border-sky-100 flex flex-col md:flex-row items-center justify-between gap-3 shadow-sm">
+            <div className="flex flex-col sm:flex-row items-center gap-3 w-full md:w-auto flex-1">
+              <div className="relative w-full sm:w-80">
+                <Search className="w-4 h-4 text-slate-400 absolute left-3 top-2.5" />
+                <input
+                  type="text"
+                  value={orderSearch}
+                  onChange={(e) => setOrderSearch(e.target.value)}
+                  placeholder="Search by Mobile, Order Ref #SR-, Name..."
+                  className="w-full pl-9 pr-8 py-2 text-xs rounded-xl border border-slate-200 focus:outline-none focus:ring-2 focus:ring-sky-500 bg-white"
+                />
+                {orderSearch && (
+                  <button
+                    onClick={() => setOrderSearch('')}
+                    className="absolute right-2.5 top-2.5 text-slate-400 hover:text-slate-600 p-0.5"
+                    title="Clear search"
+                  >
+                    <X className="w-3.5 h-3.5" />
+                  </button>
+                )}
+              </div>
+
+              {/* Status Quick Dropdown */}
+              <div className="flex items-center gap-1.5 w-full sm:w-auto">
+                <span className="text-[11px] text-slate-500 font-bold whitespace-nowrap">Status:</span>
+                <select
+                  value={orderStatusFilter}
+                  onChange={(e) => setOrderStatusFilter(e.target.value)}
+                  className="px-2.5 py-2 text-xs rounded-xl border border-slate-200 bg-white focus:outline-none focus:ring-2 focus:ring-sky-500 font-bold text-slate-700 w-full sm:w-auto"
                 >
-                  <X className="w-3.5 h-3.5" />
-                </button>
-              )}
+                  <option value="All">All Statuses ({orders.length})</option>
+                  <option value="In Progress">⏳ In Progress ({orderCountsByStatus['In Progress']})</option>
+                  <option value="Packed">📦 Packed ({orderCountsByStatus['Packed']})</option>
+                  <option value="Delivered">🚚 Delivered ({orderCountsByStatus['Delivered']})</option>
+                  <option value="WhatsApp Order Placed">📲 Order Placed ({orderCountsByStatus['WhatsApp Order Placed']})</option>
+                </select>
+              </div>
             </div>
 
-            <div className="flex items-center gap-3 w-full sm:w-auto justify-between sm:justify-end text-xs text-slate-600 font-medium">
+            <div className="flex items-center gap-3 w-full md:w-auto justify-between md:justify-end text-xs text-slate-600 font-medium">
               <span>
                 Showing <strong className="text-slate-900 font-bold">{filteredOrders.length}</strong> of {orders.length} orders
               </span>
-              {orderSearch && (
+              {(orderSearch || orderStatusFilter !== 'All') && (
                 <button
-                  onClick={() => setOrderSearch('')}
+                  onClick={() => {
+                    setOrderSearch('');
+                    setOrderStatusFilter('All');
+                  }}
                   className="text-xs text-sky-600 hover:text-sky-800 font-bold underline"
                 >
-                  Reset Filter
+                  Reset All Filters
                 </button>
               )}
             </div>
@@ -1288,12 +1467,18 @@ export default function AdminDashboardPage() {
             </div>
           ) : filteredOrders.length === 0 ? (
             <div className="glass-panel rounded-2xl p-10 text-center text-slate-500 text-xs space-y-2">
-              <p>No orders found matching &ldquo;<strong>{orderSearch}</strong>&rdquo;.</p>
+              <p>
+                No orders found matching {orderStatusFilter !== 'All' ? <span>status &ldquo;<strong>{orderStatusFilter}</strong>&rdquo;</span> : null}
+                {orderSearch ? <span> search &ldquo;<strong>{orderSearch}</strong>&rdquo;</span> : null}.
+              </p>
               <button
-                onClick={() => setOrderSearch('')}
+                onClick={() => {
+                  setOrderSearch('');
+                  setOrderStatusFilter('All');
+                }}
                 className="px-3 py-1 rounded-lg bg-sky-600 text-white font-bold text-xs"
               >
-                Clear Search
+                Clear Filters
               </button>
             </div>
           ) : (
@@ -1304,11 +1489,16 @@ export default function AdminDashboardPage() {
                   itemsList = typeof ord.itemsJson === 'string' ? JSON.parse(ord.itemsJson) : (ord.itemsJson || []);
                 } catch (e) {}
 
+                const statusTheme = getOrderStatusTheme(ord.status);
+
                 return (
-                  <div key={ord.id} className="glass-card rounded-2xl p-5 border border-sky-100 space-y-3 transition-all hover:shadow-md">
-                    <div className="flex flex-col sm:flex-row sm:items-center justify-between pb-3 border-b border-slate-100 gap-3">
+                  <div 
+                    key={ord.id} 
+                    className={`rounded-2xl p-5 border-2 transition-all duration-300 ${statusTheme.tileClass} space-y-3 hover:shadow-lg`}
+                  >
+                    <div className={`flex flex-col sm:flex-row sm:items-center justify-between pb-3 border-b ${statusTheme.divider} gap-3`}>
                       <div>
-                        <span className="font-mono font-bold text-sky-800 text-sm">#{ord.orderRef}</span>
+                        <span className={`font-mono font-bold text-sm ${statusTheme.refText}`}>#{ord.orderRef}</span>
                         <span className="text-[11px] text-slate-400 ml-2">
                           {new Date(ord.createdAt).toLocaleString('en-IN')}
                         </span>
@@ -1321,15 +1511,7 @@ export default function AdminDashboardPage() {
                             value={ord.status || 'WhatsApp Order Placed'}
                             disabled={updatingOrderId === ord.id}
                             onChange={(e) => handleUpdateOrderStatus(ord.id, e.target.value)}
-                            className={`text-xs font-bold py-1 px-2.5 rounded-xl border transition-all cursor-pointer focus:outline-none focus:ring-2 focus:ring-sky-500 ${
-                              ord.status === 'Delivered'
-                                ? 'bg-emerald-50 text-emerald-800 border-emerald-300'
-                                : ord.status === 'Packed'
-                                ? 'bg-indigo-50 text-indigo-800 border-indigo-300'
-                                : ord.status === 'In Progress'
-                                ? 'bg-amber-50 text-amber-900 border-amber-300'
-                                : 'bg-sky-50 text-sky-800 border-sky-300'
-                            }`}
+                            className={`text-xs font-bold py-1.5 px-3 rounded-xl border-2 transition-all cursor-pointer focus:outline-none focus:ring-2 shadow-xs ${statusTheme.selectClass}`}
                           >
                             <option value="WhatsApp Order Placed">📲 Order Placed</option>
                             <option value="In Progress">⏳ In Progress</option>
@@ -1341,7 +1523,7 @@ export default function AdminDashboardPage() {
                           )}
                         </div>
 
-                        <strong className="text-base font-black text-sky-950">
+                        <strong className={`text-base font-black ${statusTheme.accentText}`}>
                           ₹{ord.finalAmount.toLocaleString('en-IN')}
                         </strong>
                       </div>
@@ -1370,11 +1552,11 @@ export default function AdminDashboardPage() {
                       </div>
                     </div>
 
-                    <div className="pt-2 border-t border-slate-100 text-xs">
+                    <div className={`pt-2 border-t ${statusTheme.divider} text-xs`}>
                       <p className="text-slate-500 font-semibold mb-1">Ordered Items ({itemsList.length}):</p>
                       <div className="flex flex-wrap gap-1.5">
                         {itemsList.map((it, idx) => (
-                          <span key={idx} className="bg-slate-100 text-slate-700 px-2 py-0.5 rounded text-[11px]">
+                          <span key={idx} className={`px-2 py-0.5 rounded text-[11px] font-semibold ${statusTheme.itemBadge}`}>
                             {it.name} × {it.quantity}
                           </span>
                         ))}
@@ -1382,7 +1564,7 @@ export default function AdminDashboardPage() {
                     </div>
 
                     {/* Order Action Bar: Quick Task Switching & Individual Delete */}
-                    <div className="flex flex-wrap items-center justify-between pt-2.5 border-t border-slate-100 gap-2">
+                    <div className={`flex flex-wrap items-center justify-between pt-2.5 border-t ${statusTheme.divider} gap-2`}>
                       <div className="flex items-center gap-1.5 text-[11px]">
                         <span className="text-slate-400 font-semibold mr-1">Task Status:</span>
                         <button
@@ -1390,8 +1572,8 @@ export default function AdminDashboardPage() {
                           onClick={() => handleUpdateOrderStatus(ord.id, 'In Progress')}
                           className={`px-2.5 py-1 rounded-lg font-bold transition-all ${
                             ord.status === 'In Progress'
-                              ? 'bg-amber-500 text-white shadow-xs'
-                              : 'bg-slate-100 hover:bg-amber-100 text-slate-700'
+                              ? 'bg-amber-500 text-white shadow-xs ring-1 ring-amber-300'
+                              : 'bg-white/80 hover:bg-amber-100 text-amber-900 border border-amber-200/80'
                           }`}
                         >
                           ⏳ In Progress
@@ -1401,8 +1583,8 @@ export default function AdminDashboardPage() {
                           onClick={() => handleUpdateOrderStatus(ord.id, 'Packed')}
                           className={`px-2.5 py-1 rounded-lg font-bold transition-all ${
                             ord.status === 'Packed'
-                              ? 'bg-indigo-600 text-white shadow-xs'
-                              : 'bg-slate-100 hover:bg-indigo-100 text-slate-700'
+                              ? 'bg-indigo-600 text-white shadow-xs ring-1 ring-indigo-300'
+                              : 'bg-white/80 hover:bg-indigo-100 text-indigo-900 border border-indigo-200/80'
                           }`}
                         >
                           📦 Packed
@@ -1412,8 +1594,8 @@ export default function AdminDashboardPage() {
                           onClick={() => handleUpdateOrderStatus(ord.id, 'Delivered')}
                           className={`px-2.5 py-1 rounded-lg font-bold transition-all ${
                             ord.status === 'Delivered'
-                              ? 'bg-emerald-600 text-white shadow-xs'
-                              : 'bg-slate-100 hover:bg-emerald-100 text-slate-700'
+                              ? 'bg-emerald-600 text-white shadow-xs ring-1 ring-emerald-300'
+                              : 'bg-white/80 hover:bg-emerald-100 text-emerald-900 border border-emerald-200/80'
                           }`}
                         >
                           🚚 Delivered
