@@ -13,7 +13,7 @@ export function CartProvider({ children }) {
   // Load from localStorage on mount
   useEffect(() => {
     try {
-      const stored = localStorage.getItem('shri_rajeshwari_cart') || localStorage.getItem('sachin_pyrotech_cart');
+      const stored = localStorage.getItem('sri_rajeshwari_cart') || localStorage.getItem('sri_rajeshwari_cart') || localStorage.getItem('sachin_pyrotech_cart');
       if (stored) {
         setCartItems(JSON.parse(stored));
       }
@@ -28,7 +28,7 @@ export function CartProvider({ children }) {
   useEffect(() => {
     if (isLoaded) {
       try {
-        localStorage.setItem('shri_rajeshwari_cart', JSON.stringify(cartItems));
+        localStorage.setItem('sri_rajeshwari_cart', JSON.stringify(cartItems));
       } catch (e) {
         console.error('Failed to store cart', e);
       }

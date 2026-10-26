@@ -1,7 +1,7 @@
 import { cookies } from 'next/headers';
 import crypto from 'crypto';
 
-const SECRET = process.env.ADMIN_SESSION_SECRET || 'shri-rajeshwari-super-secure-admin-secret-2026';
+const SECRET = process.env.ADMIN_SESSION_SECRET || 'sri-rajeshwari-super-secure-admin-secret-2026';
 
 /**
  * Creates a cryptographically signed HMAC token for the authenticated admin

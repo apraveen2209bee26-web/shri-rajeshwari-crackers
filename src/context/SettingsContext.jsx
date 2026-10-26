@@ -65,7 +65,7 @@ export function SettingsProvider({ children }) {
   const secondaryPhoneDisplay = formatPhone(cleanSec);
 
   const whatsappUrl = `https://wa.me/91${cleanWa}?text=${encodeURIComponent(
-    `Hello ${settings.shop_name || 'Shri Rajeshwari Crackers'}, I would like to inquire about fireworks availability and orders.`
+    `Hello ${settings.shop_name || 'Sri Rajeshwari Crackers'}, I would like to inquire about fireworks availability and orders.`
   )}`;
 
   const value = {
@@ -104,7 +104,7 @@ export function useSettings() {
       refreshSettings: () => {},
       cleanWaNumber: cleanWa,
       cleanSecPhone: cleanSec,
-      whatsappUrl: `https://wa.me/91${cleanWa}?text=${encodeURIComponent('Hello Shri Rajeshwari Crackers, I would like to inquire about fireworks availability and orders.')}`,
+      whatsappUrl: `https://wa.me/91${cleanWa}?text=${encodeURIComponent('Hello Sri Rajeshwari Crackers, I would like to inquire about fireworks availability and orders.')}`,
       whatsappDisplay: STORE_CONFIG.whatsappDisplay,
       secondaryPhoneDisplay: STORE_CONFIG.secondaryPhoneDisplay
     };

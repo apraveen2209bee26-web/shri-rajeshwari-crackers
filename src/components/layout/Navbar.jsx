@@ -308,14 +308,14 @@ export default function Navbar() {
             <div className="w-10 h-10 sm:w-11 sm:h-11 rounded-xl bg-slate-950 flex items-center justify-center overflow-hidden border border-sky-400/30 shadow-md group-hover:scale-105 transition-transform shrink-0">
               <img 
                 src="/images/logo.png" 
-                alt="Shri Rajeshwari Crackers Logo" 
+                alt="Sri Rajeshwari Crackers Logo" 
                 className="w-full h-full object-contain p-0.5" 
               />
             </div>
             <div className="min-w-0">
               <div className="flex flex-col sm:flex-row sm:items-center sm:gap-1.5 leading-tight">
                 <span className="font-extrabold text-xs sm:text-lg tracking-tight bg-gradient-to-r from-sky-900 via-sky-800 to-indigo-900 bg-clip-text text-transparent whitespace-nowrap">
-                  SHRI RAJESHWARI
+                  SRI RAJESHWARI
                 </span>
                 <span className="font-black text-xs sm:text-lg tracking-wider text-amber-500 whitespace-nowrap">
                   CRACKERS

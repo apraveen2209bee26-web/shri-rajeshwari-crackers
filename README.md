@@ -1,9 +1,9 @@
-# 💥 SHRI RAJESHWARI CRACKERS (ஸ்ரீ ராஜேஸ்வரி கிராக்கர்ஸ்) - Modern E-Commerce Platform
+# 💥 SRI RAJESHWARI CRACKERS (ஸ்ரீ ராஜேஸ்வரி கிராக்கர்ஸ்) - Modern E-Commerce Platform
 
 > **"Light Up Your Celebrations with Sivakasi's Finest Fireworks"** • Authentic Sivakasi Direct Factory Outlet • **Flat 80% Mega Discount**  
 > Direct Phone & WhatsApp Order Desk: **+91 9361849171** / **+91 8610260462**  
 > Store Address: **12/291/1 Rathnapuri Nagar, Sivakasi - 626123**  
-> Live Production URL: **[https://shri-rajeshwari-crackers.vercel.app](https://shri-rajeshwari-crackers.vercel.app)**
+> Live Production URL: **[https://sri-rajeshwari-crackers.vercel.app](https://sri-rajeshwari-crackers.vercel.app)**
 
 A state-of-the-art, high-performance, multi-platform e-commerce web application optimized for Laptops, Tablets, and Mobile. Built using **Next.js (App Router)**, **Tailwind CSS**, and **Prisma ORM** connected to a **Serverless Cloud PostgreSQL (Neon on AWS)**, deployed on **Vercel Hobby Tier** with zero hosting and database costs (100% Free Forever).
 
@@ -45,7 +45,7 @@ A state-of-the-art, high-performance, multi-platform e-commerce web application 
    - Dynamic table pulling all 139 products live from the database.
    - Print / Save as PDF button formatted with `@media print` clean invoice styling.
 6. **About Us Page (`/about`)**:
-   - The Shri Rajeshwari Crackers heritage, Sivakasi craftsmanship, PESO green cracker formulations, and transparent 80% discount model.
+   - The Sri Rajeshwari Crackers heritage, Sivakasi craftsmanship, PESO green cracker formulations, and transparent 80% discount model.
 
 ### 3. Shopping Cart & Direct WhatsApp Checkout
 - **Slide-out Cart Drawer**:

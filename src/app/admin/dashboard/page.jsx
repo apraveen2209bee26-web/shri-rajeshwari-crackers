@@ -573,7 +573,7 @@ export default function AdminDashboardPage() {
     const url = URL.createObjectURL(blob);
     const link = document.createElement('a');
     link.href = url;
-    link.setAttribute('download', `shri_rajeshwari_orders_${new Date().toISOString().slice(0, 10)}.csv`);
+    link.setAttribute('download', `sri_rajeshwari_orders_${new Date().toISOString().slice(0, 10)}.csv`);
     document.body.appendChild(link);
     link.click();
     document.body.removeChild(link);
@@ -671,7 +671,7 @@ export default function AdminDashboardPage() {
   const handleDownloadArchiveCSV = () => {
     const link = document.createElement('a');
     link.href = '/api/orders/archive?download=csv';
-    link.setAttribute('download', `shri_rajeshwari_deleted_orders_archive_${new Date().toISOString().slice(0, 10)}.csv`);
+    link.setAttribute('download', `sri_rajeshwari_deleted_orders_archive_${new Date().toISOString().slice(0, 10)}.csv`);
     document.body.appendChild(link);
     link.click();
     document.body.removeChild(link);
@@ -715,7 +715,7 @@ export default function AdminDashboardPage() {
           <div className="w-14 h-14 rounded-2xl bg-white/10 border border-white/20 p-2 shrink-0 flex items-center justify-center">
             <img
               src="/images/logo.png"
-              alt="Shri Rajeshwari Crackers"
+              alt="Sri Rajeshwari Crackers"
               className="w-full h-full object-contain"
             />
           </div>
@@ -1790,7 +1790,7 @@ export default function AdminDashboardPage() {
 
               <div className="pt-2 flex flex-col sm:flex-row items-center justify-between gap-3">
                 <a
-                  href={`https://wa.me/91${settings.whatsapp_number}?text=Hello%20from%20Shri%20Rajeshwari%20Crackers%20Admin%20Test`}
+                  href={`https://wa.me/91${settings.whatsapp_number}?text=Hello%20from%20Sri%20Rajeshwari%20Crackers%20Admin%20Test`}
                   target="_blank"
                   rel="noopener noreferrer"
                   className="text-xs text-green-700 hover:underline font-bold flex items-center gap-1"

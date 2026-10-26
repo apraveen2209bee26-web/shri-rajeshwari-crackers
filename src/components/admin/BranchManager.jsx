@@ -164,7 +164,7 @@ export default function BranchManager({ onNotification = () => {} }) {
       alert('Please enter an address first to generate Google Maps link.');
       return;
     }
-    const query = encodeURIComponent(`${branchForm.name || 'Shri Rajeshwari Crackers'}, ${branchForm.address}, ${branchForm.city} ${branchForm.pincode}`);
+    const query = encodeURIComponent(`${branchForm.name || 'Sri Rajeshwari Crackers'}, ${branchForm.address}, ${branchForm.city} ${branchForm.pincode}`);
     setBranchForm(prev => ({
       ...prev,
       googleMapsUrl: `https://maps.google.com/?q=${query}`

@@ -154,7 +154,7 @@ async function seed() {
   if (existingBranches.length === 0) {
     await prisma.branchLocation.create({
       data: {
-        name: 'Shri Rajeshwari Crackers - Head Office & Factory Outlet',
+        name: 'Sri Rajeshwari Crackers - Head Office & Factory Outlet',
         tamilName: 'தலைமை அலுவலகம் & நேரடி பட்டாசு விற்பனை நிலையம்',
         address: '12/291/1 Rathnapuri Nagar, Sivakasi',
         city: 'Sivakasi',
@@ -168,7 +168,7 @@ async function seed() {
 
     await prisma.branchLocation.create({
       data: {
-        name: 'Shri Rajeshwari Crackers - Town Express Booking & Dispatch Depot',
+        name: 'Sri Rajeshwari Crackers - Town Express Booking & Dispatch Depot',
         tamilName: 'சிவகாசி டவுன் எக்ஸ்பிரஸ் புக்கிங் & டெலிவரி கிளை',
         address: 'Sattur Road, Near Old Bus Stand, Sivakasi',
         city: 'Sivakasi',

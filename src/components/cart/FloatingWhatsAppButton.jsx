@@ -13,7 +13,7 @@ export default function FloatingWhatsAppButton() {
         href={whatsappUrl}
         target="_blank"
         rel="noopener noreferrer"
-        aria-label="Chat with Shri Rajeshwari Crackers on WhatsApp"
+        aria-label="Chat with Sri Rajeshwari Crackers on WhatsApp"
         className="flex items-center gap-2.5 px-4 py-3 rounded-full bg-gradient-to-r from-emerald-500 via-green-600 to-emerald-700 text-white shadow-2xl shadow-green-600/40 hover:scale-105 active:scale-95 transition-all border-2 border-white/60"
       >
         <div className="relative">

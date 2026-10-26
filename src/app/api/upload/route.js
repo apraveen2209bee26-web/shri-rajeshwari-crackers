@@ -81,7 +81,7 @@ export async function POST(request) {
       const dataUri = `data:${mimeType};base64,${base64Data}`;
 
       const uploadResult = await cloudinary.uploader.upload(dataUri, {
-        folder: 'shri_rajeshwari_crackers',
+        folder: 'sri_rajeshwari_crackers',
         resource_type: 'image'
       });
 

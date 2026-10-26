@@ -97,7 +97,7 @@ const spiralSvg = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 1000
 
   <!-- Header Branding Banner -->
   <rect x="180" y="380" width="440" height="42" rx="21" fill="#1e1b4b" stroke="url(#goldMetallic)" stroke-width="2"/>
-  <text x="400" y="407" font-family="'Inter', sans-serif" font-size="16" font-weight="800" fill="#fef08a" text-anchor="middle" letter-spacing="2">SHRI RAJESHWARI CALENDARS • SIVAKASI</text>
+  <text x="400" y="407" font-family="'Inter', sans-serif" font-size="16" font-weight="800" fill="#fef08a" text-anchor="middle" letter-spacing="2">SRI RAJESHWARI CALENDARS • SIVAKASI</text>
 
   <text x="400" y="450" font-family="'Noto Sans Tamil', sans-serif" font-size="20" font-weight="800" fill="#ffffff" text-anchor="middle">ஸ்ரீ ராஜேஸ்வரி பிரீமியம் மாத காலண்டர் 2026</text>
 

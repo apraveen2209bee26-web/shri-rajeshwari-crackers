@@ -205,7 +205,7 @@ export default function HomePage() {
             {/* Mobile Smartphones: Dedicated 3:4 Vertical High-Impact Portrait Banner */}
             <img 
               src="/images/home-festival-banner-mobile.jpg" 
-              alt="Shree Rajeshwari Crackers - 80% Off Festival Celebration"
+              alt="Sri Rajeshwari Crackers - 80% Off Festival Celebration"
               className="w-full h-auto object-cover block shadow-2xl"
             />
           </picture>
@@ -683,7 +683,7 @@ export default function HomePage() {
                 </a>
                 <a
                   href="/images/visiting-card.jpg"
-                  download="Shri_Rajeshwari_Crackers_Card.jpg"
+                  download="Sri_Rajeshwari_Crackers_Card.jpg"
                   className="px-4 py-2.5 rounded-xl bg-white hover:bg-sky-50 text-slate-800 font-bold text-xs border border-slate-300 shadow-sm flex items-center gap-1.5 transition-colors"
                 >
                   <FileDown className="w-4 h-4 text-sky-600" />

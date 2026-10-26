@@ -1,5 +1,5 @@
 export const STORE_CONFIG = {
-  name: 'Shri Rajeshwari Crackers',
+  name: 'Sri Rajeshwari Crackers',
   tamilName: 'ஸ்ரீ ராஜேஸ்வரி கிராக்கர்ஸ்',
   tagline: 'ஸ்ரீ முருகன் துணை • Sivakasi Direct Factory Outlet',
   discountText: 'MEGA DISCOUNT 80% OFF',

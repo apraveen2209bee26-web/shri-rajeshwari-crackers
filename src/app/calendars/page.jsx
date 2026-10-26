@@ -372,7 +372,7 @@ export default function CalendarsPage() {
 
             <div className="flex flex-col sm:flex-row lg:flex-col gap-3 justify-center">
               <a
-                href={`${whatsappUrl}?text=${encodeURIComponent('Hello Shri Rajeshwari Press, I am interested in ordering Custom Printed Calendars for my business. Please share bulk wholesale pricing and designs.')}`}
+                href={`${whatsappUrl}?text=${encodeURIComponent('Hello Sri Rajeshwari Press, I am interested in ordering Custom Printed Calendars for my business. Please share bulk wholesale pricing and designs.')}`}
                 target="_blank"
                 rel="noopener noreferrer"
                 className="flex items-center justify-center gap-2 px-6 py-3.5 rounded-2xl font-black text-emerald-950 bg-gradient-to-r from-amber-400 to-yellow-400 hover:from-amber-300 hover:to-yellow-300 shadow-xl shadow-amber-500/20 transition-all duration-200 text-center"

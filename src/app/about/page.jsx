@@ -307,13 +307,13 @@ export default function AboutPage() {
             <div className="rounded-2xl overflow-hidden border-2 border-amber-400/60 shadow-2xl bg-slate-950 p-2 max-w-sm w-full">
               <img
                 src="/images/visiting-card.jpg"
-                alt="Shri Rajeshwari Crackers Visiting Card"
+                alt="Sri Rajeshwari Crackers Visiting Card"
                 className="w-full h-auto rounded-xl object-cover"
               />
             </div>
             <a
               href="/images/visiting-card.jpg"
-              download="Shri_Rajeshwari_Crackers_Visiting_Card.jpg"
+              download="Sri_Rajeshwari_Crackers_Visiting_Card.jpg"
               className="inline-flex items-center gap-1.5 text-xs text-amber-300 hover:text-amber-200 underline font-semibold"
             >
               <FileDown className="w-4 h-4" />

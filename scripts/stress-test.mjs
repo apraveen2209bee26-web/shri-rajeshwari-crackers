@@ -10,7 +10,7 @@ const CONCURRENCY = parseInt(process.env.CONCURRENCY || '25', 10);
 
 console.log(`
 ===============================================================
-💥 SHRI RAJESHWARI CRACKERS - FESTIVE TRAFFIC STRESS TEST
+💥 SRI RAJESHWARI CRACKERS - FESTIVE TRAFFIC STRESS TEST
 ===============================================================
 Target URL:      ${BASE_URL}
 Total Requests:  ${TOTAL_REQUESTS}

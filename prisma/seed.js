@@ -20,13 +20,13 @@ function getImageForCategory(category, macroCategory) {
 }
 
 async function main() {
-  console.log('✨ Starting database seed for Shri Rajeshwari Crackers...');
+  console.log('✨ Starting database seed for Sri Rajeshwari Crackers...');
 
   // Upsert settings
   await prisma.adminSetting.upsert({
     where: { key: 'shop_name' },
-    update: { value: 'Shri Rajeshwari Crackers' },
-    create: { key: 'shop_name', value: 'Shri Rajeshwari Crackers' }
+    update: { value: 'Sri Rajeshwari Crackers' },
+    create: { key: 'shop_name', value: 'Sri Rajeshwari Crackers' }
   });
 
   await prisma.adminSetting.upsert({
@@ -80,7 +80,7 @@ async function main() {
         discount: discount > 0 ? discount : 80,
         inStock: true,
         image,
-        description: `Premium quality ${item.name} (${item.tamilName}) by Shri Rajeshwari Crackers. Safe, eco-friendly Sivakasi fireworks.`,
+        description: `Premium quality ${item.name} (${item.tamilName}) by Sri Rajeshwari Crackers. Safe, eco-friendly Sivakasi fireworks.`,
         featured: item.featured
       }
     });

@@ -9,10 +9,10 @@ import FloatingCartButton from '@/components/cart/FloatingCartButton';
 import FloatingWhatsAppButton from '@/components/cart/FloatingWhatsAppButton';
 
 export const metadata = {
-  title: 'Shri Rajeshwari Crackers | Sivakasi Crackers Online | 80% Mega Discount',
-  description: 'Buy premium Sivakasi crackers directly from Shri Rajeshwari Crackers (ஸ்ரீ ராஜேஸ்வரி கிராக்கர்ஸ்) with 80% Mega Discount. 12/291/1 Rathnapuri Nagar, Sivakasi. Quick WhatsApp order fulfillment to 9159802698 & 6369732737.',
-  keywords: 'Shri Rajeshwari Crackers, ஸ்ரீ ராஜேஸ்வரி கிராக்கர்ஸ், Sivakasi crackers, diwali crackers online, buy crackers sivakasi, 80 percent discount crackers, gift boxes crackers, daylight crackers, nightlight crackers',
-  authors: [{ name: 'Shri Rajeshwari Crackers' }],
+  title: 'Sri Rajeshwari Crackers | Sivakasi Crackers Online | 80% Mega Discount',
+  description: 'Buy premium Sivakasi crackers directly from Sri Rajeshwari Crackers (ஸ்ரீ ராஜேஸ்வரி கிராக்கர்ஸ்) with 80% Mega Discount. 12/291/1 Rathnapuri Nagar, Sivakasi. Quick WhatsApp order fulfillment to 9159802698 & 6369732737.',
+  keywords: 'Sri Rajeshwari Crackers, ஸ்ரீ ராஜேஸ்வரி கிராக்கர்ஸ், Sivakasi crackers, diwali crackers online, buy crackers sivakasi, 80 percent discount crackers, gift boxes crackers, daylight crackers, nightlight crackers',
+  authors: [{ name: 'Sri Rajeshwari Crackers' }],
   icons: {
     icon: '/images/logo.png',
     apple: '/images/logo.png',

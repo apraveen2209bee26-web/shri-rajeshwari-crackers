@@ -4,7 +4,7 @@ import React from 'react';
 
 /**
  * FestiveBackgroundPattern
- * Luxury background ornamentation specifically crafted for Shri Rajeshwari Crackers.
+ * Luxury background ornamentation specifically crafted for Sri Rajeshwari Crackers.
  * Transforms the plain empty background of every page into a rich, authentic Sivakasi
  * celebration canvas with pyrotechnic watermarks, radial aura orbs, and twinkling sparkles.
  */

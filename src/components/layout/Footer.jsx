@@ -86,7 +86,7 @@ export default function Footer() {
               </div>
               <div>
                 <span className="font-black text-lg text-white tracking-wide uppercase">
-                  {settings.shop_name || 'SHRI RAJESHWARI CRACKERS'}
+                  {settings.shop_name || 'SRI RAJESHWARI CRACKERS'}
                 </span>
                 <p className="text-[10px] text-sky-300 font-semibold">ஸ்ரீ ராஜேஸ்வரி கிராக்கர்ஸ் • {STORE_CONFIG.motto}</p>
               </div>

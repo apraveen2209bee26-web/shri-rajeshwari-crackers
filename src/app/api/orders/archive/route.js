@@ -27,7 +27,7 @@ export async function GET(request) {
         status: 200,
         headers: {
           'Content-Type': 'text/csv; charset=utf-8',
-          'Content-Disposition': `attachment; filename="shri_rajeshwari_deleted_orders_archive_${dateStr}.csv"`,
+          'Content-Disposition': `attachment; filename="sri_rajeshwari_deleted_orders_archive_${dateStr}.csv"`,
           'Cache-Control': 'no-store, no-cache'
         }
       });
