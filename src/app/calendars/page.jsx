@@ -96,13 +96,13 @@ export default function CalendarsPage() {
           {/* Top Pill Badge */}
           <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-emerald-950/80 border border-emerald-400/50 text-emerald-300 text-xs sm:text-sm font-bold tracking-wider uppercase mb-5 shadow-lg shadow-emerald-950/60 backdrop-blur-md">
             <Printer className="w-4 h-4 text-amber-300 animate-pulse" />
-            <span>Sivakasi Direct Offset Printing • 2026 Collection</span>
+            <span>Sivakasi Direct Offset Printing • Annual Collection</span>
             <span className="w-2 h-2 rounded-full bg-amber-400" />
             <span className="text-amber-300">ஸ்ரீ ராஜேஸ்வரி பிரஸ்</span>
           </div>
 
           <h1 className="text-3xl sm:text-5xl lg:text-6xl font-black tracking-tight text-white mb-4">
-            Sivakasi Premium <span className="text-transparent bg-clip-text bg-gradient-to-r from-amber-300 via-yellow-200 to-amber-400">Calendars 2026</span>
+            Sivakasi Premium <span className="text-transparent bg-clip-text bg-gradient-to-r from-amber-300 via-yellow-200 to-amber-400">Calendars</span>
           </h1>
 
           <p className="text-lg sm:text-xl text-emerald-200 font-medium max-w-3xl mx-auto mb-2">
@@ -372,7 +372,7 @@ export default function CalendarsPage() {
 
             <div className="flex flex-col sm:flex-row lg:flex-col gap-3 justify-center">
               <a
-                href={`${whatsappUrl}?text=${encodeURIComponent('Hello Shri Rajeshwari Press, I am interested in ordering Custom Printed Calendars 2026 for my business. Please share bulk wholesale pricing and designs.')}`}
+                href={`${whatsappUrl}?text=${encodeURIComponent('Hello Shri Rajeshwari Press, I am interested in ordering Custom Printed Calendars for my business. Please share bulk wholesale pricing and designs.')}`}
                 target="_blank"
                 rel="noopener noreferrer"
                 className="flex items-center justify-center gap-2 px-6 py-3.5 rounded-2xl font-black text-emerald-950 bg-gradient-to-r from-amber-400 to-yellow-400 hover:from-amber-300 hover:to-yellow-300 shadow-xl shadow-amber-500/20 transition-all duration-200 text-center"

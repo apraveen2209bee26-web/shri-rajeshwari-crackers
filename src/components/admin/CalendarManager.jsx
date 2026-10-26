@@ -330,7 +330,7 @@ export default function CalendarManager({ onNotification = () => {} }) {
         <div className="glass-panel p-4 rounded-2xl border border-emerald-500/20 bg-white">
           <span className="text-[11px] font-bold text-slate-500 uppercase tracking-wider block">Total Varieties</span>
           <p className="text-2xl sm:text-3xl font-black text-emerald-900 mt-1">{calendars.length}</p>
-          <span className="text-[10px] text-emerald-600 font-medium block">Configured for 2026</span>
+          <span className="text-[10px] text-emerald-600 font-medium block">Configured Varieties</span>
         </div>
 
         <div className="glass-panel p-4 rounded-2xl border border-emerald-500/20 bg-white">
@@ -531,7 +531,7 @@ export default function CalendarManager({ onNotification = () => {} }) {
                     required
                     value={form.name}
                     onChange={(e) => setForm(prev => ({ ...prev, name: e.target.value }))}
-                    placeholder="e.g. Wirebound Spiral Flip Wall Calendar 2026"
+                    placeholder="e.g. Wirebound Spiral Flip Wall Calendar"
                     className="w-full px-3 py-2 rounded-xl border border-slate-300 focus:ring-2 focus:ring-emerald-500 font-medium"
                   />
                 </div>

@@ -4,9 +4,9 @@ const prisma = new PrismaClient();
 
 const defaultCalendars = [
   {
-    slug: 'wirebound-spiral-flip-wall-calendar-2026',
-    name: 'Wirebound Spiral Flip Wall Calendar 2026',
-    tamilName: '12 மாத ஸ்பைரல் வால் காலண்டர் 2026',
+    slug: 'wirebound-spiral-flip-wall-calendar',
+    name: 'Wirebound Spiral Flip Wall Calendar',
+    tamilName: '12 மாத ஸ்பைரல் வால் காலண்டர்',
     category: 'Calendars',
     type: 'Wirebound / Spiral Flip Wall',
     paperGsm: '170 GSM Premium Gloss Art Paper',
@@ -28,9 +28,9 @@ const defaultCalendars = [
     sortOrder: 1
   },
   {
-    slug: 'tear-off-daily-slip-calendar-2026',
-    name: 'Tear-Off Daily Slip Calendar 2026',
-    tamilName: 'பாரம்பரிய தினசரி காலண்டர் 2026',
+    slug: 'tear-off-daily-slip-calendar',
+    name: 'Tear-Off Daily Slip Calendar',
+    tamilName: 'பாரம்பரிய தினசரி காலண்டர்',
     category: 'Calendars',
     type: 'Tear-Off / Daily Slip',
     paperGsm: '60 GSM Smooth Glazed Daily Paper',
@@ -52,9 +52,9 @@ const defaultCalendars = [
     sortOrder: 2
   },
   {
-    slug: 'single-sheet-poster-planner-2026',
-    name: 'Single-Sheet Poster Planner Calendar 2026',
-    tamilName: 'ஒற்றை தாள் 12 மாத சுவரொட்டி காலண்டர் 2026',
+    slug: 'single-sheet-poster-planner-calendar',
+    name: 'Single-Sheet Poster Planner Calendar',
+    tamilName: 'ஒற்றை தாள் 12 மாத சுவரொட்டி காலண்டர்',
     category: 'Calendars',
     type: 'Single-Sheet Poster Planner',
     paperGsm: '170 GSM Heavy Art Card Sheet',
@@ -76,9 +76,9 @@ const defaultCalendars = [
     sortOrder: 3
   },
   {
-    slug: 'desk-tabletop-tent-calendar-2026',
-    name: 'Desk & Tabletop Tent Calendar 2026',
-    tamilName: 'மேஜை / டெஸ்க் டென்ட் காலண்டர் 2026',
+    slug: 'desk-tabletop-tent-calendar',
+    name: 'Desk & Tabletop Tent Calendar',
+    tamilName: 'மேஜை / டெஸ்க் டென்ட் காலண்டர்',
     category: 'Calendars',
     type: 'Desk & Tabletop',
     paperGsm: '300 GSM Heavy Art Card Stand',
@@ -102,7 +102,17 @@ const defaultCalendars = [
 ];
 
 async function main() {
-  console.log('Seeding Calendar Products into Neon PostgreSQL...');
+  console.log('Updating Calendar Products in Neon PostgreSQL (removing 2026)...');
+  
+  // Clean up any old slugs with 2026
+  await prisma.calendarProduct.deleteMany({
+    where: {
+      slug: {
+        contains: '2026'
+      }
+    }
+  });
+
   for (const cal of defaultCalendars) {
     await prisma.calendarProduct.upsert({
       where: { slug: cal.slug },
@@ -111,7 +121,7 @@ async function main() {
     });
     console.log(`✓ Seeded: ${cal.name}`);
   }
-  console.log('Finished seeding calendars successfully!');
+  console.log('Finished syncing calendars successfully without 2026!');
 }
 
 main()

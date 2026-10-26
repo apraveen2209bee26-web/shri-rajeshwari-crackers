@@ -77,7 +77,7 @@ export default function HomePage() {
     },
     {
       id: 4,
-      badge: 'NEW YEAR 2026',
+      badge: 'DIRECT FACTORY',
       title: 'Sivakasi Premium Calendars',
       subtitle: 'Tear-Off Daily Slips, Spiral Wall & Poster Planners',
       image: '/images/calendars/daily-slip-calendar.jpg',
@@ -516,7 +516,7 @@ export default function HomePage() {
               </div>
               <div>
                 <span className="text-[11px] font-bold tracking-widest uppercase text-emerald-800 bg-emerald-50 px-2.5 py-0.5 rounded-md border border-emerald-200">
-                  Direct Press • 2026
+                  Direct Press Quality
                 </span>
                 <h3 className="text-2xl font-black text-slate-900 mt-2">
                   Sivakasi Calendars

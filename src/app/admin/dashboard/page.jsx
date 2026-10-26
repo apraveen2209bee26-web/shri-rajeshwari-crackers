@@ -905,10 +905,7 @@ export default function AdminDashboardPage() {
           }`}
         >
           <Calendar className="w-4 h-4 text-emerald-600" />
-          <span className="flex items-center gap-1.5">
-            Calendars Management
-            <span className="bg-emerald-600 text-white text-[10px] font-black px-1.5 py-0.2 rounded-full uppercase">2026</span>
-          </span>
+          <span>Calendars Management</span>
         </button>
 
         <button

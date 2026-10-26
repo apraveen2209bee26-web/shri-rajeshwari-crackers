@@ -111,7 +111,6 @@ export default function Navbar() {
     { 
       href: '/calendars', 
       label: 'Calendars', 
-      badge: '2026',
       desktopActive: 'bg-emerald-500/20 text-emerald-950 border-emerald-400 font-bold',
       mobileActive: 'bg-gradient-to-r from-emerald-600 via-teal-600 to-emerald-700 text-white shadow-emerald-600/30 font-bold'
     },
