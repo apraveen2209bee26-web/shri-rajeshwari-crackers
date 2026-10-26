@@ -250,15 +250,15 @@ export default function Navbar() {
               />
             </div>
             <div className="min-w-0">
-              <div className="flex items-center gap-1">
-                <span className="font-extrabold text-sm sm:text-lg tracking-tight bg-gradient-to-r from-sky-900 via-sky-800 to-indigo-900 bg-clip-text text-transparent truncate">
+              <div className="flex flex-col sm:flex-row sm:items-center sm:gap-1.5 leading-tight">
+                <span className="font-extrabold text-xs sm:text-lg tracking-tight bg-gradient-to-r from-sky-900 via-sky-800 to-indigo-900 bg-clip-text text-transparent whitespace-nowrap">
                   SHRI RAJESHWARI
                 </span>
-                <span className="font-black text-sm sm:text-lg tracking-wider text-amber-500 shrink-0">
+                <span className="font-black text-xs sm:text-lg tracking-wider text-amber-500 whitespace-nowrap">
                   CRACKERS
                 </span>
               </div>
-              <p className="text-[9px] sm:text-[10px] font-semibold tracking-wider text-sky-700 -mt-0.5 truncate">
+              <p className="text-[9px] sm:text-[10px] font-semibold tracking-wider text-sky-700 truncate">
                 ஸ்ரீ ராஜேஸ்வரி கிராக்கர்ஸ் • சிவகாசி
               </p>
             </div>

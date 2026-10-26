@@ -123,43 +123,58 @@ export default function HomePage() {
   };
 
   return (
-    <div className="relative min-h-screen space-y-16 pb-20">
+    <div className="relative min-h-screen pb-20">
       {/* Authentic Sivakasi Pyrotechnic Watermark & Atmospheric Glow */}
       <FestiveBackgroundPattern theme="blue" />
 
-      {/* 1. FESTIVE TICKER BANNER (Blue, Golden, Black & White Theme) */}
-      <div className="bg-gradient-to-r from-slate-950 via-[#0a2540] to-slate-950 text-white text-xs py-2 px-3 overflow-hidden border-b border-sky-500/30 shadow-md">
-        <div className="flex items-center gap-6 whitespace-nowrap animate-marquee font-bold tracking-wide">
-          <span className="flex items-center gap-1.5 text-amber-300">
-            உங்களுக்கும் உங்கள் குடும்பத்தினருக்கும் இனிய தீபாவளி நல்வாழ்த்துகள்! 🪔✨
-          </span>
-          <span className="text-sky-300/60">•</span>
-          <span className="text-white">
-            சிவகாசி ஸ்ரீ ராஜேஸ்வரி கிராக்கர்ஸ் • நேரடி தொழிற்சாலை தள்ளுபடி 80%
-          </span>
-          <span className="text-sky-300/60">•</span>
-          <span className="text-amber-300">
-            💥 100% Genuine PESO Certified Green Crackers • Safe All-India Transport
-          </span>
-          <span className="text-sky-300/60">•</span>
-          <span className="text-white">
-            🎁 Mega Combo Packs Available • Save up to ₹19,900!
-          </span>
-          <span className="text-sky-300/60">•</span>
-          <span className="flex items-center gap-1.5 text-amber-300">
-            உங்களுக்கும் உங்கள் குடும்பத்தினருக்கும் இனிய தீபாவளி நல்வாழ்த்துகள்! 🪔✨
-          </span>
+      {/* 1. SEAMLESS TOP FESTIVAL HEADER WRAPPER (Zero gaps, Mobile-Optimized Flush Display) */}
+      <div className="w-full relative z-10">
+        {/* FESTIVE TICKER BANNER (Blue, Golden, Black & White Theme) */}
+        <div className="bg-gradient-to-r from-slate-950 via-[#0a2540] to-slate-950 text-white text-xs py-2 px-3 overflow-hidden border-b border-sky-500/30 shadow-md">
+          <div className="flex items-center gap-6 whitespace-nowrap animate-marquee font-bold tracking-wide">
+            <span className="flex items-center gap-1.5 text-amber-300">
+              உங்களுக்கும் உங்கள் குடும்பத்தினருக்கும் இனிய தீபாவளி நல்வாழ்த்துகள்! 🪔✨
+            </span>
+            <span className="text-sky-300/60">•</span>
+            <span className="text-white">
+              சிவகாசி ஸ்ரீ ராஜேஸ்வரி கிராக்கர்ஸ் • நேரடி தொழிற்சாலை தள்ளுபடி 80%
+            </span>
+            <span className="text-sky-300/60">•</span>
+            <span className="text-amber-300">
+              💥 100% Genuine PESO Certified Green Crackers • Safe All-India Transport
+            </span>
+            <span className="text-sky-300/60">•</span>
+            <span className="text-white">
+              🎁 Mega Combo Packs Available • Save up to ₹19,900!
+            </span>
+            <span className="text-sky-300/60">•</span>
+            <span className="flex items-center gap-1.5 text-amber-300">
+              உங்களுக்கும் உங்கள் குடும்பத்தினருக்கும் இனிய தீபாவளி நல்வாழ்த்துகள்! 🪔✨
+            </span>
+          </div>
+        </div>
+
+        {/* RESPONSIVE FESTIVAL PROMOTIONAL SHOWCASE BANNER (Edge-to-Edge with Mobile Portrait Optimization) */}
+        <div className="w-full relative overflow-hidden bg-[#030a17] border-b-2 border-amber-500/50 shadow-2xl">
+          <picture className="w-full block">
+            {/* Desktop & Tablet Screen: Landscape Panoramic Banner */}
+            <source 
+              media="(min-width: 640px)" 
+              srcSet="/images/home-festival-banner.jpg" 
+            />
+            {/* Mobile Smartphones: Dedicated 3:4 Vertical High-Impact Portrait Banner */}
+            <img 
+              src="/images/home-festival-banner-mobile.jpg" 
+              alt="Shree Rajeshwari Crackers - 80% Off Festival Celebration"
+              className="w-full h-auto object-cover block shadow-2xl"
+            />
+          </picture>
         </div>
       </div>
 
-      {/* GRAND FESTIVAL PROMOTIONAL SHOWCASE BANNER - FITTED FULL SCREEN (Edge-to-Edge) */}
-      <div className="w-full relative overflow-hidden bg-[#030a17] border-b-2 border-amber-500/50 shadow-2xl">
-        <img 
-          src="/images/home-festival-banner.jpg" 
-          alt="Shree Rajeshwari Crackers - 80% Off Festival Celebration"
-          className="w-full h-auto object-cover block"
-        />
-      </div>
+      {/* MAIN CONTENT SECTIONS */}
+      <div className="space-y-12 sm:space-y-16">
+
 
       {/* 2. FESTIVE HERO SECTION WITH SKY BLUE ATMOSPHERE & BURSTING SKY CRACKERS (From Screenshot 4) */}
       <section className="relative overflow-hidden bg-gradient-to-b from-[#051329] via-[#092548] to-[#0284c7] text-white py-12 md:py-20 px-4 sm:px-6 shadow-2xl">
@@ -650,6 +665,7 @@ export default function HomePage() {
           </div>
         </div>
       </section>
+      </div>
     </div>
   );
 }
