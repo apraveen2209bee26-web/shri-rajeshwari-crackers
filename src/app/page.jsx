@@ -129,28 +129,56 @@ export default function HomePage() {
 
       {/* 1. SEAMLESS TOP FESTIVAL HEADER WRAPPER (Zero gaps, Mobile-Optimized Flush Display) */}
       <div className="w-full relative z-10">
-        {/* FESTIVE TICKER BANNER (Blue, Golden, Black & White Theme) */}
-        <div className="bg-gradient-to-r from-slate-950 via-[#0a2540] to-slate-950 text-white text-xs py-2 px-3 overflow-hidden border-b border-sky-500/30 shadow-md">
-          <div className="flex items-center gap-6 whitespace-nowrap animate-marquee font-bold tracking-wide">
-            <span className="flex items-center gap-1.5 text-amber-300">
-              உங்களுக்கும் உங்கள் குடும்பத்தினருக்கும் இனிய தீபாவளி நல்வாழ்த்துகள்! 🪔✨
-            </span>
-            <span className="text-sky-300/60">•</span>
-            <span className="text-white">
-              சிவகாசி ஸ்ரீ ராஜேஸ்வரி கிராக்கர்ஸ் • நேரடி தொழிற்சாலை தள்ளுபடி 80%
-            </span>
-            <span className="text-sky-300/60">•</span>
-            <span className="text-amber-300">
-              💥 100% Genuine PESO Certified Green Crackers • Safe All-India Transport
-            </span>
-            <span className="text-sky-300/60">•</span>
-            <span className="text-white">
-              🎁 Mega Combo Packs Available • Save up to ₹19,900!
-            </span>
-            <span className="text-sky-300/60">•</span>
-            <span className="flex items-center gap-1.5 text-amber-300">
-              உங்களுக்கும் உங்கள் குடும்பத்தினருக்கும் இனிய தீபாவளி நல்வாழ்த்துகள்! 🪔✨
-            </span>
+        {/* FESTIVE TICKER BANNER (Continuous Infinite Right-to-Left Loop with Spacing Before Photo) */}
+        <div className="w-full bg-gradient-to-r from-slate-950 via-[#0a2540] to-slate-950 text-white text-xs py-2.5 px-3 overflow-hidden border-b border-sky-500/30 shadow-md mb-3 sm:mb-4 marquee-container">
+          <div className="flex items-center overflow-hidden select-none">
+            {/* Continuous Track 1 */}
+            <div className="animate-marquee-track flex items-center gap-6 pr-6 font-bold tracking-wide">
+              <span className="flex items-center gap-1.5 text-amber-300">
+                உங்களுக்கும் உங்கள் குடும்பத்தினருக்கும் இனிய தீபாவளி நல்வாழ்த்துகள்! 🪔✨
+              </span>
+              <span className="text-sky-300/60">•</span>
+              <span className="text-white">
+                சிவகாசி ஸ்ரீ ராஜேஸ்வரி கிராக்கர்ஸ் • நேரடி தொழிற்சாலை தள்ளுபடி 80%
+              </span>
+              <span className="text-sky-300/60">•</span>
+              <span className="text-amber-300">
+                💥 100% Genuine PESO Certified Green Crackers • Safe All-India Transport
+              </span>
+              <span className="text-sky-300/60">•</span>
+              <span className="text-white">
+                🎁 Mega Combo Packs Available • Save up to ₹19,900!
+              </span>
+              <span className="text-sky-300/60">•</span>
+              <span className="flex items-center gap-1.5 text-amber-300">
+                உங்களுக்கும் உங்கள் குடும்பத்தினருக்கும் இனிய தீபாவளி நல்வாழ்த்துகள்! 🪔✨
+              </span>
+              <span className="text-sky-300/60">•</span>
+            </div>
+
+            {/* Continuous Track 2 (Seamless Infinite Looping Clone) */}
+            <div className="animate-marquee-track flex items-center gap-6 pr-6 font-bold tracking-wide" aria-hidden="true">
+              <span className="flex items-center gap-1.5 text-amber-300">
+                உங்களுக்கும் உங்கள் குடும்பத்தினருக்கும் இனிய தீபாவளி நல்வாழ்த்துகள்! 🪔✨
+              </span>
+              <span className="text-sky-300/60">•</span>
+              <span className="text-white">
+                சிவகாசி ஸ்ரீ ராஜேஸ்வரி கிராக்கர்ஸ் • நேரடி தொழிற்சாலை தள்ளுபடி 80%
+              </span>
+              <span className="text-sky-300/60">•</span>
+              <span className="text-amber-300">
+                💥 100% Genuine PESO Certified Green Crackers • Safe All-India Transport
+              </span>
+              <span className="text-sky-300/60">•</span>
+              <span className="text-white">
+                🎁 Mega Combo Packs Available • Save up to ₹19,900!
+              </span>
+              <span className="text-sky-300/60">•</span>
+              <span className="flex items-center gap-1.5 text-amber-300">
+                உங்களுக்கும் உங்கள் குடும்பத்தினருக்கும் இனிய தீபாவளி நல்வாழ்த்துகள்! 🪔✨
+              </span>
+              <span className="text-sky-300/60">•</span>
+            </div>
           </div>
         </div>
 

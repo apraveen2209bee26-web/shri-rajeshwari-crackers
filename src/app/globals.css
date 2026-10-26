@@ -105,6 +105,35 @@ body {
   animation: twinkle 3.5s ease-in-out infinite;
 }
 
+/* Continuous Seamless Infinite Ticker Marquee (Right to Left) */
+@keyframes ticker-marquee {
+  0% {
+    transform: translate3d(0, 0, 0);
+  }
+  100% {
+    transform: translate3d(-100%, 0, 0);
+  }
+}
+
+.animate-marquee-track {
+  display: flex;
+  flex-shrink: 0;
+  white-space: nowrap;
+  animation: ticker-marquee 30s linear infinite;
+  will-change: transform;
+}
+
+@media (max-width: 640px) {
+  .animate-marquee-track {
+    animation-duration: 22s;
+  }
+}
+
+.marquee-container:hover .animate-marquee-track {
+  animation-play-state: paused;
+}
+
+
 /* Print Friendly Styles for Price List */
 @media print {
   body {
